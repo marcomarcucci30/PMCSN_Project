@@ -13,3 +13,9 @@ if __name__ == '__main__':
             print("ciao")
         print("\n")
         nodes = 2 +i
+    rep = 5
+    l = rep / (rep + 1.0)
+    print(l)
+    avg = 5.0
+    nodes = 11
+    print(avg / (nodes - 1.0))

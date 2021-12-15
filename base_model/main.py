@@ -9,8 +9,8 @@ arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
 seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
-START = 0.0
-STOP = 1 * 1 * 28 * 1440.0  # Minutes
+START = 8.0*1440
+STOP = 1 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
