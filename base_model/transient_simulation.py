@@ -1,7 +1,9 @@
+from matplotlib import pyplot as plt
+
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 
-nodes = 4  # n nodi
+nodes = 7  # n nodi
 arrival_time = 0.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
@@ -10,7 +12,7 @@ arrival_time_night = 25.0
 
 seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8 * 60
-STOP = 1 * 1 * 28 * 1440.0  # Minutes
+STOP = 1 * 1 * 1 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
@@ -18,8 +20,8 @@ TICKET_QUEUE = 1
 # ARCADE2 = 3
 # ARCADE3 = 4
 p_size = 0.6
-replicas = 100
-sampling_time = 10  # Minutes
+replicas = 20
+sampling_time = 120  # Minutes
 
 
 class Track:
@@ -180,6 +182,7 @@ def redirect_jobs(prev_nodes):
                 for jobs in (0, n_jobs - 1):
                     pos = select_node(True)
                     # aggiorno le stats della nuova coda
+                    #print(pos, nodes, prev_nodes)
                     node_list[pos].number += 1
                     # aggiorno le stats della coda da spegnere
                     node_list[i].number -= 1
@@ -202,25 +205,25 @@ def redirect_jobs(prev_nodes):
 
 
 if __name__ == '__main__':
+    conf_list = []
 
     for n1 in range(2, 8):  # 4, 2, 2, 6
         for n2 in range(2, 8):
             for n3 in range(2, 8):
                 for n4 in range(2, 8):
                     # settings
-                    node_list = [StatusNode(i) for i in range(nodes + 1)]  # in 0 global stats
                     plantSeeds(seed)
-                    avg_wait_system = 0.0
                     sampling = START
-                    sampling_dict = {
+                    sampling_list = []
+
+                    conf_dict = {
                         "delay_arcades": 0.0,
                         "delay_system": 0.0,
-                        "sampling": 0.0
+                        "conf": (0, 0, 0, 0)
                     }
-                    sampling_list = []
-                    sampling_count = 0
                     for rep in range(0, replicas):
-
+                        node_list = [StatusNode(i) for i in range(7 + 1)]  # in 0 global stats
+                        sampling_count = 0
                         time.current = START
                         arrival = START  # global temp var for getArrival function     [minutes]
 
@@ -233,7 +236,7 @@ if __name__ == '__main__':
                         node.arrival = arrival
                         min_arrival = arrival
 
-                        while (min_arrival < STOP) or (node_list[0].number > 0):
+                        while (min_arrival < STOP):
                             node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
                             time.next = minimum(node_to_process.arrival, node_to_process.completion)
                             # Aggiornamento delle aree basate sul giro prima
@@ -247,25 +250,33 @@ if __name__ == '__main__':
                             # SAMPLING
                             if time.current - sampling > sampling_time or sampling_count == 0:
                                 if rep == 0:
+                                    sampling_dict = {
+                                             "delay_arcades": 0.0,
+                                             "delay_system": 0.0,
+                                             "sampling": 0.0
+                                         }
                                     sampling_list.append(sampling_dict)
+
 
                                 # salvare le statistiche x run x time
                                 avg = 0.0
                                 for i in range(2, nodes + 1):
-                                    avg += (node_list[i].stat.queue / node_list[i].index)
+                                    if node_list[i].index != 0:
+                                        avg += (node_list[i].stat.queue / node_list[i].index)
                                 avg = avg / (nodes - 1.0)
-
+                                #print(sampling_count," ",rep)
+                                #print("len: ",len(sampling_list))
                                 sampling_list[sampling_count]["delay_arcades"] = sampling_list[sampling_count][
                                                         "delay_arcades"] * (rep / (rep + 1.0)) + avg * (1 / (rep + 1.0))
-
-                                wait_system = (node_list[1].stat.node / node_list[1].index) + avg
-                                sampling_list[sampling_count]["delay_system"] = sampling_list[sampling_count][
-                                                 "delay_system"] * (rep / (rep + 1.0)) + wait_system * (1 / (rep + 1.0))
+                                if node_list[1].index != 0:
+                                    delay_system = (node_list[1].stat.node / node_list[1].index) + avg
+                                    sampling_list[sampling_count]["delay_system"] = sampling_list[sampling_count][
+                                                     "delay_system"] * (rep / (rep + 1.0)) + delay_system * (1 / (rep + 1.0))
 
                                 sampling_list[sampling_count]["sampling"] = sampling
 
                                 sampling_count += 1
-                                sampling = sampling * sampling_count
+                                sampling = START + (sampling_time * sampling_count)  # 480 + (10 * count)
 
                             current_for_update = time.current
                             time.current = time.next  # advance the clock
@@ -325,7 +336,7 @@ if __name__ == '__main__':
                                     if node.arrival != INFINITY:
                                         node.last = node.arrival
                                     # update node and system last arrival time
-                                    if node_list[0].last < node.last:
+                                    if node.last is not None and node_list[0].last is not None and node_list[0].last < node.last:
                                         node_list[0].last = node.last
                                     node.arrival = INFINITY
                                 else:
@@ -363,30 +374,64 @@ if __name__ == '__main__':
                             arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                             min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
 
-                        for i in range(0, len(node_list)):
-                            print(node_list[i].last)
-                            print("\n\nNode " + str(i))
-                            print("\nfor {0} jobs".format(node_list[i].index))
-                            print("   average interarrival time = {0:6.6f}".format(
-                                node_list[i].last / node_list[i].index))
-                            print("   average wait ............ = {0:6.6f}".format(
-                                node_list[i].stat.node / node_list[i].index))
-                            print("   average delay ........... = {0:6.6f}".format(
-                                node_list[i].stat.queue / node_list[i].index))
-                            print(
-                                "   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
-                            print("   average # in the queue .. = {0:6.6f}".format(
-                                node_list[i].stat.queue / time.current))
-                            print("   utilization ............. = {0:6.6f}".format(
-                                node_list[i].stat.service / time.current))
+                       #for i in range(0, len(node_list)):
+                       #    print(node_list[i].last)
+                       #    print("\n\nNode " + str(i))
+                       #    print("\nfor {0} jobs".format(node_list[i].index))
+                       #    print("   average interarrival time = {0:6.6f}".format(
+                       #        node_list[i].last / node_list[i].index))
+                       #    print("   average wait ............ = {0:6.6f}".format(
+                       #        node_list[i].stat.node / node_list[i].index))
+                       #    print("   average delay ........... = {0:6.6f}".format(
+                       #        node_list[i].stat.queue / node_list[i].index))
+                       #    print(
+                       #        "   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
+                       #    print("   average # in the queue .. = {0:6.6f}".format(
+                       #        node_list[i].stat.queue / time.current))
+                       #    print("   utilization ............. = {0:6.6f}".format(
+                       #        node_list[i].stat.service / time.current))
 
                         # calcolo media e dev di: funzione guadagno, tempo di riposta
                         # media de
 
-                        avg_wait_system = avg_wait_system * (rep / (rep + 1.0)) + (
-                                node_list[0].stat.node / node_list[0].index) / (rep + 1.0)
-                        avg_delay_arcade = avg_delay_arcade * (rep / (rep + 1.0)) + (
-                                node_list[0].stat.node / node_list[0].index) / (rep + 1.0)
-                        print(avg_wait_system)
+                        avg = 0.0
+                        for i in range(2, max(n1, n2, n3, n4) + 1):
+                            if node_list[i].index != 0:
+                                avg += (node_list[i].stat.queue / node_list[i].index)
+                        avg = avg / (nodes - 1.0)
+
+                        delay_system_conf = (node_list[1].stat.node / node_list[1].index) + avg
+                        conf_dict["delay_system"] = conf_dict[
+                                           "delay_system"] * (rep / (rep + 1.0)) + delay_system_conf * (1 / (rep + 1.0))
+
+                        conf_dict["delay_arcades"] = conf_dict[
+                        "delay_arcades"] * (rep / (rep + 1.0)) + (node_list[0].stat.node / node_list[0].index) / (rep + 1.0)
+
+
+                    conf_dict["conf"] = (n1, n2, n3, n4)
+                    print((n1, n2, n3, n4))
+                    conf_list.append(conf_dict)
+
+                        # Azzeriamo le statistiche
+                       #for j in node_list:
+                       #    j.number = 0.0
+                       #    j.arrival = 0.0
+                       #    j.completion = 0.0
+                       #    j.stat.node = 0.0
+                       #    j.stat.queue = 0.0
+                       #    j.stat.service = 0.0
+                       #    j.last = 0.0
+                       #    j.index = 0.0
 
                     # funzione guadagno, tempo di riposta per una determinata configurazione
+
+
+    x = [str(i["conf"]) for i in conf_list]  # in 0 global stats
+    y = [i["delay_arcades"] for i in conf_list]  # in 0 global stats
+    plt.plot(x, y)
+
+    plt.legend(["Gain"])
+    plt.title("Gain")
+    plt.xlabel("Configuration")
+    plt.ylabel("Gain function")
+    plt.show()
