@@ -38,13 +38,11 @@
 # * ------------------------------------------------------------------------- 
 # */
 
-#include <stdio.h>                             
-#include <math.h>  
+# include <stdio.h>
+# include <math.h>
 
-from math import sqrt   
-import sys                           
-
-
+from math import sqrt
+import sys
 
 # long    index
 # double  data
@@ -58,39 +56,36 @@ sum = 0.0
 data = sys.stdin.readline()
 
 if (data):
-  data = float(data)
-  index  = 1
-  mean   = data
-  min    = data
-  max    = data
-else: 
-  index = 0
+    data = float(data)
+    index = 1
+    mean = data
+    min = data
+    max = data
+else:
+    index = 0
 
 data = sys.stdin.readline()
 while (data):
-  data = float(data)
-  index += 1
-  diff  = data - mean
-  sum  += diff * diff * (index - 1.0) / index
-  mean += diff / index
-  if (data > max):
-    max = data
-  elif (data < min):
-    min = data
+    data = float(data)
+    index += 1
+    diff = data - mean
+    sum += diff * diff * (index - 1.0) / index
+    mean += diff / index
+    if (data > max):
+        max = data
+    elif (data < min):
+        min = data
 
-  data = sys.stdin.readline()
-#EndWhile
+    data = sys.stdin.readline()
+# EndWhile
 
 if (index > 0):
-  stdev = sqrt(sum / index)
-  print("\nfor a sample of size {0:d}".format(index))
-  print("mean ................. = {0:7.3f}".format(mean))
-  print("standard deviation ... = {0:7.3f}".format(stdev))
-  print("minimum .............. = {0:7.3f}".format(min))
-  print("maximum .............. = {0:7.3f}".format(max))
-
-
-
+    stdev = sqrt(sum / index)
+    print("\nfor a sample of size {0:d}".format(index))
+    print("mean ................. = {0:7.3f}".format(mean))
+    print("standard deviation ... = {0:7.3f}".format(stdev))
+    print("minimum .............. = {0:7.3f}".format(min))
+    print("maximum .............. = {0:7.3f}".format(max))
 
 # C output:
 # for a sample of size 1000
