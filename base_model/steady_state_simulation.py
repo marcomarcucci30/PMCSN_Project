@@ -1,20 +1,27 @@
 import json
+import statistics
 from math import sqrt
+
+from matplotlib import pyplot as plt
 
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 nodes = 4  # n nodi
-arrival_time = 5.0
+arrival_time = 30.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
+b = 512
+k = 64
+batch_index = 0
+
 seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8.0 * 1440
-STOP = 1 * 12 * 28 * 1440.0  # Minutes
+STOP = 20 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
@@ -162,7 +169,7 @@ def get_service(id_node):
             return service
     else:
         selectStream(id_node + 10)
-        service = TruncatedNormal(15, 3, 3, 25)  # arcade game time
+        service = TruncatedNormal(30, 9, 1, 100)  # arcade game time
         # print("arcade game time: ", service)
         return service
 
@@ -195,25 +202,6 @@ actual_stats = {
 
 job_list = []
 
-b = 256
-k = 64
-batch_index = 0
-
-
-def calculate_avg(avg, actual, i):
-    if i == 0:
-        return actual
-    return avg * ((i - 1) / i) + actual * (1 / i)
-
-
-def calculate_variance(mean, M2, x, n):
-    n = n + 1
-    delta = x - mean
-    mean = mean + delta / n
-    M2 = M2 + delta * (x - mean)
-    variance = M2 / (n - 1)
-    return variance
-
 
 def online_variance(n, mean, variance, x):
     delta = x - mean
@@ -222,13 +210,35 @@ def online_variance(n, mean, variance, x):
     return mean, variance
 
 
+def plot_stats():
+    x = [i for i in range(0, len(batch_means_info["avg_delay_arcades"]))]  # in 0 global stats
+    y = (batch_means_info["avg_delay_arcades"][:])  # in 0 global stats
+    print(x)
+    print(y)
+    # plt.plot(x, y)
+
+    plt.errorbar(x, y, yerr=batch_means_info["w_arcades"][:], fmt='.', color='black',
+                 ecolor='red', elinewidth=3, capsize=0)
+    plt.tight_layout()
+
+    plt.legend(["Gain"])
+    plt.title("Avg delay system")
+    plt.xlabel("Configuration")
+    plt.ylabel("Gain function")
+    plt.show()
+    x1 = [i for i in range(0, len(job_list))]
+    y1 = [i["delay_arcades"] for i in job_list]
+    plt.errorbar(x1, y1, fmt='.')
+    plt.show()
+
+
 if __name__ == '__main__':
     # settings
     batch_means_info["seed"] = seed
     batch_means_info["b"] = b
     batch_means_info["k"] = k
     batch_means_info["n_nodes"] = nodes - 1
-    batch_means_info["lambda"] = 1.0/arrival_time
+    batch_means_info["lambda"] = 1.0 / arrival_time
     node_list = [StatusNode(i) for i in range(nodes + 1)]  # in 0 global stats
     plantSeeds(seed)
 
@@ -240,9 +250,12 @@ if __name__ == '__main__':
     node = node_list[select_node(False)]
     node.arrival = arrival
     min_arrival = arrival
+    old_index = 0
 
     while node_list[0].index <= b * k:  # (node_list[0].number > 0)
-        if node_list[0].index % b == 0 and node_list[0].index != 0:
+        # print(node_list[0].index)
+        if node_list[0].index % b == 0 and node_list[0].index != 0 and old_index != node_list[0].index:
+            old_index = node_list[0].index
             avg_wait_ticket = 0.0
             avg_delay_arcades = 0.0
             std_ticket = 0.0
@@ -250,19 +263,25 @@ if __name__ == '__main__':
             n = 0
             mean = 0
             M2 = 0
-            for i in range(b * batch_index - 1, b * batch_index + b):
-                print("len job list: ", len(job_list))
-                print("begin for: ", b * batch_index + 1, "end for: ", b * batch_index + b)
+            for i in range(b * batch_index, b * batch_index + b):
+                # print("len job list: ", len(job_list), ", index: ",node_list[0].index, ", batch_index: ",batch_index,", begin for: ", b * batch_index, ", end for: ", b * batch_index + b, ", elem_index: ", i)
                 n += 1
                 #  avg calculation,  std calculation
-                avg_wait_ticket, std_ticket = online_variance(n, avg_wait_ticket, std_ticket, job_list[i]["wait_ticket"])
-                avg_delay_arcades, std_arcades = online_variance(n, avg_delay_arcades, std_arcades, job_list[i]["delay_arcades"])
-            std_ticket = sqrt(std_ticket/n)
-            std_arcades = sqrt(std_arcades/n)
+
+                avg_wait_ticket, std_ticket = online_variance(n, avg_wait_ticket, std_ticket,
+                                                              job_list[i]["wait_ticket"])
+                avg_delay_arcades, std_arcades = online_variance(n, avg_delay_arcades, std_arcades,
+                                                                 job_list[i]["delay_arcades"])
+
+            std_ticket = statistics.variance([job_list[i]["wait_ticket"] for i in range(b * batch_index, b * batch_index + b)])
+            std_arcades = statistics.variance([job_list[i]["delay_arcades"] for i in range(b * batch_index, b * batch_index + b)])
+            std_ticket = sqrt(std_ticket)
+            std_arcades = sqrt(std_arcades)
             #  calculate interval width
             LOC = 0.95
             u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
             t = idfStudent(n - 1, u)  # critical value of t
+            print(std_arcades, t)
             w_ticket = t * std_ticket / sqrt(n - 1)  # interval half width
             w_arcades = t * std_arcades / sqrt(n - 1)  # interval half width
             #  update dictionary
@@ -361,10 +380,11 @@ if __name__ == '__main__':
 
         arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
         min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
-    with open("/prova.json", 'w') as json_file:
+    with open("prova.json", 'w+') as json_file:
         json.dump(batch_means_info, json_file, indent=4)
     json_file.close()
-    #for i in range(0, len(node_list)):
+    plot_stats()
+    # for i in range(0, len(node_list)):
     #    print(node_list[i].last)
     #    print("\n\nNode " + str(i))
     #    print("\nfor {0} jobs".format(node_list[i].index))
