@@ -183,6 +183,20 @@ def Normal(m, s):
     return (m + s * z)
 
 
+alpha = 0.2703  # Pareto parameter
+p = 15  # Pareto parameter which represents the maximum value
+k = 1  # Pareto parameter which represents the minimum value
+
+
+def BoundedPareto():
+    # ---------------------------------------------------
+    # * generate a Bounded Pareto random variate, use m > 0.0
+    # * ---------------------------------------------------
+    global k, p, alpha
+    N = 1 - pow(k / p, alpha)
+    return k / pow((1.0 - random() * N), 1 / alpha)
+
+
 def TruncatedNormal(m, s, a, b):
     alpha = cdfNormal(m, s, a)
     beta = 1.0 - cdfNormal(m, s, b)

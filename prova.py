@@ -75,3 +75,16 @@ if __name__ == '__main__':
         mean, var = online_variance(n, mean, var, list_gauss[i])
     print(mean, var)
     print(statistics.variance(list_gauss))
+
+    batch_means_info = {"ciao": 0, "ciao1": []}
+    list_dict = []
+    for i in range(0,5):
+        batch_means_info = dict(batch_means_info)
+        batch_means_info["ciao"] = i
+        batch_means_info["ciao1"].append(i)
+        list_dict.append(batch_means_info)
+    print(list_dict)
+
+    for i in range(0, 5):
+        list_dict[i] = list_dict[i].fromkeys(list_dict[i], 0)
+    print(list_dict)
