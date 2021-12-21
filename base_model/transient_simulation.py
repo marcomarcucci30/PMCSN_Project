@@ -1,18 +1,28 @@
+import json
+
+import numpy as np
+from scipy.stats import pearsonr
+import statistics
+from math import sqrt
+
 from matplotlib import pyplot as plt
 
 from utils.rngs import random, selectStream, plantSeeds
-from utils.rvgs import Exponential, TruncatedNormal
+from utils.rvgs import Exponential, TruncatedNormal, BoundedPareto
+from utils.rvms import idfStudent
 
-nodes = 7  # n nodi
-arrival_time = 0.0
+nodes = 4  # n nodi
+arrival_time = 10.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
-START = 8 * 60
-STOP = 1 * 1 * 1 * 1440.0  # Minutes
+b = 24
+k = 64
+# seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
+START = 8.0 * 1440
+STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
@@ -20,8 +30,6 @@ TICKET_QUEUE = 1
 # ARCADE2 = 3
 # ARCADE3 = 4
 p_size = 0.6
-replicas = 20
-sampling_time = 120  # Minutes
 
 
 class Track:
@@ -162,276 +170,263 @@ def get_service(id_node):
             return service
     else:
         selectStream(id_node + 10)
-        service = TruncatedNormal(15, 3, 3, 25)  # arcade game time
+        service = TruncatedNormal(15, 3, 10, 20)  # arcade game time
+        # service = BoundedPareto()
         # print("arcade game time: ", service)
         return service
 
 
-def redirect_jobs(prev_nodes):
-    # TUTTO SHIFTATO DI 2 PERCHè LA POSIZIONE 1 E 2 DELLA LISTA CI SONO
-    # IL SISTEMA E LA CODA DEI TAMPONI
-
-    if prev_nodes == nodes:
-        return
-    if prev_nodes < nodes:  # 2-->3
-
-        iteration = nodes - prev_nodes
-        for i in range(2, prev_nodes + 1):
-            if node_list[i].number > 1:
-                n_jobs = node_list[i].number
-                for jobs in (0, n_jobs - 1):
-                    pos = select_node(True)
-                    # aggiorno le stats della nuova coda
-                    #print(pos, nodes, prev_nodes)
-                    node_list[pos].number += 1
-                    # aggiorno le stats della coda da spegnere
-                    node_list[i].number -= 1
-        return
-
-    if prev_nodes > nodes:
-
-        iteration = prev_nodes - nodes  # 3-->2
-        for i in range(nodes + 1, nodes + 1 + iteration):
-            if node_list[i].number > 1:
-                n_jobs = node_list[i].number
-                for jobs in (0, n_jobs - 1):
-                    pos = select_node(True)
-                    # aggiorno le stats della nuova coda
-                    node_list[pos].number += 1
-                    # aggiorno le stats della coda da spegnere
-                    node_list[i].number -= 1
-                    node_list[i].arrival = None
-        return
+dict_list = []
 
 
-if __name__ == '__main__':
-    conf_list = []
-
-    for n1 in range(2, 8):  # 4, 2, 2, 6
-        for n2 in range(2, 8):
-            for n3 in range(2, 8):
-                for n4 in range(2, 8):
-                    # settings
-                    plantSeeds(seed)
-                    sampling = START
-                    sampling_list = []
-
-                    conf_dict = {
-                        "delay_arcades": 0.0,
-                        "delay_system": 0.0,
-                        "conf": (0, 0, 0, 0)
-                    }
-                    for rep in range(0, replicas):
-                        node_list = [StatusNode(i) for i in range(7 + 1)]  # in 0 global stats
-                        sampling_count = 0
-                        time.current = START
-                        arrival = START  # global temp var for getArrival function     [minutes]
-
-                        # initialization of the first arrival event
-                        nodes = n1
-                        set_arrival_time(arrival_time_morning)
-
-                        arrival += get_arrival(arrival_time)
-                        node = node_list[select_node(False)]
-                        node.arrival = arrival
-                        min_arrival = arrival
-
-                        while (min_arrival < STOP):
-                            node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
-                            time.next = minimum(node_to_process.arrival, node_to_process.completion)
-                            # Aggiornamento delle aree basate sul giro prima
-                            for i in range(0, nodes):
-                                if node_list[i].number > 0:
-                                    # if i == 0 or i == node_to_process.id:
-                                    node_list[i].stat.node += (time.next - time.current) * node_list[i].number
-                                    node_list[i].stat.queue += (time.next - time.current) * (node_list[i].number - 1)
-                                    node_list[i].stat.service += (time.next - time.current)
-
-                            # SAMPLING
-                            if time.current - sampling > sampling_time or sampling_count == 0:
-                                if rep == 0:
-                                    sampling_dict = {
-                                             "delay_arcades": 0.0,
-                                             "delay_system": 0.0,
-                                             "sampling": 0.0
-                                         }
-                                    sampling_list.append(sampling_dict)
+def online_variance(n, mean, variance, x):
+    delta = x - mean
+    variance = variance + delta * delta * (n - 1) / n
+    mean = mean + delta / n
+    return mean, variance
 
 
-                                # salvare le statistiche x run x time
-                                avg = 0.0
-                                for i in range(2, nodes + 1):
-                                    if node_list[i].index != 0:
-                                        avg += (node_list[i].stat.queue / node_list[i].index)
-                                avg = avg / (nodes - 1.0)
-                                #print(sampling_count," ",rep)
-                                #print("len: ",len(sampling_list))
-                                sampling_list[sampling_count]["delay_arcades"] = sampling_list[sampling_count][
-                                                        "delay_arcades"] * (rep / (rep + 1.0)) + avg * (1 / (rep + 1.0))
-                                if node_list[1].index != 0:
-                                    delay_system = (node_list[1].stat.node / node_list[1].index) + avg
-                                    sampling_list[sampling_count]["delay_system"] = sampling_list[sampling_count][
-                                                     "delay_system"] * (rep / (rep + 1.0)) + delay_system * (1 / (rep + 1.0))
+def plot_stats_global():
+    x = [i for i in range(0, len(dict_list[0]["job_list"]), 30)]
+    colors = ['red', 'orange', 'gold', 'lawngreen', 'lightseagreen', 'royalblue',
+              'blueviolet']
+    plt.xticks(rotation=45)
+    plt.rcParams["figure.figsize"] = (16, 9)
 
-                                sampling_list[sampling_count]["sampling"] = sampling
+    for i in range(0, len(dict_list)):
+        # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
+        # print(dict_list[i])
+        plt.plot(x, [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 30)], 'o',
+                 color=colors[i], label=dict_list[i]["seed"], mfc='none')
 
-                                sampling_count += 1
-                                sampling = START + (sampling_time * sampling_count)  # 480 + (10 * count)
-
-                            current_for_update = time.current
-                            time.current = time.next  # advance the clock
-
-                            # TODO: Se sto finto switch lo metto fuori le stastiche cambiano..bah
-                            # Set arrival time
-                            day = (time.current / 1440.0) // 1
-                            current_lambda = time.current - day * 1440.0
-
-                            if 480.0 <= current_lambda < 720.0:  # 8-12
-                                set_arrival_time(arrival_time_morning)
-                                prev_nodes = nodes
-                                nodes = n1
-                                redirect_jobs(prev_nodes)
-                            elif 720.0 <= current_lambda < 1020.0:  # 12-17
-                                set_arrival_time(arrival_time_afternoon)
-                                prev_nodes = nodes
-                                nodes = n2
-                                redirect_jobs(prev_nodes)
-                            elif 1020.0 <= current_lambda < 1320.0:  # 17-22
-                                set_arrival_time(arrival_time_evening)
-                                prev_nodes = nodes
-                                nodes = n3
-                                redirect_jobs(prev_nodes)
-                            else:  # 22-8
-                                set_arrival_time(arrival_time_night)
-                                prev_nodes = nodes
-                                nodes = n4
-                                redirect_jobs(prev_nodes)
-
-                            if time.current == node_to_process.arrival:
-                                # print("day: ", day, ", current_lambda: ", current_lambda, ", t_current: ", time.current,
-                                # ", lambda: ", get_arrival_time())
-                                # print(day, time.current)
-                                node_to_process.number += 1
-                                node_list[0].number += 1  # update system stat
-                                arrival += get_arrival(arrival_time)
-                                node_selected_pos = select_node(False)
-
-                                # Se il prossimo arrivo è su un altro centro, bisogna eliminare l'arrivo sul centro processato altrimenti
-                                # sarà sempre il minimo
-                                if node_selected_pos != node_to_process.id:
-                                    node_to_process.arrival = INFINITY
-                                node = node_list[node_selected_pos]
-
-                                if node.arrival != INFINITY:
-                                    node.last = node.arrival
-                                    if node.last is not None and node_list[0].last is not None and node_list[
-                                        0].last < node.last:
-                                        node_list[0].last = node.last
-                                # update node and system last arrival time
-
-                                # Controllo che l'arrivo sul nodo i-esimo sia valido. In caso negativo
-                                # imposto come ultimo arrivo del nodo i-esimo l'arrivo precedentemente
-                                # considerato
-                                if arrival > STOP:
-                                    if node.arrival != INFINITY:
-                                        node.last = node.arrival
-                                    # update node and system last arrival time
-                                    if node.last is not None and node_list[0].last is not None and node_list[0].last < node.last:
-                                        node_list[0].last = node.last
-                                    node.arrival = INFINITY
-                                else:
-                                    node.arrival = arrival
-
-                                if node_to_process.number == 1:
-                                    node_to_process.completion = time.current + get_service(node_to_process.id)
-                            else:
-                                node_to_process.index += 1  # node stats update
-                                node_to_process.number -= 1
-                                if node_to_process.id != TICKET_QUEUE:  # system stats update
-                                    node_list[0].index += 1
-                                    node_list[0].number -= 1
-
-                                if node_to_process.number > 0:
-                                    node_to_process.completion = time.current + get_service(node_to_process.id)
-                                else:
-                                    node_to_process.completion = INFINITY
-
-                                if node_to_process.id == TICKET_QUEUE:  # a completion on TICKET_QUEUE trigger an arrival on ARCADE_i
-                                    arcade_node = node_list[select_node(True)]  # on first global stats
-
-                                    # Update partial stats for arcade nodes
-                                    # if arcade_node.number > 0:
-                                    #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                                    #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                                    #     arcade_node.stat.service += (time.next - current_for_update)
-
-                                    arcade_node.number += 1  # system stats don't updated
-                                    arcade_node.last = time.current
-
-                                    if arcade_node.number == 1:
-                                        arcade_node.completion = time.current + get_service(arcade_node.id)
-
-                            arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
-                            min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
-
-                       #for i in range(0, len(node_list)):
-                       #    print(node_list[i].last)
-                       #    print("\n\nNode " + str(i))
-                       #    print("\nfor {0} jobs".format(node_list[i].index))
-                       #    print("   average interarrival time = {0:6.6f}".format(
-                       #        node_list[i].last / node_list[i].index))
-                       #    print("   average wait ............ = {0:6.6f}".format(
-                       #        node_list[i].stat.node / node_list[i].index))
-                       #    print("   average delay ........... = {0:6.6f}".format(
-                       #        node_list[i].stat.queue / node_list[i].index))
-                       #    print(
-                       #        "   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
-                       #    print("   average # in the queue .. = {0:6.6f}".format(
-                       #        node_list[i].stat.queue / time.current))
-                       #    print("   utilization ............. = {0:6.6f}".format(
-                       #        node_list[i].stat.service / time.current))
-
-                        # calcolo media e dev di: funzione guadagno, tempo di riposta
-                        # media de
-
-                        avg = 0.0
-                        for i in range(2, max(n1, n2, n3, n4) + 1):
-                            if node_list[i].index != 0:
-                                avg += (node_list[i].stat.queue / node_list[i].index)
-                        avg = avg / (nodes - 1.0)
-
-                        delay_system_conf = (node_list[1].stat.node / node_list[1].index) + avg
-                        conf_dict["delay_system"] = conf_dict[
-                                           "delay_system"] * (rep / (rep + 1.0)) + delay_system_conf * (1 / (rep + 1.0))
-
-                        conf_dict["delay_arcades"] = conf_dict[
-                        "delay_arcades"] * (rep / (rep + 1.0)) + (node_list[0].stat.node / node_list[0].index) / (rep + 1.0)
+    plt.show()
 
 
-                    conf_dict["conf"] = (n1, n2, n3, n4)
-                    print((n1, n2, n3, n4))
-                    conf_list.append(conf_dict)
+def plot_stats():
+    x = [i for i in range(0, len(batch_means_info["avg_delay_arcades"]))]  # in 0 global stats
+    y = (batch_means_info["avg_delay_arcades"][:])  # in 0 global stats
+    print(x)
+    print(y)
+    # plt.plot(x, y)
 
-                        # Azzeriamo le statistiche
-                       #for j in node_list:
-                       #    j.number = 0.0
-                       #    j.arrival = 0.0
-                       #    j.completion = 0.0
-                       #    j.stat.node = 0.0
-                       #    j.stat.queue = 0.0
-                       #    j.stat.service = 0.0
-                       #    j.last = 0.0
-                       #    j.index = 0.0
-
-                    # funzione guadagno, tempo di riposta per una determinata configurazione
-
-
-    x = [str(i["conf"]) for i in conf_list]  # in 0 global stats
-    y = [i["delay_arcades"] for i in conf_list]  # in 0 global stats
-    plt.plot(x, y)
+    plt.errorbar(x, y, yerr=batch_means_info["w_arcades"][:], fmt='.', color='black',
+                 ecolor='red', elinewidth=3, capsize=0)
+    plt.tight_layout()
 
     plt.legend(["Gain"])
-    plt.title("Gain")
+    plt.title("Avg delay system")
     plt.xlabel("Configuration")
     plt.ylabel("Gain function")
     plt.show()
+    x1 = [i for i in range(0, len(job_list))]
+    y1 = [i["delay_arcades"] for i in job_list]
+    plt.errorbar(x1, y1, fmt='.')
+    plt.show()
+
+
+seeds = [987654321, 539458255, 841744376] #, 1865511657, 482548808,
+         # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
+         #640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
+replicas = 100
+
+if __name__ == '__main__':
+    for seed in seeds:
+        batch_index = 0
+        job_list = []
+
+        # settings
+        batch_means_info_struct = {
+            "seed": 0,
+            "n_nodes": 0,
+            "lambda": 0.0,
+            "b": 0,
+            "k": 0,
+            "job_list": [],
+            "avg_wait_ticket": [],
+            "std_ticket": [],
+            "w_ticket": [],
+            "avg_delay_arcades": [],
+            "std_arcades": [],
+            "w_arcades": [],
+            "final_wait_ticket": 0.0,
+            "final_std_ticket": 0.0,
+            "final_w_ticket": 0.0,
+            "final_delay_arcades": 0.0,
+            "final_std_arcades": 0.0,
+            "final_w_arcades": 0.0,
+            "correlation_delay_arcades": 0.0
+        }
+
+        batch_means_info = batch_means_info_struct
+        batch_means_info["seed"] = seed
+        batch_means_info["b"] = b
+        batch_means_info["k"] = k
+        batch_means_info["n_nodes"] = nodes - 1
+        batch_means_info["lambda"] = 1.0 / arrival_time
+        print(batch_means_info)
+        node_list = [StatusNode(i) for i in range(nodes + 1)]  # in 0 global stats
+        batch_means_info["job_list"] = job_list
+        plantSeeds(seed)
+
+        for replica in range(0, replicas):
+
+
+            time.current = START
+            arrival = START  # global temp var for getArrival function     [minutes]
+
+            # initialization of the first arrival event
+            arrival += get_arrival(arrival_time)
+            node = node_list[select_node(False)]
+            node.arrival = arrival
+            min_arrival = arrival
+            old_index = 0
+
+            while node_list[0].index <= b * k:  # (node_list[0].number > 0)
+
+
+
+                node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
+                time.next = minimum(node_to_process.arrival, node_to_process.completion)
+                # Aggiornamento delle aree basate sul giro prima
+                for i in range(0, len(node_list)):
+                    if node_list[i].number > 0:
+                        # if i == 0 or i == node_to_process.id:
+                        node_list[i].stat.node += (time.next - time.current) * node_list[i].number
+                        node_list[i].stat.queue += (time.next - time.current) * (node_list[i].number - 1)
+                        node_list[i].stat.service += (time.next - time.current)
+
+                current_for_update = time.current
+                time.current = time.next  # advance the clock
+
+                if time.current == node_to_process.arrival:
+
+                    node_to_process.number += 1
+                    node_list[0].number += 1  # update system stat
+                    arrival += get_arrival(arrival_time)
+                    node_selected_pos = select_node(False)
+
+                    # Se il prossimo arrivo è su un altro centro, bisogna eliminare l'arrivo sul centro processato altrimenti
+                    # sarà sempre il minimo
+                    if node_selected_pos != node_to_process.id:
+                        node_to_process.arrival = INFINITY
+                    node = node_list[node_selected_pos]
+
+                    if node.arrival != INFINITY:
+                        node.last = node.arrival
+                        if node.last is not None and node_list[0].last is not None and node_list[0].last < node.last:
+                            node_list[0].last = node.last
+                    # update node and system last arrival time
+
+                    # Controllo che l'arrivo sul nodo i-esimo sia valido. In caso negativo
+                    # imposto come ultimo arrivo del nodo i-esimo l'arrivo precedentemente
+                    # considerato
+                    if arrival > STOP:
+                        if node.arrival != INFINITY:
+                            node.last = node.arrival
+                        # update node and system last arrival time
+                        if node_list[0].last < node.last:
+                            node_list[0].last = node.last
+                        node.arrival = INFINITY
+                    else:
+                        node.arrival = arrival
+
+                    if node_to_process.number == 1:
+                        node_to_process.completion = time.current + get_service(node_to_process.id)
+                else:
+                    node_to_process.index += 1  # node stats update
+                    node_to_process.number -= 1
+                    if node_to_process.id != TICKET_QUEUE:  # system stats update
+                        node_list[0].index += 1
+                        node_list[0].number -= 1
+
+                        #  Inserimento statistiche puntuali ad ogni completamento
+                        actual_stats = {
+                            "wait_ticket": 0.0,
+                            "delay_arcades": 0.0
+                        }
+                        act_st = actual_stats
+                        if node_list[1].index != 0:
+                            act_st["wait_ticket"] = node_list[1].stat.node / node_list[1].index
+                        delay_arcades_avg = 0
+                        for i in range(2, nodes + 1):
+                            if node_list[i].index != 0:
+                                delay_arcades_avg += (node_list[i].stat.queue / node_list[i].index)
+                        delay_arcades_avg = delay_arcades_avg / (nodes - 1.0)
+                        act_st["delay_arcades"] = delay_arcades_avg
+                        job_list.append(act_st)
+
+                    if node_to_process.number > 0:
+                        node_to_process.completion = time.current + get_service(node_to_process.id)
+                    else:
+                        node_to_process.completion = INFINITY
+
+                    if node_to_process.id == TICKET_QUEUE:  # a completion on TICKET_QUEUE trigger an arrival on ARCADE_i
+                        arcade_node = node_list[select_node(True)]  # on first global stats
+
+                        # Update partial stats for arcade nodes
+                        # if arcade_node.number > 0:
+                        #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
+                        #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
+                        #     arcade_node.stat.service += (time.next - current_for_update)
+
+                        arcade_node.number += 1  # system stats don't updated
+                        arcade_node.last = time.current
+
+                        if arcade_node.number == 1:
+                            arcade_node.completion = time.current + get_service(arcade_node.id)
+
+                arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
+                min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
+
+            #  Global batch means
+            '''final_avg_wait_ticket = 0.0
+            final_avg_delay_arcades = 0.0
+            final_std_ticket = 0.0
+            final_std_arcades = 0.0
+            n = 0
+            for i in range(4, len(batch_means_info["avg_wait_ticket"])):
+                # print("len job list: ", len(job_list), ", index: ",node_list[0].index, ", batch_index: ",batch_index,", begin for: ", b * batch_index, ", end for: ", b * batch_index + b, ", elem_index: ", i)
+                n += 1
+                #  avg calculation,  std calculation
+    
+                final_avg_wait_ticket, final_std_ticket = online_variance(n, final_avg_wait_ticket, final_std_ticket,
+                                                                          batch_means_info["avg_wait_ticket"][i])
+                final_avg_delay_arcades, final_std_arcades = online_variance(n, final_avg_delay_arcades, final_std_arcades,
+                                                                             batch_means_info["avg_delay_arcades"][i])
+    
+            final_std_ticket = statistics.variance(batch_means_info["avg_wait_ticket"][4:])
+            final_std_arcades = statistics.variance(batch_means_info["avg_delay_arcades"][4:])
+            final_std_ticket = sqrt(final_std_ticket)
+            final_std_arcades = sqrt(final_std_arcades)
+            #  calculate interval width
+            LOC = 0.95
+            u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
+            t = idfStudent(n - 1, u)  # critical value of t
+            final_w_ticket = t * final_std_ticket / sqrt(n - 1)  # interval half width
+            final_w_arcades = t * final_std_arcades / sqrt(n - 1)  # interval half width
+            batch_means_info["final_wait_ticket"] = final_avg_wait_ticket
+            batch_means_info["final_delay_arcades"] = final_avg_delay_arcades
+            batch_means_info["final_std_ticket"] = final_std_ticket
+            batch_means_info["final_std_arcades"] = final_std_arcades
+            batch_means_info["final_w_ticket"] = final_w_ticket
+            batch_means_info["final_w_arcades"] = final_w_arcades
+            batch_means_info["correlation_delay_arcades"] = pearsonr(batch_means_info["avg_delay_arcades"][:k - 1], batch_means_info["avg_delay_arcades"][1:])
+            print(pearsonr(batch_means_info["avg_delay_arcades"][:k-1], batch_means_info["avg_delay_arcades"][1:]))'''
+            dict_list.append(batch_means_info)
+            '''path = "stats_" + str(seed) + ".json"
+            with open(path, 'w+') as json_file:
+                json.dump(batch_means_info, json_file, indent=4)
+            json_file.close()
+            plot_stats()'''
+            # for i in range(0, len(node_list)):
+            #    print(node_list[i].last)
+            #    print("\n\nNode " + str(i))
+            #    print("\nfor {0} jobs".format(node_list[i].index))
+            #    print("   average interarrival time = {0:6.6f}".format(node_list[i].last / node_list[i].index))
+            #    print("   average wait ............ = {0:6.6f}".format(node_list[i].stat.node / node_list[i].index))
+            #    print("   average delay ........... = {0:6.6f}".format(node_list[i].stat.queue / node_list[i].index))
+            #    print("   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
+            #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
+            #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
+
+        plot_stats_global()

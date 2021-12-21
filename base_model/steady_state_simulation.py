@@ -435,7 +435,7 @@ if __name__ == '__main__':
         with open(path, 'w+') as json_file:
             json.dump(batch_means_info, json_file, indent=4)
         json_file.close()
-        plot_stats()
+        # plot_stats()
         # for i in range(0, len(node_list)):
         #    print(node_list[i].last)
         #    print("\n\nNode " + str(i))
