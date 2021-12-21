@@ -18,7 +18,7 @@ arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-b = 24
+b = 8
 k = 64
 # seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8.0 * 1440
@@ -187,8 +187,8 @@ def online_variance(n, mean, variance, x):
 
 
 def plot_stats_global():
-    x = [i for i in range(0, len(dict_list[0]["job_list"]), 30)]
-    colors = ['red', 'orange', 'gold', 'lawngreen', 'lightseagreen', 'royalblue',
+    x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_delay_arcades"]))]
+    colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
     plt.xticks(rotation=45)
     plt.rcParams["figure.figsize"] = (16, 9)
@@ -196,7 +196,7 @@ def plot_stats_global():
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
         # print(dict_list[i])
-        plt.plot(x, [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 30)], 'o',
+        plt.plot(x, [dict_list[i]["avg_delay_arcades"][j] for j in range(0, len(dict_list[i]["avg_delay_arcades"]))], 'o',
                  color=colors[i], label=dict_list[i]["seed"], mfc='none')
 
     plt.show()
@@ -224,15 +224,15 @@ def plot_stats():
     plt.show()
 
 
-seeds = [987654321, 539458255, 841744376] #, 1865511657, 482548808,
+seeds = [987654321, 539458255, 482548808] #, 1865511657, 841744376,
          # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
          #640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
-replicas = 100
+replicas = 20
+sampling_frequency = 50
 
 if __name__ == '__main__':
     for seed in seeds:
-        batch_index = 0
-        job_list = []
+
 
         # settings
         batch_means_info_struct = {
@@ -242,7 +242,7 @@ if __name__ == '__main__':
             "b": 0,
             "k": 0,
             "job_list": [],
-            "avg_wait_ticket": [],
+            "avg_wait_ticket": [], # [elem 0-50, elem 50-100, ..]
             "std_ticket": [],
             "w_ticket": [],
             "avg_delay_arcades": [],
@@ -265,12 +265,24 @@ if __name__ == '__main__':
         batch_means_info["lambda"] = 1.0 / arrival_time
         print(batch_means_info)
         node_list = [StatusNode(i) for i in range(nodes + 1)]  # in 0 global stats
-        batch_means_info["job_list"] = job_list
+
         plantSeeds(seed)
 
         for replica in range(0, replicas):
+            job_list = []
+            batch_means_info["job_list"] = job_list
+            for center in node_list:
+                center.number = 0.0
+                center.last = 0.0
+                center.arrival = None
+                center.completion = None
+                center.index = 0.0
+                center.stat.node = 0.0
+                center.stat.queue = 0.0
+                center.stat.service = 0.0
 
 
+            batch_index = 0
             time.current = START
             arrival = START  # global temp var for getArrival function     [minutes]
 
@@ -283,7 +295,24 @@ if __name__ == '__main__':
 
             while node_list[0].index <= b * k:  # (node_list[0].number > 0)
 
-
+                if node_list[0].index % sampling_frequency == 0 and node_list[0].index != 0 and old_index != node_list[0].index:
+                    old_index = node_list[0].index
+                    if replica == 0:
+                        batch_means_info["avg_wait_ticket"].append(job_list[sampling_frequency * batch_index]["wait_ticket"])
+                        batch_means_info["std_ticket"].append(0.0)
+                        batch_means_info["avg_delay_arcades"].append(job_list[sampling_frequency * batch_index]["delay_arcades"])
+                        batch_means_info["std_arcades"].append(0.0)
+                    else:
+                        # aggiornare la media delle statistiche
+                        '''if batch_index == 3:
+                            print(batch_means_info["avg_wait_ticket"][batch_index])'''
+                        batch_means_info["avg_wait_ticket"][batch_index], batch_means_info["std_ticket"][batch_index] = online_variance(replica+1, batch_means_info["avg_wait_ticket"][batch_index], batch_means_info["std_ticket"][batch_index], job_list[batch_index*sampling_frequency]["wait_ticket"])
+                        batch_means_info["avg_delay_arcades"][batch_index], batch_means_info["std_arcades"][
+                            batch_index] = online_variance(replica + 1,
+                                                           batch_means_info["avg_delay_arcades"][batch_index],
+                                                           batch_means_info["std_arcades"][batch_index],
+                                                           job_list[batch_index * sampling_frequency]["delay_arcades"])
+                    batch_index += 1
 
                 node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
                 time.next = minimum(node_to_process.arrival, node_to_process.completion)
@@ -412,12 +441,9 @@ if __name__ == '__main__':
             batch_means_info["final_w_arcades"] = final_w_arcades
             batch_means_info["correlation_delay_arcades"] = pearsonr(batch_means_info["avg_delay_arcades"][:k - 1], batch_means_info["avg_delay_arcades"][1:])
             print(pearsonr(batch_means_info["avg_delay_arcades"][:k-1], batch_means_info["avg_delay_arcades"][1:]))'''
-            dict_list.append(batch_means_info)
-            '''path = "stats_" + str(seed) + ".json"
-            with open(path, 'w+') as json_file:
-                json.dump(batch_means_info, json_file, indent=4)
-            json_file.close()
-            plot_stats()'''
+
+
+            #plot_stats()
             # for i in range(0, len(node_list)):
             #    print(node_list[i].last)
             #    print("\n\nNode " + str(i))
@@ -428,5 +454,22 @@ if __name__ == '__main__':
             #    print("   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
+        dict_list.append(batch_means_info)
+        for i in range(0, len(batch_means_info["std_arcades"])):
+            batch_means_info["std_arcades"][i] = sqrt(batch_means_info["std_arcades"][i]/replicas)
+            batch_means_info["std_ticket"][i] = sqrt(batch_means_info["std_ticket"][i] / replicas)
+            # print(batch_means_info["std_arcades"][i])
+            LOC = 0.95
+            u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
+            t = idfStudent(replicas - 1, u)  # critical value of t
+            # print(std_arcades, t)
+            w_ticket = t * batch_means_info["std_ticket"][i] / sqrt(replicas - 1)  # interval half width
+            w_arcades = t * batch_means_info["std_arcades"][i] / sqrt(replicas - 1) # interval half width
+            batch_means_info["w_ticket"].append(w_ticket)
+            batch_means_info["w_arcades"].append(w_arcades)
+        path = "stats_" + str(seed) + ".json"
+        with open(path, 'w+') as json_file:
+            json.dump(batch_means_info, json_file, indent=4)
+        json_file.close()
 
-        plot_stats_global()
+    plot_stats_global()

@@ -1,0 +1,2140 @@
+{
+    "seed": 539458255,
+    "n_nodes": 3,
+    "lambda": 0.1,
+    "b": 8,
+    "k": 64,
+    "job_list": [
+        {
+            "wait_ticket": 25.55350428386737,
+            "delay_arcades": 0.0
+        },
+        {
+            "wait_ticket": 18.84598592956354,
+            "delay_arcades": 0.0
+        },
+        {
+            "wait_ticket": 15.947357372831538,
+            "delay_arcades": 4.448706120847419
+        },
+        {
+            "wait_ticket": 15.947357372831538,
+            "delay_arcades": 4.448706120847419
+        },
+        {
+            "wait_ticket": 15.947357372831538,
+            "delay_arcades": 2.2243530604237094
+        },
+        {
+            "wait_ticket": 12.98626923754432,
+            "delay_arcades": 2.2243530604237094
+        },
+        {
+            "wait_ticket": 12.98626923754432,
+            "delay_arcades": 1.4829020402824729
+        },
+        {
+            "wait_ticket": 12.98626923754432,
+            "delay_arcades": 1.4829020402824729
+        },
+        {
+            "wait_ticket": 13.600121249953872,
+            "delay_arcades": 1.4829020402824729
+        },
+        {
+            "wait_ticket": 17.87885502827503,
+            "delay_arcades": 1.4829020402824729
+        },
+        {
+            "wait_ticket": 24.039406601166114,
+            "delay_arcades": 1.5906017935682637
+        },
+        {
+            "wait_ticket": 23.77561344505585,
+            "delay_arcades": 1.9255700705413499
+        },
+        {
+            "wait_ticket": 25.57514723053702,
+            "delay_arcades": 2.263314595512687
+        },
+        {
+            "wait_ticket": 20.152703472817322,
+            "delay_arcades": 4.049417559245901
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 4.924793929786625
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 5.5134535505183315
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 7.295586462444043
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 6.530413596930887
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 7.216252266119721
+        },
+        {
+            "wait_ticket": 19.22106572889652,
+            "delay_arcades": 7.053214991028789
+        },
+        {
+            "wait_ticket": 19.233389769734732,
+            "delay_arcades": 6.881085741985468
+        },
+        {
+            "wait_ticket": 18.414673625817937,
+            "delay_arcades": 8.594833370898966
+        },
+        {
+            "wait_ticket": 18.414673625817937,
+            "delay_arcades": 7.811650374260661
+        },
+        {
+            "wait_ticket": 18.414673625817937,
+            "delay_arcades": 8.308109042449592
+        },
+        {
+            "wait_ticket": 17.659960243532705,
+            "delay_arcades": 7.984455491082904
+        },
+        {
+            "wait_ticket": 16.952744841630032,
+            "delay_arcades": 7.9175331476696265
+        },
+        {
+            "wait_ticket": 16.952744841630032,
+            "delay_arcades": 7.3628085939933205
+        },
+        {
+            "wait_ticket": 16.952744841630032,
+            "delay_arcades": 7.263760831535692
+        },
+        {
+            "wait_ticket": 16.952744841630032,
+            "delay_arcades": 6.794378516886511
+        },
+        {
+            "wait_ticket": 16.58983745952628,
+            "delay_arcades": 6.392050818615785
+        },
+        {
+            "wait_ticket": 15.57891858207103,
+            "delay_arcades": 6.340000107072125
+        },
+        {
+            "wait_ticket": 15.57891858207103,
+            "delay_arcades": 6.2629629584939694
+        },
+        {
+            "wait_ticket": 15.57891858207103,
+            "delay_arcades": 5.914278953326005
+        },
+        {
+            "wait_ticket": 15.122074616432386,
+            "delay_arcades": 5.609180448804039
+        },
+        {
+            "wait_ticket": 15.336192720182764,
+            "delay_arcades": 5.547550729941515
+        },
+        {
+            "wait_ticket": 14.9204499754647,
+            "delay_arcades": 5.535726184260466
+        },
+        {
+            "wait_ticket": 14.719741557824191,
+            "delay_arcades": 5.498946080017899
+        },
+        {
+            "wait_ticket": 14.367590930322633,
+            "delay_arcades": 5.457016110309579
+        },
+        {
+            "wait_ticket": 14.367590930322633,
+            "delay_arcades": 5.414287985305045
+        },
+        {
+            "wait_ticket": 13.97722019859236,
+            "delay_arcades": 5.38363789843624
+        },
+        {
+            "wait_ticket": 13.274983711794073,
+            "delay_arcades": 5.9170742229114035
+        },
+        {
+            "wait_ticket": 12.943316826968866,
+            "delay_arcades": 6.082354583378073
+        },
+        {
+            "wait_ticket": 12.32971197069295,
+            "delay_arcades": 6.3227119736210255
+        },
+        {
+            "wait_ticket": 12.32971197069295,
+            "delay_arcades": 6.118776582763267
+        },
+        {
+            "wait_ticket": 11.965337077666936,
+            "delay_arcades": 6.691074835057435
+        },
+        {
+            "wait_ticket": 11.4691537940988,
+            "delay_arcades": 6.695811925905417
+        },
+        {
+            "wait_ticket": 11.533450360646125,
+            "delay_arcades": 7.180720549383547
+        },
+        {
+            "wait_ticket": 11.585295153005973,
+            "delay_arcades": 7.2033678781204
+        },
+        {
+            "wait_ticket": 11.743856867416346,
+            "delay_arcades": 7.320072748969526
+        },
+        {
+            "wait_ticket": 11.576478849006284,
+            "delay_arcades": 7.670129112478374
+        },
+        {
+            "wait_ticket": 11.593694017759319,
+            "delay_arcades": 7.630620510117736
+        },
+        {
+            "wait_ticket": 11.750634644057289,
+            "delay_arcades": 7.808495236255794
+        },
+        {
+            "wait_ticket": 11.495163215421579,
+            "delay_arcades": 8.704656980974102
+        },
+        {
+            "wait_ticket": 11.538474454170972,
+            "delay_arcades": 8.502958594682548
+        },
+        {
+            "wait_ticket": 11.220528981451785,
+            "delay_arcades": 9.39313935851237
+        },
+        {
+            "wait_ticket": 11.220528981451785,
+            "delay_arcades": 9.060771307087409
+        },
+        {
+            "wait_ticket": 11.220528981451785,
+            "delay_arcades": 9.561517862692808
+        },
+        {
+            "wait_ticket": 11.220528981451785,
+            "delay_arcades": 9.376246488150638
+        },
+        {
+            "wait_ticket": 11.24897072890209,
+            "delay_arcades": 9.342303144131623
+        },
+        {
+            "wait_ticket": 11.105329807990675,
+            "delay_arcades": 9.64709203866598
+        },
+        {
+            "wait_ticket": 11.420145372168335,
+            "delay_arcades": 9.472637271254392
+        },
+        {
+            "wait_ticket": 10.784827067396522,
+            "delay_arcades": 9.914606721888386
+        },
+        {
+            "wait_ticket": 10.784827067396522,
+            "delay_arcades": 9.922377034318343
+        },
+        {
+            "wait_ticket": 10.784827067396522,
+            "delay_arcades": 10.125762712343091
+        },
+        {
+            "wait_ticket": 10.492217051925602,
+            "delay_arcades": 10.395140186296556
+        },
+        {
+            "wait_ticket": 10.492217051925602,
+            "delay_arcades": 10.511368827305665
+        },
+        {
+            "wait_ticket": 10.492217051925602,
+            "delay_arcades": 10.351478422282451
+        },
+        {
+            "wait_ticket": 10.40160434180006,
+            "delay_arcades": 10.347549136667455
+        },
+        {
+            "wait_ticket": 10.384461383314468,
+            "delay_arcades": 10.288412361800878
+        },
+        {
+            "wait_ticket": 10.456951835959664,
+            "delay_arcades": 10.306391132761696
+        },
+        {
+            "wait_ticket": 10.28140696704413,
+            "delay_arcades": 10.451163290967651
+        },
+        {
+            "wait_ticket": 10.28140696704413,
+            "delay_arcades": 10.181233635101513
+        },
+        {
+            "wait_ticket": 10.312729941672599,
+            "delay_arcades": 10.123034909649624
+        },
+        {
+            "wait_ticket": 10.433265295951507,
+            "delay_arcades": 9.956332683050515
+        },
+        {
+            "wait_ticket": 10.36398056553102,
+            "delay_arcades": 9.821951441596342
+        },
+        {
+            "wait_ticket": 10.36398056553102,
+            "delay_arcades": 9.75245902587826
+        },
+        {
+            "wait_ticket": 10.36398056553102,
+            "delay_arcades": 9.525748989046733
+        },
+        {
+            "wait_ticket": 9.978014903324397,
+            "delay_arcades": 9.36017087413718
+        },
+        {
+            "wait_ticket": 9.978014903324397,
+            "delay_arcades": 9.364193850838385
+        },
+        {
+            "wait_ticket": 9.978371850554966,
+            "delay_arcades": 9.194737012891233
+        },
+        {
+            "wait_ticket": 9.84539122418814,
+            "delay_arcades": 9.071809659326169
+        },
+        {
+            "wait_ticket": 9.84539122418814,
+            "delay_arcades": 9.093396967845846
+        },
+        {
+            "wait_ticket": 9.84539122418814,
+            "delay_arcades": 8.945243563227914
+        },
+        {
+            "wait_ticket": 9.72549998589506,
+            "delay_arcades": 8.863503176789518
+        },
+        {
+            "wait_ticket": 9.72549998589506,
+            "delay_arcades": 8.82098951953952
+        },
+        {
+            "wait_ticket": 9.730474428417134,
+            "delay_arcades": 8.811907323776582
+        },
+        {
+            "wait_ticket": 9.741857676954371,
+            "delay_arcades": 8.88584649237677
+        },
+        {
+            "wait_ticket": 9.754333912219172,
+            "delay_arcades": 8.885958796768431
+        },
+        {
+            "wait_ticket": 9.805266653991591,
+            "delay_arcades": 8.930439071477913
+        },
+        {
+            "wait_ticket": 9.692927115608036,
+            "delay_arcades": 8.937924512199404
+        },
+        {
+            "wait_ticket": 9.692927115608036,
+            "delay_arcades": 8.981011335002583
+        },
+        {
+            "wait_ticket": 9.692927115608036,
+            "delay_arcades": 8.822302026745774
+        },
+        {
+            "wait_ticket": 9.692927115608036,
+            "delay_arcades": 8.76313791607934
+        },
+        {
+            "wait_ticket": 9.75522178147893,
+            "delay_arcades": 8.82921372428745
+        },
+        {
+            "wait_ticket": 9.890756477387516,
+            "delay_arcades": 9.003798739490772
+        },
+        {
+            "wait_ticket": 9.60505972714177,
+            "delay_arcades": 9.35603767010027
+        },
+        {
+            "wait_ticket": 9.60505972714177,
+            "delay_arcades": 9.20448606543717
+        },
+        {
+            "wait_ticket": 9.60505972714177,
+            "delay_arcades": 9.238739603440987
+        },
+        {
+            "wait_ticket": 9.60505972714177,
+            "delay_arcades": 9.244372674500221
+        },
+        {
+            "wait_ticket": 9.60505972714177,
+            "delay_arcades": 9.122544929312822
+        },
+        {
+            "wait_ticket": 9.513360219373086,
+            "delay_arcades": 9.241662367346644
+        },
+        {
+            "wait_ticket": 9.513360219373086,
+            "delay_arcades": 9.228825580886268
+        },
+        {
+            "wait_ticket": 9.513360219373086,
+            "delay_arcades": 9.281783296484237
+        },
+        {
+            "wait_ticket": 9.426827671154214,
+            "delay_arcades": 9.226758549516328
+        },
+        {
+            "wait_ticket": 9.327068681149319,
+            "delay_arcades": 9.409554584131302
+        },
+        {
+            "wait_ticket": 9.340571418216237,
+            "delay_arcades": 9.405359477345462
+        },
+        {
+            "wait_ticket": 9.241151372151048,
+            "delay_arcades": 9.302826011536963
+        },
+        {
+            "wait_ticket": 9.241151372151048,
+            "delay_arcades": 9.404354029739755
+        },
+        {
+            "wait_ticket": 9.241151372151048,
+            "delay_arcades": 9.353767630346528
+        },
+        {
+            "wait_ticket": 9.241151372151048,
+            "delay_arcades": 9.305554283606904
+        },
+        {
+            "wait_ticket": 9.209550687722418,
+            "delay_arcades": 9.387388061510181
+        },
+        {
+            "wait_ticket": 9.120163242399423,
+            "delay_arcades": 9.462454134917104
+        },
+        {
+            "wait_ticket": 9.153421088306088,
+            "delay_arcades": 9.439350688796976
+        },
+        {
+            "wait_ticket": 9.13619547062757,
+            "delay_arcades": 9.484028124548706
+        },
+        {
+            "wait_ticket": 9.142690619673559,
+            "delay_arcades": 9.435806932815375
+        },
+        {
+            "wait_ticket": 9.139270703917546,
+            "delay_arcades": 9.403164423973552
+        },
+        {
+            "wait_ticket": 9.058675454458788,
+            "delay_arcades": 9.35748118969987
+        },
+        {
+            "wait_ticket": 9.058675454458788,
+            "delay_arcades": 9.315758319932161
+        },
+        {
+            "wait_ticket": 9.058675454458788,
+            "delay_arcades": 9.186532407911612
+        },
+        {
+            "wait_ticket": 9.046878332356542,
+            "delay_arcades": 9.147338196917703
+        },
+        {
+            "wait_ticket": 9.046878332356542,
+            "delay_arcades": 9.023281321377976
+        },
+        {
+            "wait_ticket": 9.014839748116202,
+            "delay_arcades": 8.917995627847127
+        },
+        {
+            "wait_ticket": 9.014839748116202,
+            "delay_arcades": 8.881106958676389
+        },
+        {
+            "wait_ticket": 9.035875741049129,
+            "delay_arcades": 8.766231935447239
+        },
+        {
+            "wait_ticket": 9.032830034615694,
+            "delay_arcades": 8.72289143113631
+        },
+        {
+            "wait_ticket": 8.964269061652205,
+            "delay_arcades": 8.612351314444108
+        },
+        {
+            "wait_ticket": 8.964269061652205,
+            "delay_arcades": 8.577570569225985
+        },
+        {
+            "wait_ticket": 9.041206060999379,
+            "delay_arcades": 8.521188915157987
+        },
+        {
+            "wait_ticket": 8.918395041758911,
+            "delay_arcades": 8.417703380359326
+        },
+        {
+            "wait_ticket": 8.918395041758911,
+            "delay_arcades": 8.387806687446426
+        },
+        {
+            "wait_ticket": 8.918395041758911,
+            "delay_arcades": 8.346633208351042
+        },
+        {
+            "wait_ticket": 8.774587043597837,
+            "delay_arcades": 8.315480542283387
+        },
+        {
+            "wait_ticket": 8.70284041944843,
+            "delay_arcades": 8.226924829264142
+        },
+        {
+            "wait_ticket": 8.70284041944843,
+            "delay_arcades": 8.211446712216178
+        },
+        {
+            "wait_ticket": 8.665359771293188,
+            "delay_arcades": 8.177895394388274
+        },
+        {
+            "wait_ticket": 8.560651373280812,
+            "delay_arcades": 8.273004498030817
+        },
+        {
+            "wait_ticket": 8.560651373280812,
+            "delay_arcades": 8.233427587885757
+        },
+        {
+            "wait_ticket": 8.560651373280812,
+            "delay_arcades": 8.27102308485448
+        },
+        {
+            "wait_ticket": 8.589214131711328,
+            "delay_arcades": 8.177355806132793
+        },
+        {
+            "wait_ticket": 8.636485228231537,
+            "delay_arcades": 8.14548253350149
+        },
+        {
+            "wait_ticket": 8.693828951071785,
+            "delay_arcades": 8.109124626205107
+        },
+        {
+            "wait_ticket": 8.61128820848092,
+            "delay_arcades": 8.146245549354944
+        },
+        {
+            "wait_ticket": 8.59923781214146,
+            "delay_arcades": 8.123681988106314
+        },
+        {
+            "wait_ticket": 8.608644157021994,
+            "delay_arcades": 8.033189871375193
+        },
+        {
+            "wait_ticket": 8.68800076164413,
+            "delay_arcades": 7.998430915161905
+        },
+        {
+            "wait_ticket": 8.65257168362655,
+            "delay_arcades": 7.993548877239808
+        },
+        {
+            "wait_ticket": 8.7808614319926,
+            "delay_arcades": 8.024302380632498
+        },
+        {
+            "wait_ticket": 8.712103580847506,
+            "delay_arcades": 8.141440648519582
+        },
+        {
+            "wait_ticket": 8.712103580847506,
+            "delay_arcades": 8.127889480379308
+        },
+        {
+            "wait_ticket": 8.6014549831914,
+            "delay_arcades": 8.308579168198433
+        },
+        {
+            "wait_ticket": 8.6014549831914,
+            "delay_arcades": 8.296624417826996
+        },
+        {
+            "wait_ticket": 8.6014549831914,
+            "delay_arcades": 8.352810200614686
+        },
+        {
+            "wait_ticket": 8.54263900618012,
+            "delay_arcades": 8.360046842074683
+        },
+        {
+            "wait_ticket": 8.54263900618012,
+            "delay_arcades": 8.2725711292346
+        },
+        {
+            "wait_ticket": 8.549630768498343,
+            "delay_arcades": 8.236283734397619
+        },
+        {
+            "wait_ticket": 8.552786714330537,
+            "delay_arcades": 8.207913059404904
+        },
+        {
+            "wait_ticket": 8.489924247206849,
+            "delay_arcades": 8.209398589214134
+        },
+        {
+            "wait_ticket": 8.562619177362244,
+            "delay_arcades": 8.182734577388132
+        },
+        {
+            "wait_ticket": 8.56957045693569,
+            "delay_arcades": 8.2162884332917
+        },
+        {
+            "wait_ticket": 8.57415953815035,
+            "delay_arcades": 8.261028494134026
+        },
+        {
+            "wait_ticket": 8.57415953815035,
+            "delay_arcades": 8.226197765372357
+        },
+        {
+            "wait_ticket": 8.532584501471504,
+            "delay_arcades": 8.25698072450079
+        },
+        {
+            "wait_ticket": 8.541361049728142,
+            "delay_arcades": 8.22102176686924
+        },
+        {
+            "wait_ticket": 8.513977471236577,
+            "delay_arcades": 8.156816618416164
+        },
+        {
+            "wait_ticket": 8.451177262846384,
+            "delay_arcades": 8.171723537786958
+        },
+        {
+            "wait_ticket": 8.451177262846384,
+            "delay_arcades": 8.172997642101329
+        },
+        {
+            "wait_ticket": 8.451177262846384,
+            "delay_arcades": 8.158196888204571
+        },
+        {
+            "wait_ticket": 8.515166010314365,
+            "delay_arcades": 8.132455170442691
+        },
+        {
+            "wait_ticket": 8.537261251097677,
+            "delay_arcades": 8.07463531074994
+        },
+        {
+            "wait_ticket": 8.537261251097677,
+            "delay_arcades": 8.049846989942203
+        },
+        {
+            "wait_ticket": 8.486049738194104,
+            "delay_arcades": 7.972710096758497
+        },
+        {
+            "wait_ticket": 8.521565298747891,
+            "delay_arcades": 7.939389637066367
+        },
+        {
+            "wait_ticket": 8.554102855957808,
+            "delay_arcades": 7.923902200164201
+        },
+        {
+            "wait_ticket": 8.537958922595607,
+            "delay_arcades": 7.900718386487276
+        },
+        {
+            "wait_ticket": 8.464397196051992,
+            "delay_arcades": 7.8776731097276995
+        },
+        {
+            "wait_ticket": 8.498368136382826,
+            "delay_arcades": 7.822859722545914
+        },
+        {
+            "wait_ticket": 8.564255688459196,
+            "delay_arcades": 7.827722492802306
+        },
+        {
+            "wait_ticket": 8.542420676520853,
+            "delay_arcades": 7.841337225981516
+        },
+        {
+            "wait_ticket": 8.542420676520853,
+            "delay_arcades": 7.810499466794686
+        },
+        {
+            "wait_ticket": 8.502487769710312,
+            "delay_arcades": 7.7380015755786715
+        },
+        {
+            "wait_ticket": 8.502487769710312,
+            "delay_arcades": 7.715296177108307
+        },
+        {
+            "wait_ticket": 8.505986462369775,
+            "delay_arcades": 7.693492492543121
+        },
+        {
+            "wait_ticket": 8.468983626130326,
+            "delay_arcades": 7.6784481118730135
+        },
+        {
+            "wait_ticket": 8.539586716966165,
+            "delay_arcades": 7.671085787181301
+        },
+        {
+            "wait_ticket": 8.559146283675078,
+            "delay_arcades": 7.634319205625684
+        },
+        {
+            "wait_ticket": 8.476872990077476,
+            "delay_arcades": 7.63967253617432
+        },
+        {
+            "wait_ticket": 8.476872990077476,
+            "delay_arcades": 7.61859564109464
+        },
+        {
+            "wait_ticket": 8.476872990077476,
+            "delay_arcades": 7.590718424787586
+        },
+        {
+            "wait_ticket": 8.542707582569205,
+            "delay_arcades": 7.522567325469176
+        },
+        {
+            "wait_ticket": 8.491977465854035,
+            "delay_arcades": 7.495604116254157
+        },
+        {
+            "wait_ticket": 8.491977465854035,
+            "delay_arcades": 7.475218266914794
+        },
+        {
+            "wait_ticket": 8.452202531272054,
+            "delay_arcades": 7.455490025618636
+        },
+        {
+            "wait_ticket": 8.452202531272054,
+            "delay_arcades": 7.429396597346037
+        },
+        {
+            "wait_ticket": 8.452202531272054,
+            "delay_arcades": 7.404131531875741
+        },
+        {
+            "wait_ticket": 8.452202531272054,
+            "delay_arcades": 7.385029583954065
+        },
+        {
+            "wait_ticket": 8.412812871527986,
+            "delay_arcades": 7.360554051779718
+        },
+        {
+            "wait_ticket": 8.413592735939979,
+            "delay_arcades": 7.294350126727548
+        },
+        {
+            "wait_ticket": 8.297477141679078,
+            "delay_arcades": 7.30477493825223
+        },
+        {
+            "wait_ticket": 8.330237088714632,
+            "delay_arcades": 7.316890352274367
+        },
+        {
+            "wait_ticket": 8.309453654162537,
+            "delay_arcades": 7.3241633265032995
+        },
+        {
+            "wait_ticket": 8.309453654162537,
+            "delay_arcades": 7.259824300748374
+        },
+        {
+            "wait_ticket": 8.318466385349366,
+            "delay_arcades": 7.241068900599944
+        },
+        {
+            "wait_ticket": 8.275536638485846,
+            "delay_arcades": 7.21806532350741
+        },
+        {
+            "wait_ticket": 8.275536638485846,
+            "delay_arcades": 7.155513492912344
+        },
+        {
+            "wait_ticket": 8.309206231656555,
+            "delay_arcades": 7.205047987964193
+        },
+        {
+            "wait_ticket": 8.440916723851906,
+            "delay_arcades": 7.29854405811912
+        },
+        {
+            "wait_ticket": 8.393536339025724,
+            "delay_arcades": 7.366178236005358
+        },
+        {
+            "wait_ticket": 8.422083511737062,
+            "delay_arcades": 7.411938725020917
+        },
+        {
+            "wait_ticket": 8.386159621033649,
+            "delay_arcades": 7.48752178617508
+        },
+        {
+            "wait_ticket": 8.39226871710319,
+            "delay_arcades": 7.480273029729319
+        },
+        {
+            "wait_ticket": 8.311198302876713,
+            "delay_arcades": 7.53929661098509
+        },
+        {
+            "wait_ticket": 8.311198302876713,
+            "delay_arcades": 7.561026664611881
+        },
+        {
+            "wait_ticket": 8.305091010503372,
+            "delay_arcades": 7.576229174161665
+        },
+        {
+            "wait_ticket": 8.305091010503372,
+            "delay_arcades": 7.558178038840107
+        },
+        {
+            "wait_ticket": 8.306820692409381,
+            "delay_arcades": 7.540517664249069
+        },
+        {
+            "wait_ticket": 8.263905743147012,
+            "delay_arcades": 7.484058863184746
+        },
+        {
+            "wait_ticket": 8.263905743147012,
+            "delay_arcades": 7.457409279551164
+        },
+        {
+            "wait_ticket": 8.239611215816428,
+            "delay_arcades": 7.400845719027348
+        },
+        {
+            "wait_ticket": 8.27398870307425,
+            "delay_arcades": 7.383697239351993
+        },
+        {
+            "wait_ticket": 8.23718036546763,
+            "delay_arcades": 7.328584026533917
+        },
+        {
+            "wait_ticket": 8.23718036546763,
+            "delay_arcades": 7.274866084926425
+        },
+        {
+            "wait_ticket": 8.197664509795118,
+            "delay_arcades": 7.258207561813223
+        },
+        {
+            "wait_ticket": 8.23121773703348,
+            "delay_arcades": 7.232278237196765
+        },
+        {
+            "wait_ticket": 8.259512727805225,
+            "delay_arcades": 7.17990324412946
+        },
+        {
+            "wait_ticket": 8.192633577124825,
+            "delay_arcades": 7.229864480421841
+        },
+        {
+            "wait_ticket": 8.192633577124825,
+            "delay_arcades": 7.204301297089027
+        },
+        {
+            "wait_ticket": 8.399024368232828,
+            "delay_arcades": 7.161062585133032
+        },
+        {
+            "wait_ticket": 8.386945097200032,
+            "delay_arcades": 7.1868691211851425
+        },
+        {
+            "wait_ticket": 8.386945097200032,
+            "delay_arcades": 7.149313433251213
+        },
+        {
+            "wait_ticket": 8.386945097200032,
+            "delay_arcades": 7.201786045526724
+        },
+        {
+            "wait_ticket": 8.386945097200032,
+            "delay_arcades": 7.197824213903288
+        },
+        {
+            "wait_ticket": 8.386945097200032,
+            "delay_arcades": 7.235943431202579
+        },
+        {
+            "wait_ticket": 8.41578054429832,
+            "delay_arcades": 7.217900596314814
+        },
+        {
+            "wait_ticket": 8.476637140855278,
+            "delay_arcades": 7.19417449153692
+        },
+        {
+            "wait_ticket": 8.376954218444906,
+            "delay_arcades": 7.185132870605078
+        },
+        {
+            "wait_ticket": 8.376954218444906,
+            "delay_arcades": 7.161999918446632
+        },
+        {
+            "wait_ticket": 8.376954218444906,
+            "delay_arcades": 7.1139592924227015
+        },
+        {
+            "wait_ticket": 8.290196242789552,
+            "delay_arcades": 7.1639113974753705
+        },
+        {
+            "wait_ticket": 8.290196242789552,
+            "delay_arcades": 7.15274260842192
+        },
+        {
+            "wait_ticket": 8.294075254239388,
+            "delay_arcades": 7.1581720098533905
+        },
+        {
+            "wait_ticket": 8.366039693054931,
+            "delay_arcades": 7.135056031584707
+        },
+        {
+            "wait_ticket": 8.402433858217464,
+            "delay_arcades": 7.130146054516625
+        },
+        {
+            "wait_ticket": 8.494892881663343,
+            "delay_arcades": 7.109027805171311
+        },
+        {
+            "wait_ticket": 8.543008160838502,
+            "delay_arcades": 7.106080512970055
+        },
+        {
+            "wait_ticket": 8.562397256754988,
+            "delay_arcades": 7.1203323367792395
+        },
+        {
+            "wait_ticket": 8.57766280389386,
+            "delay_arcades": 7.11056999679051
+        },
+        {
+            "wait_ticket": 8.564920193031142,
+            "delay_arcades": 7.125731191840816
+        },
+        {
+            "wait_ticket": 8.533907677384777,
+            "delay_arcades": 7.128192500331644
+        },
+        {
+            "wait_ticket": 8.478310794520796,
+            "delay_arcades": 7.1638303054951935
+        },
+        {
+            "wait_ticket": 8.484643239902617,
+            "delay_arcades": 7.1570915081391435
+        },
+        {
+            "wait_ticket": 8.564705359176914,
+            "delay_arcades": 7.155808863199162
+        },
+        {
+            "wait_ticket": 8.603552181538168,
+            "delay_arcades": 7.145057254787649
+        },
+        {
+            "wait_ticket": 8.657327176680246,
+            "delay_arcades": 7.151618297534424
+        },
+        {
+            "wait_ticket": 8.670955868689493,
+            "delay_arcades": 7.130580308538993
+        },
+        {
+            "wait_ticket": 8.605674029610974,
+            "delay_arcades": 7.106262625315121
+        },
+        {
+            "wait_ticket": 8.579223893349972,
+            "delay_arcades": 7.183991399887753
+        },
+        {
+            "wait_ticket": 8.579223893349972,
+            "delay_arcades": 7.172214343761026
+        },
+        {
+            "wait_ticket": 8.579223893349972,
+            "delay_arcades": 7.202844245104372
+        },
+        {
+            "wait_ticket": 8.579223893349972,
+            "delay_arcades": 7.198643428838242
+        },
+        {
+            "wait_ticket": 8.579223893349972,
+            "delay_arcades": 7.155695767717627
+        },
+        {
+            "wait_ticket": 8.547108603013772,
+            "delay_arcades": 7.137489679497279
+        },
+        {
+            "wait_ticket": 8.519679942243421,
+            "delay_arcades": 7.098029175282444
+        },
+        {
+            "wait_ticket": 8.493745359838726,
+            "delay_arcades": 7.099625658452802
+        },
+        {
+            "wait_ticket": 8.43431545147567,
+            "delay_arcades": 7.082853289592239
+        },
+        {
+            "wait_ticket": 8.43431545147567,
+            "delay_arcades": 7.06240379299319
+        },
+        {
+            "wait_ticket": 8.401177852681874,
+            "delay_arcades": 7.043036370184372
+        },
+        {
+            "wait_ticket": 8.401177852681874,
+            "delay_arcades": 7.025268982884998
+        },
+        {
+            "wait_ticket": 8.31537542505159,
+            "delay_arcades": 7.0464945437098345
+        },
+        {
+            "wait_ticket": 8.291175281329117,
+            "delay_arcades": 7.075430150928707
+        },
+        {
+            "wait_ticket": 8.291175281329117,
+            "delay_arcades": 7.091472028840026
+        },
+        {
+            "wait_ticket": 8.291175281329117,
+            "delay_arcades": 7.06253433027091
+        },
+        {
+            "wait_ticket": 8.320364811779987,
+            "delay_arcades": 7.079647853321855
+        },
+        {
+            "wait_ticket": 8.290206588711783,
+            "delay_arcades": 7.071694097058511
+        },
+        {
+            "wait_ticket": 8.290206588711783,
+            "delay_arcades": 7.070519784743317
+        },
+        {
+            "wait_ticket": 8.290206588711783,
+            "delay_arcades": 7.032341062772093
+        },
+        {
+            "wait_ticket": 8.317420801289934,
+            "delay_arcades": 7.014348950564294
+        },
+        {
+            "wait_ticket": 8.2813793072137,
+            "delay_arcades": 7.020427850977506
+        },
+        {
+            "wait_ticket": 8.304550098852623,
+            "delay_arcades": 7.012560971271263
+        },
+        {
+            "wait_ticket": 8.268886433896597,
+            "delay_arcades": 7.078252421434368
+        },
+        {
+            "wait_ticket": 8.269319544769616,
+            "delay_arcades": 7.0430308968329145
+        },
+        {
+            "wait_ticket": 8.259319268758073,
+            "delay_arcades": 7.056226467239966
+        },
+        {
+            "wait_ticket": 8.262597122807705,
+            "delay_arcades": 7.040854977971493
+        },
+        {
+            "wait_ticket": 8.242981331044968,
+            "delay_arcades": 7.02304775482077
+        },
+        {
+            "wait_ticket": 8.225878691976906,
+            "delay_arcades": 6.986668728561327
+        },
+        {
+            "wait_ticket": 8.235995998626072,
+            "delay_arcades": 7.0054038496136615
+        },
+        {
+            "wait_ticket": 8.248714728094521,
+            "delay_arcades": 6.97933437499259
+        },
+        {
+            "wait_ticket": 8.229690759664956,
+            "delay_arcades": 6.962315249397629
+        },
+        {
+            "wait_ticket": 8.20457141879643,
+            "delay_arcades": 6.975506088387253
+        },
+        {
+            "wait_ticket": 8.20457141879643,
+            "delay_arcades": 6.941610530598115
+        },
+        {
+            "wait_ticket": 8.236475521685485,
+            "delay_arcades": 6.962537959453552
+        },
+        {
+            "wait_ticket": 8.208869741280633,
+            "delay_arcades": 6.93817414138676
+        },
+        {
+            "wait_ticket": 8.208869741280633,
+            "delay_arcades": 6.951300774142735
+        },
+        {
+            "wait_ticket": 8.208869741280633,
+            "delay_arcades": 6.940535705739237
+        },
+        {
+            "wait_ticket": 8.224440814466979,
+            "delay_arcades": 6.933202440449751
+        },
+        {
+            "wait_ticket": 8.202364642582582,
+            "delay_arcades": 6.911389620932799
+        },
+        {
+            "wait_ticket": 8.202364642582582,
+            "delay_arcades": 6.89355739439824
+        },
+        {
+            "wait_ticket": 8.209981043990274,
+            "delay_arcades": 6.900564405267667
+        },
+        {
+            "wait_ticket": 8.179791285374812,
+            "delay_arcades": 6.883557947402633
+        },
+        {
+            "wait_ticket": 8.179791285374812,
+            "delay_arcades": 6.866021337124553
+        },
+        {
+            "wait_ticket": 8.181779884470473,
+            "delay_arcades": 6.832379906790195
+        },
+        {
+            "wait_ticket": 8.151421448116437,
+            "delay_arcades": 6.856264272797719
+        },
+        {
+            "wait_ticket": 8.151421448116437,
+            "delay_arcades": 6.823257586431933
+        },
+        {
+            "wait_ticket": 8.151421448116437,
+            "delay_arcades": 6.806525219552633
+        },
+        {
+            "wait_ticket": 8.184172163191384,
+            "delay_arcades": 6.774135480595554
+        },
+        {
+            "wait_ticket": 8.219583377411217,
+            "delay_arcades": 6.777273949270089
+        },
+        {
+            "wait_ticket": 8.22696473158366,
+            "delay_arcades": 6.76370459908417
+        },
+        {
+            "wait_ticket": 8.234821636793626,
+            "delay_arcades": 6.73427119928521
+        },
+        {
+            "wait_ticket": 8.372660012331908,
+            "delay_arcades": 6.724164880696893
+        },
+        {
+            "wait_ticket": 8.384456809239481,
+            "delay_arcades": 6.707238894565357
+        },
+        {
+            "wait_ticket": 8.31464566299467,
+            "delay_arcades": 6.712706226301942
+        },
+        {
+            "wait_ticket": 8.31464566299467,
+            "delay_arcades": 6.73893625561492
+        },
+        {
+            "wait_ticket": 8.289151808377078,
+            "delay_arcades": 6.776222000874575
+        },
+        {
+            "wait_ticket": 8.289151808377078,
+            "delay_arcades": 6.750265463826451
+        },
+        {
+            "wait_ticket": 8.262244594555566,
+            "delay_arcades": 6.763267635020717
+        },
+        {
+            "wait_ticket": 8.262244594555566,
+            "delay_arcades": 6.74816501985014
+        },
+        {
+            "wait_ticket": 8.263347934706106,
+            "delay_arcades": 6.717559916965205
+        },
+        {
+            "wait_ticket": 8.236424253687293,
+            "delay_arcades": 6.7851264155010105
+        },
+        {
+            "wait_ticket": 8.236424253687293,
+            "delay_arcades": 6.780947081314856
+        },
+        {
+            "wait_ticket": 8.209412282492114,
+            "delay_arcades": 6.809744896289729
+        },
+        {
+            "wait_ticket": 8.183994784414942,
+            "delay_arcades": 6.7934662763860905
+        },
+        {
+            "wait_ticket": 8.163365717391033,
+            "delay_arcades": 6.800432756091749
+        },
+        {
+            "wait_ticket": 8.170216341094754,
+            "delay_arcades": 6.80603866183969
+        },
+        {
+            "wait_ticket": 8.141593201234299,
+            "delay_arcades": 6.835110371121089
+        },
+        {
+            "wait_ticket": 8.141593201234299,
+            "delay_arcades": 6.832852291280706
+        },
+        {
+            "wait_ticket": 8.098379680065605,
+            "delay_arcades": 6.844535151371731
+        },
+        {
+            "wait_ticket": 8.104048552750331,
+            "delay_arcades": 6.829922174415169
+        },
+        {
+            "wait_ticket": 8.121953344022383,
+            "delay_arcades": 6.812066094846685
+        },
+        {
+            "wait_ticket": 8.087707047998022,
+            "delay_arcades": 6.794537649765695
+        },
+        {
+            "wait_ticket": 8.087707047998022,
+            "delay_arcades": 6.780197812565329
+        },
+        {
+            "wait_ticket": 8.072282901995854,
+            "delay_arcades": 6.750661821332173
+        },
+        {
+            "wait_ticket": 8.050882974015265,
+            "delay_arcades": 6.736587536672556
+        },
+        {
+            "wait_ticket": 8.050882974015265,
+            "delay_arcades": 6.71937779059304
+        },
+        {
+            "wait_ticket": 8.055467704701087,
+            "delay_arcades": 6.690355468772634
+        },
+        {
+            "wait_ticket": 8.119001028321932,
+            "delay_arcades": 6.661833531811201
+        },
+        {
+            "wait_ticket": 8.07268592123743,
+            "delay_arcades": 6.655741967641112
+        },
+        {
+            "wait_ticket": 8.053513334261583,
+            "delay_arcades": 6.642118801916394
+        },
+        {
+            "wait_ticket": 8.053513334261583,
+            "delay_arcades": 6.625424420144097
+        },
+        {
+            "wait_ticket": 8.089186920282689,
+            "delay_arcades": 6.611857826572693
+        },
+        {
+            "wait_ticket": 8.09553935167703,
+            "delay_arcades": 6.583823444089234
+        },
+        {
+            "wait_ticket": 8.063152044290893,
+            "delay_arcades": 6.593446614273158
+        },
+        {
+            "wait_ticket": 8.083130606748936,
+            "delay_arcades": 6.577047708284442
+        },
+        {
+            "wait_ticket": 8.091743462476417,
+            "delay_arcades": 6.5970528799251555
+        },
+        {
+            "wait_ticket": 8.086430196325118,
+            "delay_arcades": 6.656065132698699
+        },
+        {
+            "wait_ticket": 8.08983693973037,
+            "delay_arcades": 6.646279812360032
+        },
+        {
+            "wait_ticket": 8.09136625418458,
+            "delay_arcades": 6.650096268482149
+        },
+        {
+            "wait_ticket": 8.047410789126731,
+            "delay_arcades": 6.757754461110754
+        },
+        {
+            "wait_ticket": 8.047410789126731,
+            "delay_arcades": 6.750402289786931
+        },
+        {
+            "wait_ticket": 8.055405157954398,
+            "delay_arcades": 6.798633393819994
+        },
+        {
+            "wait_ticket": 8.055730063173849,
+            "delay_arcades": 6.807994052838665
+        },
+        {
+            "wait_ticket": 8.0350584847626,
+            "delay_arcades": 6.839521937922707
+        },
+        {
+            "wait_ticket": 8.0350584847626,
+            "delay_arcades": 6.837099514245907
+        },
+        {
+            "wait_ticket": 8.041544881148775,
+            "delay_arcades": 6.81000347101378
+        },
+        {
+            "wait_ticket": 8.061612569020639,
+            "delay_arcades": 6.793735524100832
+        },
+        {
+            "wait_ticket": 8.042400844253816,
+            "delay_arcades": 6.7792649887683964
+        },
+        {
+            "wait_ticket": 8.01984391181444,
+            "delay_arcades": 6.7526205462568045
+        },
+        {
+            "wait_ticket": 8.001602136039935,
+            "delay_arcades": 6.738395274235089
+        },
+        {
+            "wait_ticket": 8.001602136039935,
+            "delay_arcades": 6.722400738194627
+        },
+        {
+            "wait_ticket": 8.001602136039935,
+            "delay_arcades": 6.696196699691492
+        },
+        {
+            "wait_ticket": 8.001602136039935,
+            "delay_arcades": 6.680468739251705
+        },
+        {
+            "wait_ticket": 8.008237862840717,
+            "delay_arcades": 6.665000745100177
+        },
+        {
+            "wait_ticket": 8.008237862840717,
+            "delay_arcades": 6.651014553280507
+        },
+        {
+            "wait_ticket": 8.008237862840717,
+            "delay_arcades": 6.625240089179063
+        },
+        {
+            "wait_ticket": 7.984542310835901,
+            "delay_arcades": 6.644456180355438
+        },
+        {
+            "wait_ticket": 7.978850253650427,
+            "delay_arcades": 6.6479490167186475
+        },
+        {
+            "wait_ticket": 7.990042517385872,
+            "delay_arcades": 6.6327020623336095
+        },
+        {
+            "wait_ticket": 7.951068682827357,
+            "delay_arcades": 6.646592937999959
+        },
+        {
+            "wait_ticket": 7.951068682827357,
+            "delay_arcades": 6.631591902234034
+        },
+        {
+            "wait_ticket": 7.951068682827357,
+            "delay_arcades": 6.617921784637718
+        },
+        {
+            "wait_ticket": 7.941767298739631,
+            "delay_arcades": 6.625584413214973
+        },
+        {
+            "wait_ticket": 7.917053042188047,
+            "delay_arcades": 6.611613956183141
+        },
+        {
+            "wait_ticket": 7.921165564534928,
+            "delay_arcades": 6.666108975852498
+        },
+        {
+            "wait_ticket": 7.928686313986715,
+            "delay_arcades": 6.652476493710584
+        },
+        {
+            "wait_ticket": 7.938431044622688,
+            "delay_arcades": 6.673587702334726
+        },
+        {
+            "wait_ticket": 7.9483282628387775,
+            "delay_arcades": 6.667494875804877
+        },
+        {
+            "wait_ticket": 7.932264200595737,
+            "delay_arcades": 6.655694286182619
+        },
+        {
+            "wait_ticket": 7.932264200595737,
+            "delay_arcades": 6.653551941959283
+        },
+        {
+            "wait_ticket": 7.932264200595737,
+            "delay_arcades": 6.63983180745439
+        },
+        {
+            "wait_ticket": 7.926796704351592,
+            "delay_arcades": 6.625333456442147
+        },
+        {
+            "wait_ticket": 7.917173032724693,
+            "delay_arcades": 6.630802034045231
+        },
+        {
+            "wait_ticket": 7.929893367304908,
+            "delay_arcades": 6.630202012639238
+        },
+        {
+            "wait_ticket": 7.925665353505374,
+            "delay_arcades": 6.609074957664622
+        },
+        {
+            "wait_ticket": 7.93538644127076,
+            "delay_arcades": 6.5955862238226
+        },
+        {
+            "wait_ticket": 7.95161336036359,
+            "delay_arcades": 6.571713373835544
+        },
+        {
+            "wait_ticket": 7.9913605665526255,
+            "delay_arcades": 6.561530339330801
+        },
+        {
+            "wait_ticket": 8.004824335631122,
+            "delay_arcades": 6.601355114916367
+        },
+        {
+            "wait_ticket": 8.009118857659356,
+            "delay_arcades": 6.636931940771113
+        },
+        {
+            "wait_ticket": 7.98372824712182,
+            "delay_arcades": 6.654518247367968
+        },
+        {
+            "wait_ticket": 7.98372824712182,
+            "delay_arcades": 6.678418829378296
+        },
+        {
+            "wait_ticket": 7.962687726612194,
+            "delay_arcades": 6.742496880716395
+        },
+        {
+            "wait_ticket": 8.037357942577716,
+            "delay_arcades": 6.7698459191545615
+        },
+        {
+            "wait_ticket": 8.071487062707602,
+            "delay_arcades": 6.778977374551261
+        },
+        {
+            "wait_ticket": 8.057521616309026,
+            "delay_arcades": 6.762282793540863
+        },
+        {
+            "wait_ticket": 8.036418095413351,
+            "delay_arcades": 6.771266707824128
+        },
+        {
+            "wait_ticket": 8.036418095413351,
+            "delay_arcades": 6.758191403272195
+        },
+        {
+            "wait_ticket": 8.036418095413351,
+            "delay_arcades": 6.7352840751404655
+        },
+        {
+            "wait_ticket": 8.036418095413351,
+            "delay_arcades": 6.720059996384431
+        },
+        {
+            "wait_ticket": 8.014682342750268,
+            "delay_arcades": 6.740432479271385
+        },
+        {
+            "wait_ticket": 8.02075803779078,
+            "delay_arcades": 6.747899494207935
+        },
+        {
+            "wait_ticket": 7.998498675182852,
+            "delay_arcades": 6.738043840480041
+        },
+        {
+            "wait_ticket": 8.02035301249587,
+            "delay_arcades": 6.723046986780066
+        },
+        {
+            "wait_ticket": 7.994694988550288,
+            "delay_arcades": 6.706914561498153
+        },
+        {
+            "wait_ticket": 7.994694988550288,
+            "delay_arcades": 6.694211087002157
+        },
+        {
+            "wait_ticket": 7.994694988550288,
+            "delay_arcades": 6.672054339659603
+        },
+        {
+            "wait_ticket": 7.994694988550288,
+            "delay_arcades": 6.657279661569998
+        },
+        {
+            "wait_ticket": 7.976460595887388,
+            "delay_arcades": 6.65654537208685
+        },
+        {
+            "wait_ticket": 8.002560941618738,
+            "delay_arcades": 6.6441317835085485
+        },
+        {
+            "wait_ticket": 7.963244912133969,
+            "delay_arcades": 6.647484781703354
+        },
+        {
+            "wait_ticket": 7.963244912133969,
+            "delay_arcades": 6.637305088831526
+        },
+        {
+            "wait_ticket": 7.945068198866558,
+            "delay_arcades": 6.615570928059423
+        },
+        {
+            "wait_ticket": 7.945068198866558,
+            "delay_arcades": 6.601226041485734
+        },
+        {
+            "wait_ticket": 7.889789274767109,
+            "delay_arcades": 6.610639184964794
+        },
+        {
+            "wait_ticket": 7.889789274767109,
+            "delay_arcades": 6.598409501402467
+        },
+        {
+            "wait_ticket": 7.9039632272425235,
+            "delay_arcades": 6.584306496240592
+        },
+        {
+            "wait_ticket": 7.897148533868555,
+            "delay_arcades": 6.572256660965947
+        },
+        {
+            "wait_ticket": 7.9404482129755545,
+            "delay_arcades": 6.550832988204875
+        },
+        {
+            "wait_ticket": 7.920295130669365,
+            "delay_arcades": 6.59011255008112
+        },
+        {
+            "wait_ticket": 7.920295130669365,
+            "delay_arcades": 6.596030514511796
+        },
+        {
+            "wait_ticket": 7.92043961544896,
+            "delay_arcades": 6.589235562111103
+        },
+        {
+            "wait_ticket": 7.903406202381725,
+            "delay_arcades": 6.57985998304996
+        },
+        {
+            "wait_ticket": 7.908438224517297,
+            "delay_arcades": 6.56815814365281
+        },
+        {
+            "wait_ticket": 7.888026733565281,
+            "delay_arcades": 6.561478093235724
+        },
+        {
+            "wait_ticket": 7.888026733565281,
+            "delay_arcades": 6.540464114644425
+        },
+        {
+            "wait_ticket": 7.880749353801109,
+            "delay_arcades": 6.528930647037163
+        },
+        {
+            "wait_ticket": 7.9028188414777,
+            "delay_arcades": 6.5152262982522045
+        },
+        {
+            "wait_ticket": 7.9028188414777,
+            "delay_arcades": 6.503857594467903
+        },
+        {
+            "wait_ticket": 7.861804416499842,
+            "delay_arcades": 6.511866170211195
+        },
+        {
+            "wait_ticket": 7.861804416499842,
+            "delay_arcades": 6.5006587246366
+        },
+        {
+            "wait_ticket": 7.91225367413167,
+            "delay_arcades": 6.488252883863496
+        },
+        {
+            "wait_ticket": 7.908170063608259,
+            "delay_arcades": 6.487350309470372
+        },
+        {
+            "wait_ticket": 7.99881370589795,
+            "delay_arcades": 6.500558505056098
+        },
+        {
+            "wait_ticket": 8.000954183105758,
+            "delay_arcades": 6.498707903834954
+        },
+        {
+            "wait_ticket": 8.021752901391324,
+            "delay_arcades": 6.484699801252776
+        },
+        {
+            "wait_ticket": 8.033142845102018,
+            "delay_arcades": 6.48283650195181
+        },
+        {
+            "wait_ticket": 8.046082417229119,
+            "delay_arcades": 6.482398491911158
+        },
+        {
+            "wait_ticket": 8.092195860618238,
+            "delay_arcades": 6.481795820783044
+        },
+        {
+            "wait_ticket": 8.110404523893411,
+            "delay_arcades": 6.468624711380111
+        },
+        {
+            "wait_ticket": 8.152942413999689,
+            "delay_arcades": 6.476106723049497
+        },
+        {
+            "wait_ticket": 8.180887953590688,
+            "delay_arcades": 6.478630225065486
+        },
+        {
+            "wait_ticket": 8.212554476382268,
+            "delay_arcades": 6.462975799333798
+        },
+        {
+            "wait_ticket": 8.225817128084016,
+            "delay_arcades": 6.453553840131872
+        },
+        {
+            "wait_ticket": 8.297808668150456,
+            "delay_arcades": 6.462633298239029
+        },
+        {
+            "wait_ticket": 8.396411621225255,
+            "delay_arcades": 6.500028827099072
+        },
+        {
+            "wait_ticket": 8.374679296683873,
+            "delay_arcades": 6.48222354923583
+        },
+        {
+            "wait_ticket": 8.369048535089712,
+            "delay_arcades": 6.586170614827728
+        },
+        {
+            "wait_ticket": 8.397649552011568,
+            "delay_arcades": 6.6096604755844455
+        },
+        {
+            "wait_ticket": 8.439342236025867,
+            "delay_arcades": 6.64762846630807
+        },
+        {
+            "wait_ticket": 8.446373705915128,
+            "delay_arcades": 6.637862554519267
+        },
+        {
+            "wait_ticket": 8.413395511652338,
+            "delay_arcades": 6.648519768200605
+        },
+        {
+            "wait_ticket": 8.394062711379432,
+            "delay_arcades": 6.665954881103281
+        },
+        {
+            "wait_ticket": 8.397701044669239,
+            "delay_arcades": 6.6580509656204
+        },
+        {
+            "wait_ticket": 8.394129993752292,
+            "delay_arcades": 6.681600423895445
+        },
+        {
+            "wait_ticket": 8.387015319012894,
+            "delay_arcades": 6.723042243391036
+        },
+        {
+            "wait_ticket": 8.36902330723795,
+            "delay_arcades": 6.739242620358568
+        },
+        {
+            "wait_ticket": 8.34702966811036,
+            "delay_arcades": 6.824280937867258
+        },
+        {
+            "wait_ticket": 8.34702966811036,
+            "delay_arcades": 6.84932468133255
+        },
+        {
+            "wait_ticket": 8.34702966811036,
+            "delay_arcades": 6.88361002461064
+        },
+        {
+            "wait_ticket": 8.32937981070719,
+            "delay_arcades": 6.901560686370661
+        },
+        {
+            "wait_ticket": 8.346331310834696,
+            "delay_arcades": 6.951135242534892
+        },
+        {
+            "wait_ticket": 8.342137712007904,
+            "delay_arcades": 7.036509883765746
+        },
+        {
+            "wait_ticket": 8.342137712007904,
+            "delay_arcades": 7.041594603290073
+        },
+        {
+            "wait_ticket": 8.342137712007904,
+            "delay_arcades": 7.074095312602059
+        },
+        {
+            "wait_ticket": 8.342137712007904,
+            "delay_arcades": 7.059161310430025
+        },
+        {
+            "wait_ticket": 8.342137712007904,
+            "delay_arcades": 7.043641255251313
+        },
+        {
+            "wait_ticket": 8.343256606192934,
+            "delay_arcades": 7.025245873259803
+        },
+        {
+            "wait_ticket": 8.32322804855844,
+            "delay_arcades": 7.030975876280073
+        },
+        {
+            "wait_ticket": 8.32322804855844,
+            "delay_arcades": 7.015653528810643
+        },
+        {
+            "wait_ticket": 8.32322804855844,
+            "delay_arcades": 7.004316851564446
+        },
+        {
+            "wait_ticket": 8.377488166553102,
+            "delay_arcades": 7.0044161060536885
+        },
+        {
+            "wait_ticket": 8.391824254822039,
+            "delay_arcades": 7.004935536155814
+        },
+        {
+            "wait_ticket": 8.451814835835062,
+            "delay_arcades": 6.992002865348071
+        },
+        {
+            "wait_ticket": 8.453046853884196,
+            "delay_arcades": 6.987097118533995
+        },
+        {
+            "wait_ticket": 8.492228307949693,
+            "delay_arcades": 6.996762155648817
+        },
+        {
+            "wait_ticket": 8.542012394742107,
+            "delay_arcades": 7.0218850891412545
+        },
+        {
+            "wait_ticket": 8.53828842557273,
+            "delay_arcades": 7.019114687547102
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.076552691887904
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.068796433668052
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.072210817537222
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.100786379544974
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.0921210205687295
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.074311367179432
+        },
+        {
+            "wait_ticket": 8.479118822368608,
+            "delay_arcades": 7.062929964321344
+        },
+        {
+            "wait_ticket": 8.469317690372591,
+            "delay_arcades": 7.072506223971803
+        },
+        {
+            "wait_ticket": 8.469317690372591,
+            "delay_arcades": 7.058511193304938
+        },
+        {
+            "wait_ticket": 8.469317690372591,
+            "delay_arcades": 7.047285283794468
+        },
+        {
+            "wait_ticket": 8.469317690372591,
+            "delay_arcades": 7.032712459686291
+        },
+        {
+            "wait_ticket": 8.436810679976603,
+            "delay_arcades": 7.024637015963265
+        },
+        {
+            "wait_ticket": 8.436810679976603,
+            "delay_arcades": 7.01024410326383
+        },
+        {
+            "wait_ticket": 8.42043229845513,
+            "delay_arcades": 7.018702496236219
+        },
+        {
+            "wait_ticket": 8.42043229845513,
+            "delay_arcades": 7.0018940137948
+        },
+        {
+            "wait_ticket": 8.445864127119046,
+            "delay_arcades": 6.984537493208151
+        },
+        {
+            "wait_ticket": 8.469549866969578,
+            "delay_arcades": 6.970321180664538
+        },
+        {
+            "wait_ticket": 8.462808863951206,
+            "delay_arcades": 6.959375036351774
+        },
+        {
+            "wait_ticket": 8.469797690401506,
+            "delay_arcades": 6.945332093473326
+        },
+        {
+            "wait_ticket": 8.449864576397115,
+            "delay_arcades": 6.958545463596436
+        },
+        {
+            "wait_ticket": 8.449864576397115,
+            "delay_arcades": 6.9481890728872635
+        },
+        {
+            "wait_ticket": 8.431801554701819,
+            "delay_arcades": 6.975422774270469
+        },
+        {
+            "wait_ticket": 8.446216028678018,
+            "delay_arcades": 6.976806979424862
+        },
+        {
+            "wait_ticket": 8.43660720728101,
+            "delay_arcades": 6.9815375256633585
+        },
+        {
+            "wait_ticket": 8.381462544042101,
+            "delay_arcades": 7.040405578072246
+        },
+        {
+            "wait_ticket": 8.391131534418323,
+            "delay_arcades": 7.046004299287752
+        },
+        {
+            "wait_ticket": 8.361127679010457,
+            "delay_arcades": 7.085053127485787
+        },
+        {
+            "wait_ticket": 8.361127679010457,
+            "delay_arcades": 7.125043216291644
+        },
+        {
+            "wait_ticket": 8.397660618316538,
+            "delay_arcades": 7.147142946226006
+        },
+        {
+            "wait_ticket": 8.38904349981623,
+            "delay_arcades": 7.13604338861558
+        },
+        {
+            "wait_ticket": 8.42296133815777,
+            "delay_arcades": 7.139537641999303
+        },
+        {
+            "wait_ticket": 8.432351354221757,
+            "delay_arcades": 7.131214585297339
+        },
+        {
+            "wait_ticket": 8.421621766119504,
+            "delay_arcades": 7.119925957097155
+        },
+        {
+            "wait_ticket": 8.42684289767536,
+            "delay_arcades": 7.120250788179959
+        },
+        {
+            "wait_ticket": 8.409090123871925,
+            "delay_arcades": 7.11203149412847
+        },
+        {
+            "wait_ticket": 8.409453764223194,
+            "delay_arcades": 7.114999213080462
+        },
+        {
+            "wait_ticket": 8.379899376664701,
+            "delay_arcades": 7.101897126026334
+        },
+        {
+            "wait_ticket": 8.362411515027548,
+            "delay_arcades": 7.114933426348376
+        },
+        {
+            "wait_ticket": 8.362411515027548,
+            "delay_arcades": 7.116403782171911
+        }
+    ],
+    "avg_wait_ticket": [
+        6.802665777865742,
+        7.754891394296775,
+        7.994451802665474,
+        7.885311221646662,
+        7.848950765033911,
+        7.935773179851609,
+        7.969947773062454,
+        7.9283792435332945,
+        7.951266150147714,
+        7.912978091634852
+    ],
+    "std_ticket": [
+        7.16481547951706,
+        2.071096072702195,
+        1.6012827725910455,
+        1.1908692644259895,
+        0.9704836508374739,
+        0.9640005877207832,
+        0.7697369552130635,
+        0.6663462484355946,
+        0.533769011592027,
+        0.47803543989163855
+    ],
+    "w_ticket": [
+        3.4403484316170094,
+        0.9944836884940156,
+        0.7688921914329983,
+        0.5718228498474899,
+        0.46599970587012285,
+        0.4628867162768327,
+        0.36960663316390296,
+        0.319961243562102,
+        0.2563012804902227,
+        0.22953954370355953
+    ],
+    "avg_delay_arcades": [
+        0.5655767314106622,
+        5.682962242897079,
+        6.876237505968197,
+        6.558583863918684,
+        6.5759434518800255,
+        7.149267607263314,
+        7.319454308513574,
+        7.2832337057882635,
+        7.3196176548704885,
+        7.191966802380422
+    ],
+    "std_arcades": [
+        1.0991247540430287,
+        2.610315529579953,
+        2.228238228903697,
+        1.449793756690557,
+        1.3238587636298154,
+        1.665448592877985,
+        1.686035491036272,
+        1.5620452905137547,
+        1.4183851276379524,
+        1.3544823255032974
+    ],
+    "w_arcades": [
+        0.5277696452244499,
+        1.2534021237377677,
+        1.069939053977509,
+        0.6961513093055524,
+        0.6356807700291626,
+        0.799702863364283,
+        0.8095881287968962,
+        0.7500514257062154,
+        0.6810697446777844,
+        0.6503853668695354
+    ],
+    "final_wait_ticket": 0.0,
+    "final_std_ticket": 0.0,
+    "final_w_ticket": 0.0,
+    "final_delay_arcades": 0.0,
+    "final_std_arcades": 0.0,
+    "final_w_arcades": 0.0,
+    "correlation_delay_arcades": 0.0
+}
