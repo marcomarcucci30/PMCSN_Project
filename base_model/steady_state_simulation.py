@@ -11,7 +11,7 @@ from utils.rvgs import Exponential, TruncatedNormal, BoundedPareto
 from utils.rvms import idfStudent
 
 nodes = 4  # n nodi
-arrival_time = 15.0
+arrival_time = 45.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
@@ -29,10 +29,10 @@ TICKET_QUEUE = 1
 # ARCADE2 = 3
 # ARCADE3 = 4
 p_size = 0.6
-ticket_price = 5.0
-energy_cost = 250*b/1024
-nodes_min = 3
-nodes_max = 13
+ticket_price = 10.0
+energy_cost = 300*b/1024
+nodes_min = 2
+nodes_max = 20
 delay_max = 5.0
 delay_min = 0.0
 income_list = []
@@ -46,7 +46,6 @@ def ticket_refund(avg_delay_arcades):
     else:
         return 0.50'''
     perc = (avg_delay_arcades-delay_min)/(delay_max-delay_min)
-    print(perc)
     if perc > 1.0:
         return 1.0
     else:
@@ -232,8 +231,8 @@ def plot_stats_global():
 def plot_stats():
     x = [i for i in range(0, len(batch_means_info["avg_delay_arcades"]))]  # in 0 global stats
     y = (batch_means_info["avg_delay_arcades"][:])  # in 0 global stats
-    print(x)
-    print(y)
+    #print(x)
+    #print(y)
     # plt.plot(x, y)
 
     plt.errorbar(x, y, fmt='.', color='black',
@@ -315,7 +314,7 @@ if __name__ == '__main__':
             batch_means_info["k"] = k
             batch_means_info["n_nodes"] = nodes - 1
             batch_means_info["lambda"] = 1.0 / arrival_time
-            print(batch_means_info)
+            # print(batch_means_info)
             node_list = [StatusNode(i) for i in range(nodes + 1)]  # in 0 global stats
             plantSeeds(seed)
 
@@ -531,7 +530,7 @@ if __name__ == '__main__':
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
 
-        # plot_stats_global()
+        plot_stats_global()
         # plot_correlation()
         # plot_income()
         # acs(dict_list[0]["avg_wait_ticket"], b)
