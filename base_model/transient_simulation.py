@@ -5,15 +5,15 @@ from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-nodes = 4  # n nodi
-arrival_time = 10.0
-arrival_time_morning = 15.0
-arrival_time_afternoon = 5.0
-arrival_time_evening = 15.0
-arrival_time_night = 25.0
+nodes = 3  # n nodi
+arrival_time = 15.0
+arrival_time_morning = 15.0  # 2 arcades for stationary
+arrival_time_afternoon = 5.0  # 4 arcades for stationary
+arrival_time_evening = 15.0  # 2 arcades for stationary
+arrival_time_night = 25.0  # 1 arcades for stationary
 
-b = 8
-k = 64
+b = 128
+k = 128
 # seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8.0 * 1440
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
@@ -181,7 +181,7 @@ def online_variance(n, mean, variance, x):
 
 
 def plot_stats_global():
-    x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_delay_arcades"]))]
+    x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_wait_system"]))]
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
     plt.xticks(rotation=45)
@@ -190,11 +190,29 @@ def plot_stats_global():
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
         # print(dict_list[i])
-        plt.plot(x, [dict_list[i]["avg_delay_arcades"][j] for j in range(0, len(dict_list[i]["avg_delay_arcades"]))],
+        plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
                  'o',
                  color=colors[i], label=dict_list[i]["seed"], mfc='none')
 
+    plt.xlabel("Number of jobs")
+    plt.ylabel("Avg wait system")
     plt.show()
+
+'''def plot_stats_global():
+    x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_wait_system"]))]
+    colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
+              'blueviolet']
+    plt.xticks(rotation=45)
+    plt.rcParams["figure.figsize"] = (16, 9)
+
+    for i in range(0, len(dict_list)):
+        # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
+        # print(dict_list[i])
+        plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
+                 'o',
+                 color=colors[i], label=dict_list[i]["seed"], mfc='none')
+
+    plt.show()'''
 
 
 def plot_stats():
@@ -222,7 +240,7 @@ def plot_stats():
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
 # 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
-replicas = 20
+replicas = 1
 sampling_frequency = 50
 
 if __name__ == '__main__':
@@ -478,16 +496,17 @@ if __name__ == '__main__':
             batch_means_info["std_ticket"][i] = sqrt(batch_means_info["std_ticket"][i] / replicas)
             batch_means_info["std_system"][i] = sqrt(batch_means_info["std_system"][i] / replicas)
             # print(batch_means_info["std_arcades"][i])
-            LOC = 0.95
-            u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
-            t = idfStudent(replicas - 1, u)  # critical value of t
-            # print(std_arcades, t)
-            w_ticket = t * batch_means_info["std_ticket"][i] / sqrt(replicas - 1)  # interval half width
-            w_arcades = t * batch_means_info["std_arcades"][i] / sqrt(replicas - 1)  # interval half width
-            w_system = t * batch_means_info["std_system"][i] / sqrt(replicas - 1)  # interval half width
-            batch_means_info["w_ticket"].append(w_ticket)
-            batch_means_info["w_arcades"].append(w_arcades)
-            batch_means_info["w_system"].append(w_system)
+            if replicas > 1:
+                LOC = 0.95
+                u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
+                t = idfStudent(replicas - 1, u)  # critical value of t
+                # print(std_arcades, t)
+                w_ticket = t * batch_means_info["std_ticket"][i] / sqrt(replicas - 1)  # interval half width
+                w_arcades = t * batch_means_info["std_arcades"][i] / sqrt(replicas - 1)  # interval half width
+                w_system = t * batch_means_info["std_system"][i] / sqrt(replicas - 1)  # interval half width
+                batch_means_info["w_ticket"].append(w_ticket)
+                batch_means_info["w_arcades"].append(w_arcades)
+                batch_means_info["w_system"].append(w_system)
         path = "stats_" + str(seed) + ".json"
         with open(path, 'w+') as json_file:
             json.dump(batch_means_info, json_file, indent=4)

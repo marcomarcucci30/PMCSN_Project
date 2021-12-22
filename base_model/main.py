@@ -3,14 +3,14 @@ from utils.rvgs import Exponential, TruncatedNormal
 
 nodes = 4  # n nodi
 arrival_time = 0.0
-arrival_time_morning = 10.0
-arrival_time_afternoon = 10.0
-arrival_time_evening = 10.0
-arrival_time_night = 10.0
+arrival_time_morning = 15.0
+arrival_time_afternoon = 15.0
+arrival_time_evening = 15.0
+arrival_time_night = 15.0
 
 seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8.0*1440
-STOP = 1 * 12 * 28 * 1440.0  # Minutes
+STOP = 1 * 1 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
