@@ -1,16 +1,16 @@
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 
-nodes = 4  # n nodi
+nodes = 2  # n nodi
 arrival_time = 0.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 15.0
 arrival_time_evening = 15.0
 arrival_time_night = 15.0
 
-seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
+seed = 1234567891  # TODO: Controlla il seed migliore o forse era il multiplier?
 START = 8.0*1440
-STOP = 1 * 1 * 28 * 1440.0  # Minutes
+STOP = 1 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
@@ -144,7 +144,7 @@ def get_service(id_node):
     # * --------------------------------------------
     # */
     if id_node == TICKET_QUEUE:
-        selectStream(6)
+        selectStream(8)
         r = random()
         if r <= p_size:  # green pass
             selectStream(id_node + 10)
@@ -280,7 +280,6 @@ if __name__ == '__main__':
 
     print(times)
     for i in range(0, len(node_list)):
-        print(node_list[i].last)
         print("\n\nNode " + str(i))
         print("\nfor {0} jobs".format(node_list[i].index))
         print("   average interarrival time = {0:6.6f}".format(node_list[i].last / node_list[i].index))
@@ -289,3 +288,4 @@ if __name__ == '__main__':
         print("   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
         print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
         print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
+        print(node_list[i].last)
