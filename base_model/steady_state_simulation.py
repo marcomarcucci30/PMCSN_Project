@@ -45,7 +45,7 @@ def ticket_refund(avg_delay_arcades):
         return 0.25
     else:
         return 0.50'''
-    perc = (avg_delay_arcades-delay_min)/(delay_max-delay_min)
+    perc = (avg_delay_arcades-delay_min)/(delay_max-delay_min)  # TODO: non rimborsare il biglietto al 100% ?
     if perc > 1.0:
         return 1.0
     else:

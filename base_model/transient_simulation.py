@@ -5,7 +5,7 @@ from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-nodes = 3  # n nodi
+nodes = 6  # n nodi
 arrival_time = 15.0
 arrival_time_morning = 15.0  # 2 arcades for stationary
 arrival_time_afternoon = 5.0  # 4 arcades for stationary
@@ -240,7 +240,7 @@ def plot_stats():
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
 # 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
-replicas = 1
+replicas = 10
 sampling_frequency = 50
 
 if __name__ == '__main__':
@@ -360,6 +360,10 @@ if __name__ == '__main__':
 
                 if time.current == node_to_process.arrival:
 
+                    # Simuliamo il sistema per ogni fascia oraria, in modo da capire se la fascia in questione
+                    # raggiunge la stazionarietà o meno, ottendendo quindi una configurazione minima di server
+                    # necessari.
+
                     node_to_process.number += 1
                     node_list[0].number += 1  # update system stat
                     arrival += get_arrival(arrival_time)
@@ -410,7 +414,7 @@ if __name__ == '__main__':
                             act_st["wait_system"] = node_list[0].stat.node / node_list[0].index
                         if node_list[1].index != 0:
                             act_st["wait_ticket"] = node_list[1].stat.node / node_list[1].index
-                        delay_arcades_avg = 0
+                        delay_arcades_avg = 0.0
                         for i in range(2, nodes + 1):
                             if node_list[i].index != 0:
                                 delay_arcades_avg += (node_list[i].stat.queue / node_list[i].index)
@@ -500,7 +504,6 @@ if __name__ == '__main__':
                 LOC = 0.95
                 u = 1.0 - 0.5 * (1.0 - LOC)  # interval parameter
                 t = idfStudent(replicas - 1, u)  # critical value of t
-                # print(std_arcades, t)
                 w_ticket = t * batch_means_info["std_ticket"][i] / sqrt(replicas - 1)  # interval half width
                 w_arcades = t * batch_means_info["std_arcades"][i] / sqrt(replicas - 1)  # interval half width
                 w_system = t * batch_means_info["std_system"][i] / sqrt(replicas - 1)  # interval half width
