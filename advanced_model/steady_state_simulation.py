@@ -33,7 +33,7 @@ ticket_price = 10.0
 ticket_price_premium = 20.0
 energy_cost = 300 * b / 1024
 nodes_min = 2
-nodes_max = 20
+nodes_max = 2
 delay_max = 5.0
 delay_min = 0.0
 income_list = []
@@ -45,6 +45,18 @@ def ticket_refund(avg_delay_arcades):
         return 1.0
     else:
         return perc
+
+
+select_node_positive = 75
+
+
+def is_positive():
+    selectStream(select_node_positive)
+    r = random()
+    if r <= p_positive:
+        return True
+    else:
+        return False
 
 
 def plot_income():
@@ -325,17 +337,6 @@ def online_variance(n, mean, variance, x):
     return mean, variance
 
 
-select_node_positive = 75
-
-
-def is_positive():
-    selectStream(select_node_positive)
-    r = random()
-    if r <= p_positive:
-        return True
-    else:
-        return False
-
 
 seeds = [987654321, 539458255, 482548808]
 
@@ -401,14 +402,22 @@ if __name__ == '__main__':
             while node_list[0].index_support <= b * (k - 1):
                 # print(node_list[0].index)
                 if node_list[0].index % b == 0 and node_list[0].index != 0:  # and old_index != node_list[0].index:
+                    index_arcades = 0  # all completed jobs from standard
+                    index_arcades_total = 0
+                    for center in node_list:
+                        if center.id > TICKET_QUEUE:
+                            index_arcades += center.more_p_stat.index + center.less_p_stat.index
+                            index_arcades_total += center.more_p_stat.index_support + center.less_p_stat.index_support
+                    index_arcades = int(index_arcades)
+                    index_arcades_total = int(index_arcades_total)
                     old_index = node_list[0].index
-                    avg_wait_ticket_green_pass = job_list[b * batch_index + b - 1][
+                    avg_wait_ticket_green_pass = job_list[index_arcades_total + index_arcades - 1][
                         "wait_ticket_green_pass"]  # prendo l'ultimo elemento
-                    avg_delay_arcades = job_list[b * batch_index + b - 1][
+                    avg_delay_arcades = job_list[index_arcades_total + index_arcades - 1][
                         "delay_arcades"]  # che rappresenta la media sul
-                    avg_delay_arcades_priority = job_list[b * batch_index + b - 1][
+                    avg_delay_arcades_priority = job_list[index_arcades_total + index_arcades - 1][
                         "delay_arcades_priority"]  # che rappresenta la media sul
-                    avg_wait_system = job_list[b * batch_index + b - 1]["wait_system"]
+                    avg_wait_system = job_list[index_arcades_total + index_arcades - 1]["wait_system"]
                     index_more_p_arcades = 0  # all completed jobs from premium
                     for center in node_list:
                         if center.id > TICKET_QUEUE:
@@ -584,7 +593,7 @@ if __name__ == '__main__':
                         for i in range(2, nodes + 1):
                             if node_list[i].more_p_stat.index != 0:
                                 delay_arcades_avg_priority += (
-                                            node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index)
+                                        node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index)
                             if node_list[i].less_p_stat.index != 0:
                                 delay_arcades_avg += (node_list[i].less_p_stat.queue / node_list[i].less_p_stat.index)
                         delay_arcades_avg = delay_arcades_avg / (nodes - 1.0)
@@ -603,29 +612,33 @@ if __name__ == '__main__':
                         node_to_process.completion = INFINITY
 
                     if node_to_process.id == TICKET_QUEUE:  # a completion on TICKET_QUEUE trigger an arrival on ARCADE_i
-                        arcade_node = node_list[select_node(True)]  # on first global stats
-                        select_queue(arcade_node.id)
+                        if not is_positive():
+                            arcade_node = node_list[select_node(True)]  # on first global stats
+                            select_queue(arcade_node.id)
 
-                        # Update partial stats for arcade nodes
-                        # if arcade_node.number > 0:
-                        #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                        #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                        #     arcade_node.stat.service += (time.next - current_for_update)
-                        if arcade_node.priority_arrival is True:
-                            arcade_node.more_p_stat.number += 1  # system stats don't updated
-                            arcade_node.more_p_stat.last = time.current
+                            # Update partial stats for arcade nodes
+                            # if arcade_node.number > 0:
+                            #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
+                            #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
+                            #     arcade_node.stat.service += (time.next - current_for_update)
+                            if arcade_node.priority_arrival is True:
+                                arcade_node.more_p_stat.number += 1  # system stats don't updated
+                                arcade_node.more_p_stat.last = time.current
+                            else:
+                                arcade_node.less_p_stat.number += 1  # system stats don't updated
+                                arcade_node.less_p_stat.last = time.current
+
+                            # arcade_node.last = time.current
+
+                            if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
+                                arcade_node.priority_completion = True
+                                arcade_node.completion = time.current + get_service(arcade_node.id)
+                            elif arcade_node.more_p_stat.number == 0 and arcade_node.less_p_stat.number == 1:
+                                arcade_node.priority_completion = False
+                                arcade_node.completion = time.current + get_service(arcade_node.id)
                         else:
-                            arcade_node.less_p_stat.number += 1  # system stats don't updated
-                            arcade_node.less_p_stat.last = time.current
-
-                        # arcade_node.last = time.current
-
-                        if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
-                            arcade_node.priority_completion = True
-                            arcade_node.completion = time.current + get_service(arcade_node.id)
-                        elif arcade_node.more_p_stat.number == 0 and arcade_node.less_p_stat.number == 1:
-                            arcade_node.priority_completion = False
-                            arcade_node.completion = time.current + get_service(arcade_node.id)
+                            node_list[0].index += 1
+                            node_list[0].number -= 1
 
                 arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]

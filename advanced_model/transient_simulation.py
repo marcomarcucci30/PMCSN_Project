@@ -25,8 +25,8 @@ k = 128
 START = 8.0 * 1440
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
-p_ticket_queue = 1.0
-TICKET_QUEUE = 0.8
+p_ticket_queue = 0.8
+TICKET_QUEUE = 1
 p_size = 0.6
 p_premium = 0.36
 p_positive = 0.05
@@ -380,40 +380,45 @@ if __name__ == '__main__':
 
                 if node_list[0].index % sampling_frequency == 0 and node_list[0].index != 0 and old_index != node_list[0].index:
                     old_index = node_list[0].index
+                    old_index_arcades = 0
+                    for center in node_list:
+                        if center.id > TICKET_QUEUE:
+                            old_index_arcades += center.more_p_stat.index + center.less_p_stat.index
+                    old_index_arcades = int(old_index_arcades)
                     if replica == 0:
                         batch_means_info["avg_wait_ticket_green_pass"].append(
-                            job_list[sampling_frequency * batch_index]["wait_ticket_green_pass"])
+                            job_list[old_index_arcades-1]["wait_ticket_green_pass"])
                         batch_means_info["std_ticket_green_pass"].append(0.0)
 
                         batch_means_info["avg_delay_arcades"].append(
-                            job_list[sampling_frequency * batch_index]["delay_arcades"])
+                            job_list[old_index_arcades-1]["delay_arcades"])
                         batch_means_info["std_arcades"].append(0.0)
 
                         batch_means_info["avg_delay_arcades_priority"].append(
-                            job_list[sampling_frequency * batch_index]["delay_arcades_priority"])
+                            job_list[old_index_arcades-1]["delay_arcades_priority"])
                         batch_means_info["std_arcades_priority"].append(0.0)
 
                         batch_means_info["avg_wait_system"].append(
-                            job_list[sampling_frequency * batch_index]["wait_system"])
+                            job_list[old_index_arcades-1]["wait_system"])
                         batch_means_info["std_system"].append(0.0)
                     else:
                         batch_means_info["avg_wait_ticket_green_pass"][batch_index], batch_means_info["std_ticket_green_pass"][
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_wait_ticket_green_pass"][batch_index],
                                                            batch_means_info["std_ticket_green_pass"][batch_index],
-                                                           job_list[batch_index * sampling_frequency]["wait_ticket_green_pass"])
+                                                           job_list[old_index_arcades-1]["wait_ticket_green_pass"])
 
                         batch_means_info["avg_delay_arcades"][batch_index], batch_means_info["std_arcades"][
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_delay_arcades"][batch_index],
                                                            batch_means_info["std_arcades"][batch_index],
-                                                           job_list[batch_index * sampling_frequency]["delay_arcades"])
+                                                           job_list[old_index_arcades-1]["delay_arcades"])
 
                         batch_means_info["avg_delay_arcades_priority"][batch_index], batch_means_info["std_arcades_priority"][
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_delay_arcades_priority"][batch_index],
                                                            batch_means_info["std_arcades_priority"][batch_index],
-                                                           job_list[batch_index * sampling_frequency]["delay_arcades_priority"])
+                                                           job_list[old_index_arcades-1]["delay_arcades_priority"])
 
 
 
@@ -421,7 +426,7 @@ if __name__ == '__main__':
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_wait_system"][batch_index],
                                                            batch_means_info["std_system"][batch_index],
-                                                           job_list[batch_index * sampling_frequency]["wait_system"])
+                                                           job_list[old_index_arcades-1]["wait_system"])
                     batch_index += 1
 
 
