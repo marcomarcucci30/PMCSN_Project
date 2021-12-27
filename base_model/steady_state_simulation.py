@@ -34,7 +34,7 @@ p_size = 0.6
 ticket_price = 10.0
 energy_cost = 300*b/1024
 nodes_min = 2
-nodes_max = 20
+nodes_max = 5
 delay_max = 5.0
 delay_min = 0.0
 income_list = []
@@ -343,14 +343,24 @@ if __name__ == '__main__':
             old_index = 0
 
             while node_list[0].index_support <= b * (k - 1):  # (node_list[0].number > 0)
+                # print(node_list[0].index_support, b * (k - 1))
                 # print(node_list[0].index)
                 if node_list[0].index % b == 0 and node_list[0].index != 0:  # and old_index != node_list[0].index:
+                    index_arcades = 0  # all completed jobs from standard
+                    index_arcades_total = 0
+                    for center in node_list:
+                        if center.id > TICKET_QUEUE:
+                            index_arcades += center.index
+                            index_arcades_total += center.index_support
+                    index_arcades = int(index_arcades)
+                    index_arcades_total = int(index_arcades_total)
                     old_index = node_list[0].index
-                    avg_wait_ticket = job_list[b * batch_index + b - 1]["wait_ticket"]  # prendo l'ultimo elemento
-                    avg_delay_arcades = job_list[b * batch_index + b - 1][
+                    avg_wait_ticket = job_list[index_arcades_total + index_arcades - 1]["wait_ticket"]  # prendo l'ultimo elemento
+                    avg_delay_arcades = job_list[index_arcades_total + index_arcades - 1][
                         "delay_arcades"]  # che rappresenta la media sul
-                    avg_wait_system = job_list[b * batch_index + b - 1]["wait_system"]
-                    income = b * ticket_price - (nodes - 1) * energy_cost - b * ticket_refund(
+                    avg_wait_system = job_list[index_arcades_total + index_arcades - 1]["wait_system"]
+
+                    income = index_arcades * ticket_price - (nodes - 1) * energy_cost - index_arcades * ticket_refund(
                         avg_delay_arcades) * ticket_price
 
                     #  batch
