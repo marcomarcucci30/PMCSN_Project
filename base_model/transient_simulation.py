@@ -1,11 +1,14 @@
 import json
 from math import sqrt
 from matplotlib import pyplot as plt
+
+from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
+    select_node_arcades, select_node_stream
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-nodes = 6  # n nodi
+nodes = 3  # n nodi
 arrival_time = 15.0
 arrival_time_morning = 15.0  # 2 arcades for stationary
 arrival_time_afternoon = 5.0  # 4 arcades for stationary
@@ -14,7 +17,7 @@ arrival_time_night = 25.0  # 1 arcades for stationary
 
 b = 128
 k = 128
-# seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
+# seed = 123456789
 START = 8.0 * 1440
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
@@ -24,6 +27,7 @@ TICKET_QUEUE = 1
 # ARCADE2 = 3
 # ARCADE3 = 4
 p_size = 0.6
+p_positive = 0.05
 
 
 class Track:
@@ -72,7 +76,7 @@ arr_est = 0
 
 
 def select_node(from_tkt_queue):
-    selectStream(5)  # TODO: scegliere gli streams sequenziali o no?
+    selectStream(select_node_stream)
     if from_tkt_queue:
         r = random()
         for i in range(1, nodes):
@@ -134,13 +138,12 @@ def next_event():
             return i
 
 
-# TODO: Provare l'esponenziale troncata e verificare i tempi di interarrivo
 def get_arrival(y):
     # ---------------------------------------------
     # * generate the next arrival time from an Exponential distribution.
     # * --------------------------------------------
 
-    selectStream(0)
+    selectStream(select_node_arrival)
     return Exponential(y)
 
 
@@ -150,20 +153,20 @@ def get_service(id_node):
     # * --------------------------------------------
     # */
     if id_node == TICKET_QUEUE:
-        selectStream(6)
+        selectStream(select_node_random)
         r = random()
         if r <= p_size:  # green pass
-            selectStream(id_node + 10)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(2, 1.5, 1, 3)  # green pass
             # print("Green pass: ", service)
             return service
         else:
-            selectStream(id_node + 15)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(10, 1.5, 8, 12)  # covid test
             # print("covid test: ", service)
             return service
     else:
-        selectStream(id_node + 10)
+        selectStream(id_node + select_node_arcades)
         service = TruncatedNormal(15, 3, 10, 20)  # arcade game time
         # service = BoundedPareto()
         # print("arcade game time: ", service)
@@ -171,6 +174,17 @@ def get_service(id_node):
 
 
 dict_list = []
+
+select_node_positive = 75
+
+
+def is_positive():
+    selectStream(select_node_positive)
+    r = random()
+    if r <= p_positive:
+        return True
+    else:
+        return False
 
 
 def online_variance(n, mean, variance, x):
@@ -197,6 +211,7 @@ def plot_stats_global():
     plt.xlabel("Number of jobs")
     plt.ylabel("Avg wait system")
     plt.show()
+
 
 '''def plot_stats_global():
     x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_wait_system"]))]
@@ -310,7 +325,7 @@ if __name__ == '__main__':
             while node_list[0].index <= b * k:  # (node_list[0].number > 0)
 
                 if node_list[0].index % sampling_frequency == 0 and node_list[0].index != 0 and old_index != node_list[
-                        0].index:
+                    0].index:
                     old_index = node_list[0].index
                     if replica == 0:
                         batch_means_info["avg_wait_ticket"].append(
@@ -429,19 +444,23 @@ if __name__ == '__main__':
 
                     if node_to_process.id == TICKET_QUEUE:  # a completion on TICKET_QUEUE trigger an arrival on
                         # ARCADE_i
-                        arcade_node = node_list[select_node(True)]  # on first global stats
+                        if not is_positive():
+                            arcade_node = node_list[select_node(True)]  # on first global stats
 
-                        # Update partial stats for arcade nodes
-                        # if arcade_node.number > 0:
-                        #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                        #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                        #     arcade_node.stat.service += (time.next - current_for_update)
+                            # Update partial stats for arcade nodes
+                            # if arcade_node.number > 0:
+                            #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
+                            #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
+                            #     arcade_node.stat.service += (time.next - current_for_update)
 
-                        arcade_node.number += 1  # system stats don't updated
-                        arcade_node.last = time.current
+                            arcade_node.number += 1  # system stats don't updated
+                            arcade_node.last = time.current
 
-                        if arcade_node.number == 1:
-                            arcade_node.completion = time.current + get_service(arcade_node.id)
+                            if arcade_node.number == 1:
+                                arcade_node.completion = time.current + get_service(arcade_node.id)
+                        else:
+                            node_list[0].index += 1
+                            node_list[0].number -= 1
 
                 arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]

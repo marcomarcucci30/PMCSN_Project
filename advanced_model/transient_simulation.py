@@ -3,11 +3,15 @@ from math import sqrt
 
 from matplotlib import pyplot as plt
 
+
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
+from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
+    select_node_arcades, select_node_stream
+from advanced_model.skeleton import select_queue_premium
 
-nodes = 6 # n nodi
+nodes = 3 # n nodi
 arrival_time = 15.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 15.0
@@ -17,14 +21,15 @@ arrival_time_night = 15.0
 b = 128
 k = 128
 
-# seed = 1234567891  # TODO: Controlla il seed migliore o forse era il multiplier?
+# seed = 1234567891
 START = 8.0 * 1440
-STOP = 1 * 12 * 28 * 1440.0  # Minutes
+STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
-p_ticket_queue = 0.8
-TICKET_QUEUE = 1
+p_ticket_queue = 1.0
+TICKET_QUEUE = 0.8
 p_size = 0.6
 p_premium = 0.36
+p_positive = 0.05
 
 
 class Time:
@@ -93,6 +98,18 @@ class SystemNode:
         self.stat = SystemTrack()  # Track stats
 
 
+select_node_positive = 75
+
+
+def is_positive():
+    selectStream(select_node_positive)
+    r = random()
+    if r <= p_positive:
+        return True
+    else:
+        return False
+
+
 def set_arrival_time(x):
     global arrival_time
     arrival_time = x
@@ -106,7 +123,7 @@ arr_est = 0
 
 
 def select_node(from_tkt_queue):
-    selectStream(5)  # TODO: scegliere gli streams sequenziali o no?
+    selectStream(select_node_stream)
     if from_tkt_queue:
         r = random()
         for i in range(1, nodes):
@@ -181,13 +198,13 @@ def next_event():
             return i
 
 
-# TODO: Provare l'esponenziale troncata e verificare i tempi di interarrivo
+
 def get_arrival(y):
     # ---------------------------------------------
     # * generate the next arrival time from an Exponential distribution.
     # * --------------------------------------------
 
-    selectStream(0)
+    selectStream(select_node_arrival)
     return Exponential(y)
 
 
@@ -198,22 +215,22 @@ def get_service(id_node):
     # */
     if id_node == TICKET_QUEUE:
         if node_list[id_node].priority_completion is True:  # green pass
-            selectStream(id_node + 10)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(2, 1.5, 1, 3)  # green pass
             return service
         else:
-            selectStream(id_node + 15)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(10, 1.5, 8, 12)  # covid test
             return service
     else:
-        selectStream(id_node + 10)
+        selectStream(id_node + select_node_arcades)
         service = TruncatedNormal(15, 3, 3, 25)  # arcade game time
         return service
 
 
 def select_queue(node_id):
     if node_id == TICKET_QUEUE:
-        selectStream(8)
+        selectStream(select_node_random)
         r = random()
         if r <= p_size:  # green pass
             node_list[node_id].priority_arrival = True  # green pass
@@ -222,7 +239,7 @@ def select_queue(node_id):
             node_list[node_id].priority_arrival = False  # test
             return
     else:
-        selectStream(7)  # TODO:Controllare gli stream!
+        selectStream(select_queue_premium)
         r = random()
         if r <= p_premium:
             node_list[node_id].priority_arrival = True  # premium ticket
@@ -544,29 +561,33 @@ if __name__ == '__main__':
                         node_to_process.completion = INFINITY
 
                     if node_to_process.id == TICKET_QUEUE:  # a completion on TICKET_QUEUE trigger an arrival on ARCADE_i
-                        arcade_node = node_list[select_node(True)]  # on first global stats
-                        select_queue(arcade_node.id)
+                        if not is_positive():
+                            arcade_node = node_list[select_node(True)]  # on first global stats
+                            select_queue(arcade_node.id)
 
-                        # Update partial stats for arcade nodes
-                        # if arcade_node.number > 0:
-                        #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                        #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                        #     arcade_node.stat.service += (time.next - current_for_update)
-                        if arcade_node.priority_arrival is True:
-                            arcade_node.more_p_stat.number += 1  # system stats don't updated
-                            arcade_node.more_p_stat.last = time.current
+                            # Update partial stats for arcade nodes
+                            # if arcade_node.number > 0:
+                            #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
+                            #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
+                            #     arcade_node.stat.service += (time.next - current_for_update)
+                            if arcade_node.priority_arrival is True:
+                                arcade_node.more_p_stat.number += 1  # system stats don't updated
+                                arcade_node.more_p_stat.last = time.current
+                            else:
+                                arcade_node.less_p_stat.number += 1  # system stats don't updated
+                                arcade_node.less_p_stat.last = time.current
+
+                            # arcade_node.last = time.current
+
+                            if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
+                                arcade_node.priority_completion = True
+                                arcade_node.completion = time.current + get_service(arcade_node.id)
+                            elif arcade_node.more_p_stat.number == 0 and arcade_node.less_p_stat.number == 1:
+                                arcade_node.priority_completion = False
+                                arcade_node.completion = time.current + get_service(arcade_node.id)
                         else:
-                            arcade_node.less_p_stat.number += 1  # system stats don't updated
-                            arcade_node.less_p_stat.last = time.current
-
-                        # arcade_node.last = time.current
-
-                        if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
-                            arcade_node.priority_completion = True
-                            arcade_node.completion = time.current + get_service(arcade_node.id)
-                        elif arcade_node.more_p_stat.number == 0 and arcade_node.less_p_stat.number == 1:
-                            arcade_node.priority_completion = False
-                            arcade_node.completion = time.current + get_service(arcade_node.id)
+                            node_list[0].index += 1
+                            node_list[0].number -= 1
 
                 arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]

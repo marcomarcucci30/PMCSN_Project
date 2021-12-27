@@ -10,7 +10,7 @@ arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-seed = 123456789  # TODO: Controlla il seed migliore o forse era il multiplier?
+seed = 123456789
 START = 8 * 60
 STOP = 1 * 1 * 1 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
@@ -70,7 +70,7 @@ arr_est = 0
 
 
 def select_node(from_tkt_queue):
-    selectStream(5)  # TODO: scegliere gli streams sequenziali o no?
+    selectStream(5)
     if from_tkt_queue:
         r = random()
         for i in range(1, nodes):
@@ -132,7 +132,7 @@ def next_event():
             return i
 
 
-# TODO: Provare l'esponenziale troncata e verificare i tempi di interarrivo
+
 def get_arrival(y):
     # ---------------------------------------------
     # * generate the next arrival time from an Exponential distribution.
@@ -280,8 +280,6 @@ if __name__ == '__main__':
 
                             current_for_update = time.current
                             time.current = time.next  # advance the clock
-
-                            # TODO: Se sto finto switch lo metto fuori le stastiche cambiano..bah
                             # Set arrival time
                             day = (time.current / 1440.0) // 1
                             current_lambda = time.current - day * 1440.0

@@ -7,6 +7,9 @@ from matplotlib import pyplot as plt
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
+from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
+    select_node_arcades, select_node_stream
+from advanced_model.skeleton import select_queue_premium
 
 nodes = 4  # n nodi
 arrival_time = 45.0
@@ -15,16 +18,17 @@ arrival_time_afternoon = 15.0
 arrival_time_evening = 15.0
 arrival_time_night = 15.0
 
-b = 32
+b = 512
 k = 64
-seed = 1234567891  # TODO: Controlla il seed migliore o forse era il multiplier?
+seed = 1234567891
 START = 8.0 * 1440
-STOP = 1 * 12 * 28 * 1440.0  # Minutes
+STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
 p_size = 0.6
 p_premium = 0.36
+p_positive = 0.05
 ticket_price = 10.0
 ticket_price_premium = 20.0
 energy_cost = 300 * b / 1024
@@ -53,6 +57,7 @@ def plot_income():
     plt.plot(x, y2, 'o', mfc='none', color='red')
     plt.show()
 
+
 def plot_stats_global():
     x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
     y = [dict_list[i]["final_delay_arcades"] for i in range(0, len(dict_list))]
@@ -66,8 +71,8 @@ def plot_stats_global():
 def plot_stats():
     x = [i for i in range(0, len(batch_means_info["avg_delay_arcades"]))]  # in 0 global stats
     y = (batch_means_info["avg_delay_arcades"][:])  # in 0 global stats
-    #print(x)
-    #print(y)
+    # print(x)
+    # print(y)
     # plt.plot(x, y)
 
     plt.errorbar(x, y, fmt='.', color='black',
@@ -185,7 +190,7 @@ arr_est = 0
 
 
 def select_node(from_tkt_queue):
-    selectStream(5)  # TODO: scegliere gli streams sequenziali o no?
+    selectStream(select_node_stream)
     if from_tkt_queue:
         r = random()
         for i in range(1, nodes):
@@ -260,13 +265,12 @@ def next_event():
             return i
 
 
-# TODO: Provare l'esponenziale troncata e verificare i tempi di interarrivo
 def get_arrival(y):
     # ---------------------------------------------
     # * generate the next arrival time from an Exponential distribution.
     # * --------------------------------------------
 
-    selectStream(0)
+    selectStream(select_node_arrival)
     return Exponential(y)
 
 
@@ -277,22 +281,22 @@ def get_service(id_node):
     # */
     if id_node == TICKET_QUEUE:
         if node_list[id_node].priority_completion is True:  # green pass
-            selectStream(id_node + 10)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(2, 1.5, 1, 3)  # green pass
             return service
         else:
-            selectStream(id_node + 15)
+            selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(10, 1.5, 8, 12)  # covid test
             return service
     else:
-        selectStream(id_node + 10)
+        selectStream(id_node + select_node_arcades)
         service = TruncatedNormal(15, 3, 3, 25)  # arcade game time
         return service
 
 
 def select_queue(node_id):
     if node_id == TICKET_QUEUE:
-        selectStream(8)
+        selectStream(select_node_random)
         r = random()
         if r <= p_size:  # green pass
             node_list[node_id].priority_arrival = True  # green pass
@@ -301,7 +305,7 @@ def select_queue(node_id):
             node_list[node_id].priority_arrival = False  # test
             return
     else:
-        selectStream(7)  # TODO:Controllare gli stream!
+        selectStream(select_queue_premium)
         r = random()
         if r <= p_premium:
             node_list[node_id].priority_arrival = True  # premium ticket
@@ -319,6 +323,18 @@ def online_variance(n, mean, variance, x):
     variance = variance + delta * delta * (n - 1) / n
     mean = mean + delta / n
     return mean, variance
+
+
+select_node_positive = 75
+
+
+def is_positive():
+    selectStream(select_node_positive)
+    r = random()
+    if r <= p_positive:
+        return True
+    else:
+        return False
 
 
 seeds = [987654321, 539458255, 482548808]
@@ -386,9 +402,12 @@ if __name__ == '__main__':
                 # print(node_list[0].index)
                 if node_list[0].index % b == 0 and node_list[0].index != 0:  # and old_index != node_list[0].index:
                     old_index = node_list[0].index
-                    avg_wait_ticket_green_pass = job_list[b * batch_index + b - 1]["wait_ticket_green_pass"]  # prendo l'ultimo elemento
-                    avg_delay_arcades = job_list[b * batch_index + b - 1]["delay_arcades"]  # che rappresenta la media sul
-                    avg_delay_arcades_priority = job_list[b * batch_index + b - 1]["delay_arcades_priority"]  # che rappresenta la media sul
+                    avg_wait_ticket_green_pass = job_list[b * batch_index + b - 1][
+                        "wait_ticket_green_pass"]  # prendo l'ultimo elemento
+                    avg_delay_arcades = job_list[b * batch_index + b - 1][
+                        "delay_arcades"]  # che rappresenta la media sul
+                    avg_delay_arcades_priority = job_list[b * batch_index + b - 1][
+                        "delay_arcades_priority"]  # che rappresenta la media sul
                     avg_wait_system = job_list[b * batch_index + b - 1]["wait_system"]
                     index_more_p_arcades = 0  # all completed jobs from premium
                     for center in node_list:
@@ -402,8 +421,8 @@ if __name__ == '__main__':
 
                     income = index_less_p_arcades * ticket_price + index_more_p_arcades * ticket_price_premium - \
                              (nodes - 1) * energy_cost - (index_less_p_arcades * ticket_refund(avg_delay_arcades) +
-                             index_more_p_arcades * ticket_refund(avg_delay_arcades_priority)) * ticket_price
-                    # TODO:Aggiorare la funzione costo dipende dalla media sugli indez delle due classi di priorità
+                                                          index_more_p_arcades * ticket_refund(
+                                avg_delay_arcades_priority)) * ticket_price
 
                     #  batch
                     #  azzeriamo le statistiche (index e track)?
@@ -501,7 +520,8 @@ if __name__ == '__main__':
                             node.less_p_stat.last = node.arrival
 
                         max_last = maximum(node.more_p_stat.last, node.less_p_stat.last)
-                        if node.more_p_stat.last is not None and node_list[0].last is not None and node_list[0].last < max_last:
+                        if node.more_p_stat.last is not None and node_list[0].last is not None and node_list[
+                            0].last < max_last:
                             node_list[0].last = max_last
 
                         # node.last = node.arrival
@@ -557,12 +577,14 @@ if __name__ == '__main__':
                         if node_list[0].index != 0:
                             act_st["wait_system"] = node_list[0].stat.node / node_list[0].index
                         if node_list[1].more_p_stat.index != 0:  # prendiamo il tempo di risposte del green pass
-                            act_st["wait_ticket_green_pass"] = node_list[1].more_p_stat.node / node_list[1].more_p_stat.index
+                            act_st["wait_ticket_green_pass"] = node_list[1].more_p_stat.node / node_list[
+                                1].more_p_stat.index
                         delay_arcades_avg = 0
                         delay_arcades_avg_priority = 0
                         for i in range(2, nodes + 1):
                             if node_list[i].more_p_stat.index != 0:
-                                delay_arcades_avg_priority += (node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index)
+                                delay_arcades_avg_priority += (
+                                            node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index)
                             if node_list[i].less_p_stat.index != 0:
                                 delay_arcades_avg += (node_list[i].less_p_stat.queue / node_list[i].less_p_stat.index)
                         delay_arcades_avg = delay_arcades_avg / (nodes - 1.0)
@@ -624,17 +646,22 @@ if __name__ == '__main__':
                 n += 1
                 #  avg calculation,  std calculation
 
-                final_avg_wait_ticket_green_pass, final_std_ticket_green_pass = online_variance(n, final_avg_wait_ticket_green_pass,
-                                                                          final_std_ticket_green_pass,
-                                                                          batch_means_info["avg_wait_ticket_green_pass"][i])
+                final_avg_wait_ticket_green_pass, final_std_ticket_green_pass = online_variance(n,
+                                                                                                final_avg_wait_ticket_green_pass,
+                                                                                                final_std_ticket_green_pass,
+                                                                                                batch_means_info[
+                                                                                                    "avg_wait_ticket_green_pass"][
+                                                                                                    i])
                 final_avg_delay_arcades, final_std_arcades = online_variance(n, final_avg_delay_arcades,
                                                                              final_std_arcades,
                                                                              batch_means_info["avg_delay_arcades"][
                                                                                  i])
-                final_avg_delay_arcades_priority, final_std_arcades_priority = online_variance(n, final_avg_delay_arcades_priority,
-                                                                             final_std_arcades_priority,
-                                                                             batch_means_info["avg_delay_arcades_priority"][
-                                                                                 i])
+                final_avg_delay_arcades_priority, final_std_arcades_priority = online_variance(n,
+                                                                                               final_avg_delay_arcades_priority,
+                                                                                               final_std_arcades_priority,
+                                                                                               batch_means_info[
+                                                                                                   "avg_delay_arcades_priority"][
+                                                                                                   i])
                 final_income, final_std_income = online_variance(n, final_income, final_std_income,
                                                                  batch_means_info["income"][i])
                 final_avg_wait_system, final_std_system = online_variance(n, final_avg_wait_system,
