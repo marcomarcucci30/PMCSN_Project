@@ -19,11 +19,11 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\usepackage{amsmath,amsfonts,stmaryrd,amssymb} % Math packages
+
+\usepackage{amsmath,amsfonts,stmaryrd,amssymb, eurosym, todonotes} % Math packages
 
 \usepackage{enumerate} % Custom item numbers for enumerations
 
-\usepackage[ruled]{algorithm2e} % Algorithms
 
 \usepackage[framemethod=tikz]{mdframed} % Allows defining custom boxed/framed environments
 
@@ -31,6 +31,13 @@
 \lstset{
 	basicstyle=\ttfamily, % Typeset listings in monospace font
 }
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	DOCUMENT MARGINS
