@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.21)  29 DEC 2021 11:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.21)  29 DEC 2021 15:11
 entering extended mode
 **./Report_PMCSN_Marcucci_Lasco_Falaschi.tex
 (Report_PMCSN_Marcucci_Lasco_Falaschi.tex
@@ -1288,20 +1288,12 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
 (C:\Users\marco\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 47.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 51.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 51.
+(Font)              scaled to size 14.4pt on input line 48.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 53.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 67.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 67.
+(Font)              scaled to size 14.4pt on input line 48.
 LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
-ut line 82.
+ut line 63.
 
 (C:\Users\marco\AppData\Local\Programs\MiKTeX\tex/latex/xcharter\ts1xcharter-tl
 f.fd
@@ -1309,166 +1301,181 @@ File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter
 -TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 82.
- [1
+(Font)              scaled to size 10.0pt on input line 63.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 77.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 86.
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--88
+
+ []
+
+[1
 
 {C:/Users/marco/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 96.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 105.
-
-Underfull \hbox (badness 10000) in paragraph at lines 104--107
+Underfull \hbox (badness 10000) in paragraph at lines 115--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 134--139
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--157
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--176
-
- []
-
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 164.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 185.
+(Font)              scaled to size 8.0pt on input line 166.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 185.
-[3]
-Overfull \hbox (40.32536pt too wide) in paragraph at lines 257--266
+(Font)              scaled to size 10.0pt on input line 166.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 167.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 167.
+ [3]
+Overfull \hbox (40.32536pt too wide) in paragraph at lines 238--247
  [] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 251--254
+
+ []
+
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 270--273
+Underfull \hbox (badness 10000) in paragraph at lines 267--270
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--287
-
- []
-
-<images/transient_mor_ns.png, id=55, 979.2585pt x 560.27318pt>
+<images/transient_mor_ns.png, id=54, 979.2585pt x 560.27318pt>
 File: images/transient_mor_ns.png Graphic file (type png)
 <use images/transient_mor_ns.png>
-Package pdftex.def Info: images/transient_mor_ns.png  used on input line 291.
+Package pdftex.def Info: images/transient_mor_ns.png  used on input line 274.
 (pdftex.def)             Requested size: 470.03874pt x 268.92807pt.
 
-Overfull \hbox (14.79463pt too wide) in paragraph at lines 291--292
+Overfull \hbox (14.79463pt too wide) in paragraph at lines 274--275
  [][] 
  []
 
-<images/transient_mor_s.png, id=57, 974.38028pt x 560.27318pt>
+<images/transient_mor_s.png, id=56, 974.38028pt x 560.27318pt>
 File: images/transient_mor_s.png Graphic file (type png)
 <use images/transient_mor_s.png>
-Package pdftex.def Info: images/transient_mor_s.png  used on input line 297.
+Package pdftex.def Info: images/transient_mor_s.png  used on input line 280.
 (pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
 
-Overfull \hbox (12.45311pt too wide) in paragraph at lines 297--298
+Overfull \hbox (12.45311pt too wide) in paragraph at lines 280--281
  [][] 
  []
 
 [5] [6 <./images/transient_mor_ns.png> <./images/transient_mor_s.png>]
+<images/transient_aft_ns.png, id=66, 988.83427pt x 560.27318pt>
+File: images/transient_aft_ns.png Graphic file (type png)
+<use images/transient_aft_ns.png>
+Package pdftex.def Info: images/transient_aft_ns.png  used on input line 294.
+(pdftex.def)             Requested size: 474.63506pt x 268.92807pt.
 
-LaTeX Warning: Reference `figura:avg_ws_aft_ns' on page 7 undefined on input li
-ne 304.
+Overfull \hbox (19.39095pt too wide) in paragraph at lines 294--295
+ [][] 
+ []
 
+<images/transient_aft_s.png, id=67, 969.68272pt x 560.27318pt>
+File: images/transient_aft_s.png Graphic file (type png)
+<use images/transient_aft_s.png>
+Package pdftex.def Info: images/transient_aft_s.png  used on input line 300.
+(pdftex.def)             Requested size: 465.44243pt x 268.92807pt.
 
-LaTeX Warning: Reference `figura:avg_ws_aft_s' on page 7 undefined on input lin
-e 304.
+Overfull \hbox (10.19832pt too wide) in paragraph at lines 300--301
+ [][] 
+ []
 
+[7 <./images/transient_aft_ns.png> <./images/transient_aft_s.png>]
+<images/transient_night_s.png, id=74, 974.38028pt x 560.27318pt>
+File: images/transient_night_s.png Graphic file (type png)
+<use images/transient_night_s.png>
+Package pdftex.def Info: images/transient_night_s.png  used on input line 311.
+(pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
 
-LaTeX Warning: Reference `figura:avg_ws_eve_ns' on page 7 undefined on input li
-ne 305.
-
-
-LaTeX Warning: Reference `figura:avg_ws_eve_s' on page 7 undefined on input lin
-e 305.
-
-
-LaTeX Warning: Reference `figura:avg_ws_night_ns' on page 7 undefined on input 
-line 306.
-
-
-LaTeX Warning: Reference `figura:avg_ws_night_s' on page 7 undefined on input l
-ine 306.
+Overfull \hbox (12.45311pt too wide) in paragraph at lines 311--312
+ [][] 
+ []
 
 (C:\Users\marco\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 323.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 331.
+
+[8 <./images/transient_night_s.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 3
-38.
+46.
 
 (C:\Users\marco\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-[7] [8] (Report_PMCSN_Marcucci_Lasco_Falaschi.aux)
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 7.0pt on input line 353.
 
-LaTeX Warning: There were undefined references.
-
- ) 
+[9] (Report_PMCSN_Marcucci_Lasco_Falaschi.aux) ) 
 Here is how much of TeX's memory you used:
- 21661 strings out of 480790
- 409757 string characters out of 2897301
- 817545 words of memory out of 3000000
- 37203 multiletter control sequences out of 15000+200000
+ 21671 strings out of 480790
+ 410112 string characters out of 2897301
+ 816247 words of memory out of 3000000
+ 37210 multiletter control sequences out of 15000+200000
  639163 words of font info for 89 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,16n,99p,936b,1483s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\marco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss
-1000.pk> <C:\Users\marco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ectt1000.pk> <C:\Users\marco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecit1000.pk>{C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvi
-ps/xcharter/xch_yelf2i.enc}{C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/
-enc/dvips/xcharter/xch_rydp4l.enc}{C:/Users/marco/AppData/Local/Programs/MiKTeX
-/fonts/enc/dvips/xcharter/xch1_co4ru4.enc} <C:\Users\marco\AppData\Local\MiKTeX
-\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk><C:/Users/marco/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/xcharter/XCharter-Bold.pfb><C:/Users/marco/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/xcharter/XCharter-Italic.pfb><C:
-/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/xcharter/XCharter
--Roman.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmex10.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/marco/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/marco/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/marco/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/marco/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/
-marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/eurosym/feymr10.pfb>
-Output written on Report_PMCSN_Marcucci_Lasco_Falaschi.pdf (8 pages, 1380055 by
+ 71i,16n,99p,936b,1488s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\marco\AppData\Local\
+MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\marco\AppData\
+Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\marco\Ap
+pData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecit1000.pk>{C:/Users/mar
+co/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/xcharter/xch_yelf2i.enc}{C:/Us
+ers/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/xcharter/xch_rydp4l.enc
+}{C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/xcharter/xch1_co
+4ru4.enc} <C:\Users\marco\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi6
+00\ectt1200.pk><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/xcharter/XCharter-Bold.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/xcharter/XCharter-Italic.pfb><C:/Users/marco/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/xcharter/XCharter-Roman.pfb><C:/Users/marco/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mar
+co/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/U
+sers/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.p
+fb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmr7.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmsy7.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/eurosym/feymr10.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on Report_PMCSN_Marcucci_Lasco_Falaschi.pdf (9 pages, 2891031 by
 tes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
+ 218 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 119 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 

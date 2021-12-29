@@ -10,13 +10,13 @@ from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-stationary = False
+stationary = True
 nodes = 2 # n nodi
-arrival_time = 14.0
+arrival_time = 35.0
 arrival_time_morning = 14.0  # 2 arcades for stationary
 arrival_time_afternoon = 5.0  # 4 arcades for stationary
-arrival_time_evening = 15.0  # 2 arcades for stationary
-arrival_time_night = 25.0  # 1 arcades for stationary
+arrival_time_evening = 14.0  # 2 arcades for stationary
+arrival_time_night = .0  # 1 arcades for stationary
 
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
@@ -230,9 +230,9 @@ def plot_stats_global():
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
     if stationary:
-        plt.savefig(fname=results_dir+"/transient_mor_s", bbox_inches='tight')
+        plt.savefig(fname=results_dir+"/transient_night_s", bbox_inches='tight')
     else:
-        plt.savefig(fname=results_dir + "/transient_mor_ns", bbox_inches='tight')
+        plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')
     plt.show()
 
 

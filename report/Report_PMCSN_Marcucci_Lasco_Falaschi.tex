@@ -43,26 +43,7 @@
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\begin{info} % Information block
-	This is an interesting piece of information, to which the reader should pay special attention. Fusce varius orci ac magna dapibus porttitor. In tempor leo a neque bibendum sollicitudin. Nulla pretium fermentum nisi, eget sodales magna facilisis eu. Praesent aliquet nulla ut bibendum lacinia. Donec vel mauris vulputate, commodo ligula ut, egestas orci. Suspendisse commodo odio sed hendrerit lobortis. Donec finibus eros erat, vel ornare enim mattis et.
-	
-	% Math equation/formula
-\begin{equation}
-	I = \int_{a}^{b} f(x) \; \text{d}x.
-\end{equation}
-\end{info}
 
-% Numbered question, with subquestions in an enumerate environment
-\begin{question}
-	Quisque ullamcorper placerat ipsum. Cras nibh. Morbi vel justo vitae lacus tincidunt ultrices. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-
-	% Subquestions numbered with letters
-	\begin{enumerate}[(a)]
-		\item Do this.
-		\item Do that.
-		\item Do something else.
-	\end{enumerate}
-\end{question}
 
 \section*{Introduzione} % Unnumbered section
 Lo studio ha lo scopo di analizzare due sistemi a code, stocastici e dinamici, che simulano lo scenario di una sala giochi. Il primo caso di studio si riferisce ad un modello base descrivendone il comportamento ed i limiti. Il secondo caso di studio propone un modello avanzato, che ha lo scopo di enfatizzare le differenze e i miglioramenti rispetto al primo caso.
@@ -179,7 +160,7 @@ Si considera un numero di nodi per il controllo Covid-19 pari a 1 ed un numero m
 L’approccio di simulazione utilizzato è stato quello Next-Event Simulation. Il linguaggio di programmazione utilizzato è \textit{Python v.3.8}.
 Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{algo1}. Quest'ultimo si avvale di ulteriori strutture dati e funzioni necessarie al corretto funzionamento.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{M/G/1 - Rete Aperta - Scheduling FIFO}\label{algo1}
 \begin{algorithmic}[1]
 \Procedure{Modello Base}{}
@@ -282,29 +263,56 @@ Attraverso l'analisi del comportamento transiente viene studiato il tempo medio 
 In particolare, vengono effettuate run di simulazione
 consecutive, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
 La tecnica delle repliche permette di calcolare stime puntuali e intervallari ad ogni acquisizione, ognuna di queste corrispondente ad un certo numero di richieste processate.
+
+Una prima analisi ha portato ad osservare che il sistema non può raggiungere la stazionarietà per via dei limiti introdotti dalla coda del controllo Covid-19, essendo unica per modellazione. Infatti, per un $\lambda_{arrival} \gtrsim \frac{1}{4.1}$, l'utilizzazione di tale centro è approssimativamente pari ad 1, mentre quella dei centri Arcade risulta essere inferiore. Questo studio permette di concludere che il collo di bottiglia è rappresentato dalla coda del controllo Covid-19, per questo motivo, segue solamente lo studio dei nodi Arcade, considerando un $\lambda_{arrival} < \frac{1}{4.1}$.
 \\ \\
-Per quanto riguarda la prima fascia oraria (08:00-12:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_mor_ns} e figura \ref{figura:avg_ws_mor_s}.
+Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_mor_ns} e figura \ref{figura:avg_ws_mor_s}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
 
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering,margin=2cm}
 \includegraphics[scale=0.48]{images/transient_mor_ns.png}
-\caption{Average Wait System, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 2, repliche=50, Sampling\_freq=75}\label{figura:avg_ws_mor_ns}
+\caption{Average Wait System, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 1, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_mor_ns}
 \end{figure}
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering,margin=2cm}
 \includegraphics[scale=0.48]{images/transient_mor_s.png}
-\caption{Average Wait System, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 3, repliche=50, Sampling\_freq=75}\label{figura:avg_ws_mor_s}
+\caption{Average Wait System, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 2, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_mor_s}
 \end{figure}
 
-Come si evince dai grafici, il numero minimo di nodi Arcade necessari per il raggiungimento della stazionarietà, nella fascia oraria 08:00-12:00, è pari a 3. Infatti, nella figura \ref{figura:avg_ws_mor_s} il tempo medio di risposta del sistema assume un comportamento stabile dopo il processamento di circa $5000$ jobs. Inoltre, sono stati utilizzati 3 seed iniziali diversi, in modo tale da simulare il comportamento in condizioni aleatorie differenti.
-\par Tali considerazioni, con le dovute differenze, valgono per le altre fasce orarie.
+Come si evince dai grafici, il numero minimo di nodi Arcade necessari per il raggiungimento della stazionarietà, nella fascia oraria 08:00-12:00 e 17:00-22:00, è pari a 3. Infatti, nella figura \ref{figura:avg_ws_mor_s} il tempo medio di risposta del sistema assume un comportamento stabile dopo il processamento di circa $5000$ jobs. Inoltre, sono stati utilizzati 3 seed iniziali diversi, in modo tale da simulare il comportamento in condizioni aleatorie differenti.Tali considerazioni, con le dovute differenze, valgono per le altre fasce orarie.
 
 Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_aft_ns} e figura \ref{figura:avg_ws_aft_s}.
-Per quanto riguarda la terza fascia oraria (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_eve_ns} e figura \ref{figura:avg_ws_eve_s}.
-Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_night_ns} e figura \ref{figura:avg_ws_night_s}.
 
+
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/transient_aft_ns.png}
+\caption{Average Wait System, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, Arcades: 2, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_aft_ns}
+\end{figure}
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/transient_aft_s.png}
+\caption{Average Wait System, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, Arcades: 3, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_aft_s}
+\end{figure}
+
+
+Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_night_s}.
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/transient_night_s.png}
+\caption{Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, Arcades: 1, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_night_s}
+\end{figure}
+
+In questo caso, il tempo di risposta medio del sistema staziona anche con l'utilizzo di un solo nodo Arcade.
 
 \subsubsection{Analisi del comportamento stazionario}
 %----Massimizzazione del guadagno
