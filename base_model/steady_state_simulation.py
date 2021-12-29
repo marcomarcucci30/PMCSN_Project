@@ -9,9 +9,8 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
 
 from matplotlib import pyplot as plt
 
-from base_model.acs import acs
 from utils.rngs import random, selectStream, plantSeeds
-from utils.rvgs import Exponential, TruncatedNormal, BoundedPareto
+from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 nodes = 4  # n nodi
@@ -21,7 +20,7 @@ arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-b = 256
+b = 8
 k = 64
 # seed = 123456789
 START = 8.0 * 1440
@@ -70,26 +69,31 @@ def is_positive():
         return False
 
 def plot_income():
+    fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)  # permette di generare sottografici in un grafico
+    plt.setp(axs[1].xaxis.get_majorticklabels())
     x = [str(income_list[i][1]) for i in range(0, len(income_list))]
     y1 = [income_list[i][0] for i in range(0, len(income_list))]
-    plt.xticks(rotation=45)
-    fig1 = plt.figure(figsize=(16,9), dpi=400)
-    plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    #plt.xticks(rotation=45)
+    #fig1 = plt.figure(figsize=(16,9), dpi=400)
+    axs[0].set_ylabel(ylabel="Income (€)", fontsize=15)
+    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
     plt.rc('legend', fontsize=20)  # legend fontsize
     plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
-    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels
-    plt.xlabel("Number of Arcades")
-    plt.ylabel("Income (€)")
-    plt.plot(x, y1, 'o', mfc='none', color='black', figure=fig1)
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
+    #axs[0].set(ylabel="Income (€)")
+    #axs[0].ylabel("Income (€)")
+    axs[0].tick_params(labelsize=10)
+    axs[1].tick_params(labelsize=10)
+    axs[0].plot(x, y1, 'o', mfc='none', color='black')
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
-    plt.show()
-    fig2 = plt.figure(figsize=(16, 9), dpi=400)
-    plt.xlabel("Number of Arcades")
-    plt.ylabel("Average wait system (minutes)")
+    # plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
+    #plt.show()
+    #fig2 = plt.figure(figsize=(16, 9), dpi=400)
+    axs[1].set_ylabel(ylabel="Average wait system (minutes)", fontsize=15)
+    axs[1].set_xlabel(xlabel="Number of Arcades", fontsize=15)
     y2 = [income_list[i][2] for i in range(0, len(income_list))]
-    plt.plot(x, y2, 'o', mfc='none', color='red', figure=fig2)
+    axs[1].plot(x, y2, 'o', mfc='none', color='red')
     plt.savefig(fname=results_dir + "/avg_wait_sys_mor", bbox_inches='tight')
     plt.show()
 
