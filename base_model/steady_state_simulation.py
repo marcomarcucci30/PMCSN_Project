@@ -1,4 +1,6 @@
 import json
+import os
+
 from scipy.stats import pearsonr
 import statistics
 from math import sqrt
@@ -13,13 +15,13 @@ from utils.rvgs import Exponential, TruncatedNormal, BoundedPareto
 from utils.rvms import idfStudent
 
 nodes = 4  # n nodi
-arrival_time = 45.0
+arrival_time = 14.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-b = 512
+b = 256
 k = 64
 # seed = 123456789
 START = 8.0 * 1440
@@ -33,8 +35,8 @@ TICKET_QUEUE = 1
 p_size = 0.6
 ticket_price = 10.0
 energy_cost = 300*b/1024
-nodes_min = 2
-nodes_max = 5
+nodes_min = 3
+nodes_max = 20
 delay_max = 5.0
 delay_min = 0.0
 income_list = []
@@ -71,10 +73,24 @@ def plot_income():
     x = [str(income_list[i][1]) for i in range(0, len(income_list))]
     y1 = [income_list[i][0] for i in range(0, len(income_list))]
     plt.xticks(rotation=45)
-    plt.plot(x, y1, 'o', mfc='none', color='black')
+    fig1 = plt.figure(figsize=(16,9), dpi=400)
+    plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels
+    plt.xlabel("Number of Arcades")
+    plt.ylabel("Income (€)")
+    plt.plot(x, y1, 'o', mfc='none', color='black', figure=fig1)
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
     plt.show()
+    fig2 = plt.figure(figsize=(16, 9), dpi=400)
+    plt.xlabel("Number of Arcades")
+    plt.ylabel("Average wait system (minutes)")
     y2 = [income_list[i][2] for i in range(0, len(income_list))]
-    plt.plot(x, y2, 'o', mfc='none', color='red')
+    plt.plot(x, y2, 'o', mfc='none', color='red', figure=fig2)
+    plt.savefig(fname=results_dir + "/avg_wait_sys_mor", bbox_inches='tight')
     plt.show()
 
 

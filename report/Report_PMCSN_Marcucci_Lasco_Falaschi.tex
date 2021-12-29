@@ -75,6 +75,7 @@ Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia 
 %------------------------------------------------
 
 \subsection{Obiettivi}
+\label{Goal}
 \todo[inline, color=red]{Controllare tutti i parametri definiti}
 \par Il primo obiettivo dello studio è quello di massimizzare i profitti della sala giochi. A tale scopo è stata definita una funzione guadagno:
 
@@ -312,10 +313,30 @@ Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservar
 \caption{Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, Arcades: 1, repliche=64, Sampling\_freq=75}\label{figura:avg_ws_night_s}
 \end{figure}
 
-In questo caso, il tempo di risposta medio del sistema staziona anche con l'utilizzo di un solo nodo Arcade.
+In questo caso, il tempo di risposta medio del sistema si stabilizza anche con l'utilizzo di un solo nodo Arcade.
 
 \subsubsection{Analisi del comportamento stazionario}
 %----Massimizzazione del guadagno
+Attraverso l'analisi del comportamento stazionario si vuole trovare la configurazione ottima di nodi arcade, per ogni fascia oraria, che permetta di raggiungere gli obiettivi prefissati in \ref{Goal}, partendo dai risultati ottenuti dallo studio precedente.
+In questa fase sono state effettuate simulazioni con tempi
+d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. Nonostante ciò, è stato scelto un valore di \textit{b} pari a 512 al fine di ridurre maggiormente la dipendenza tra i batch.
+\todo[inline, color=red]{Controllare ultima frase}
+Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
+\\
+In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade.
+Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:income_mor} e figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/income_mor.png}
+	\caption{Income, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b= 256, k=64}\label{figura:income_mor}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_wait_sys_mor.png}
+	\caption{Income, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b= 256, k=64}\label{figura:avg_wait_sys_mor}
+\end{figure}
 
 \section{Implementation}
 
