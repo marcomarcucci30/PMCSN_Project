@@ -275,10 +275,38 @@ Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel s
 %----Introduzione
 Al fine di raggiungere gli obiettivi prefissati, è utile dedurre il minimo numero di nodi che permette al sistema di raggiungere la stazionarietà e, in seguito, ricavare la configurazione ottimale del sistema.
 
-Il raggiungimento della stazionarietà viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente.
+Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente.
 \subsubsection{Analisi del comportamento transiente}
 %----Minimo n per stazionarietà
-\subsubsection{Analisi del comportamento transiente}
+Attraverso l'analisi del comportamento transiente viene studiato il tempo medio di risposta del sistema, per ogni fascia oraria, utilizzando il metodo delle repliche.
+In particolare, vengono effettuate run di simulazione
+consecutive, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
+La tecnica delle repliche permette di calcolare stime puntuali e intervallari ad ogni acquisizione, ognuna di queste corrispondente ad un certo numero di richieste processate.
+\\ \\
+Per quanto riguarda la prima fascia oraria (08:00-12:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_mor_ns} e figura \ref{figura:avg_ws_mor_s}.
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/transient_mor_ns.png}
+\caption{Average Wait System, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 2, repliche=50, Sampling\_freq=75}\label{figura:avg_ws_mor_ns}
+\end{figure}
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/transient_mor_s.png}
+\caption{Average Wait System, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 3, repliche=50, Sampling\_freq=75}\label{figura:avg_ws_mor_s}
+\end{figure}
+
+Come si evince dai grafici, il numero minimo di nodi Arcade necessari per il raggiungimento della stazionarietà, nella fascia oraria 08:00-12:00, è pari a 3. Infatti, nella figura \ref{figura:avg_ws_mor_s} il tempo medio di risposta del sistema assume un comportamento stabile dopo il processamento di circa $5000$ jobs. Inoltre, sono stati utilizzati 3 seed iniziali diversi, in modo tale da simulare il comportamento in condizioni aleatorie differenti.
+\par Tali considerazioni, con le dovute differenze, valgono per le altre fasce orarie.
+
+Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_aft_ns} e figura \ref{figura:avg_ws_aft_s}.
+Per quanto riguarda la terza fascia oraria (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_eve_ns} e figura \ref{figura:avg_ws_eve_s}.
+Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_night_ns} e figura \ref{figura:avg_ws_night_s}.
+
+
+\subsubsection{Analisi del comportamento stazionario}
 %----Massimizzazione del guadagno
 
 \section{Implementation}

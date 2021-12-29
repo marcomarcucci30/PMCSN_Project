@@ -1,6 +1,8 @@
 import json
+import os
 from math import sqrt
 from matplotlib import pyplot as plt
+from matplotlib.figure import Figure
 
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
@@ -8,15 +10,22 @@ from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-nodes = 3  # n nodi
-arrival_time = 15.0
-arrival_time_morning = 15.0  # 2 arcades for stationary
+stationary = False
+nodes = 2 # n nodi
+arrival_time = 14.0
+arrival_time_morning = 14.0  # 2 arcades for stationary
 arrival_time_afternoon = 5.0  # 4 arcades for stationary
 arrival_time_evening = 15.0  # 2 arcades for stationary
 arrival_time_night = 25.0  # 1 arcades for stationary
 
+seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
+# 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
+# 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
+replicas = 64
+sampling_frequency = 75
+
 b = 128
-k = 128
+k = 160
 # seed = 123456789
 START = 8.0 * 1440
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
@@ -199,17 +208,31 @@ def plot_stats_global():
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
     plt.xticks(rotation=45)
-    plt.rcParams["figure.figsize"] = (16, 9)
+    # plt.rcParams["figure.figsize"] = (16, 9)
+    fig1 = plt.figure(figsize=(16,9), dpi=400)
+    plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels
 
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
         # print(dict_list[i])
         plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
-                 'o',
-                 color=colors[i], label=dict_list[i]["seed"], mfc='none')
+                 'o', color=colors[i], label=dict_list[i]["seed"], mfc='none', figure=fig1)
+
+    plt.legend(["seed = "+str(dict_list[0]["seed"]), "seed = "+str(dict_list[1]["seed"]),
+                "seed = "+str(dict_list[2]["seed"])])
+    # plt.title("Average Wait System\n08:00-12:00")
 
     plt.xlabel("Number of jobs")
-    plt.ylabel("Avg wait system")
+    plt.ylabel("Avg wait system (minutes)")
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    if stationary:
+        plt.savefig(fname=results_dir+"/transient_mor_s", bbox_inches='tight')
+    else:
+        plt.savefig(fname=results_dir + "/transient_mor_ns", bbox_inches='tight')
     plt.show()
 
 
@@ -252,11 +275,7 @@ def plot_stats():
     plt.show()
 
 
-seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
-# 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
-# 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
-replicas = 10
-sampling_frequency = 50
+
 
 if __name__ == '__main__':
     for seed in seeds:
@@ -510,7 +529,6 @@ if __name__ == '__main__':
              batch_means_info["avg_delay_arcades"][1:])
             print(pearsonr(batch_means_info["avg_delay_arcades"][:k-1], batch_means_info["avg_delay_arcades"][1:]))'''
 
-            # plot_stats()
             # for i in range(0, len(node_list)):
             #    print(node_list[i].last)
             #    print("\n\nNode " + str(i))
@@ -541,5 +559,6 @@ if __name__ == '__main__':
         with open(path, 'w+') as json_file:
             json.dump(batch_means_info, json_file, indent=4)
         json_file.close()
+        #plot_stats()
 
     plot_stats_global()
