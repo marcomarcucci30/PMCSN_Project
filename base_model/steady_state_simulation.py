@@ -13,14 +13,14 @@ from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
-nodes = 4  # n nodi
+nodes = 6  # n nodi
 arrival_time = 14.0
 arrival_time_morning = 15.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 15.0
 arrival_time_night = 25.0
 
-b = 8
+b = 256
 k = 64
 # seed = 123456789
 START = 8.0 * 1440
@@ -34,10 +34,10 @@ TICKET_QUEUE = 1
 p_size = 0.6
 ticket_price = 10.0
 energy_cost = 300*b/1024
-nodes_min = 3
-nodes_max = 20
-delay_max = 5.0
-delay_min = 0.0
+nodes_min = 6
+nodes_max = 6
+delay_max = 20.0
+delay_min = 8.0
 income_list = []
 p_positive = 0.05
 
@@ -51,8 +51,8 @@ def ticket_refund(avg_delay_arcades):
     else:
         return 0.50'''
     perc = (avg_delay_arcades-delay_min)/(delay_max-delay_min)  # TODO: non rimborsare il biglietto al 100% ?
-    if perc > 1.0:
-        return 1.0
+    if perc > 0.8:
+        return 0.8
     else:
         return perc
 
@@ -68,6 +68,55 @@ def is_positive():
     else:
         return False
 
+def plot_stats_global():
+    fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)
+    x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
+    y = [dict_list[i]["final_wait_system"] for i in range(0, len(dict_list))]
+    plt.xticks(rotation=45)
+    # fig1 = plt.figure(figsize=(16, 9), dpi=400)
+    axs[0].set_ylabel(ylabel="Avg wait system (minutes)", fontsize=15)
+    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
+    #axs[0].set(ylabel="Income (€)")
+    #axs[0].ylabel("Income (€)")
+    axs[0].tick_params(labelsize=10)
+
+    axs[0].errorbar(x, y, yerr=[dict_list[i]["final_w_system"] for i in range(0, len(dict_list))], fmt='.',
+                 color='blue',
+                 ecolor='red', elinewidth=3, capsize=0)
+
+    axs[0].set_xlabel(xlabel="Seed", fontsize=15)
+
+    cellText = []
+    for j in range(len(dict_list)):
+        # Building cellText to create table
+        row = []
+        row.append(str(dict_list[j]["seed"]))
+        row.append(str(dict_list[j]["final_wait_system"]))
+        row.append(str(dict_list[j]["final_std_system"]))
+        row.append("±" + str(dict_list[j]["final_w_system"]))
+        row.append("95%")
+        cellText.append(row)
+
+    # Plotting Table and Graph
+    # rows = [(str(dict_list[j]["seed"])) for j in range(0, len(dict_list))]
+    cols = ("SEED", "MEAN VALUE", "STD", "CONFIDENCE INTERVAL", "CONFIDENCE LEVEL")
+    axs[1].axis('tight')
+    axs[1].axis('off')
+    axs[1].table(cellText=cellText,
+                 cellLoc='center',
+                 colLabels=cols,
+                 loc='center')
+
+
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    plt.savefig(fname=results_dir + "/avg_ws_steady_state_mor", bbox_inches='tight')
+
+    plt.show()
+
 def plot_income():
     fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)  # permette di generare sottografici in un grafico
     plt.setp(axs[1].xaxis.get_majorticklabels())
@@ -75,7 +124,7 @@ def plot_income():
     y1 = [income_list[i][0] for i in range(0, len(income_list))]
     #plt.xticks(rotation=45)
     #fig1 = plt.figure(figsize=(16,9), dpi=400)
-    axs[0].set_ylabel(ylabel="Income (€)", fontsize=15)
+    axs[0].set_ylabel(ylabel="Income", fontsize=15)
     """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
     plt.rc('legend', fontsize=20)  # legend fontsize
     plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
@@ -94,7 +143,7 @@ def plot_income():
     axs[1].set_xlabel(xlabel="Number of Arcades", fontsize=15)
     y2 = [income_list[i][2] for i in range(0, len(income_list))]
     axs[1].plot(x, y2, 'o', mfc='none', color='red')
-    plt.savefig(fname=results_dir + "/avg_wait_sys_mor", bbox_inches='tight')
+    plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
     plt.show()
 
 
@@ -252,14 +301,7 @@ def online_variance(n, mean, variance, x):
     return mean, variance
 
 
-def plot_stats_global():
-    x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
-    y = [dict_list[i]["final_delay_arcades"] for i in range(0, len(dict_list))]
-    plt.xticks(rotation=45)
-    plt.errorbar(x, y, yerr=batch_means_info["final_w_arcades"], fmt='.',
-                 color='black',
-                 ecolor='red', elinewidth=3, capsize=0)
-    plt.show()
+
 
 
 def plot_stats():
@@ -284,9 +326,10 @@ def plot_stats():
     plt.show()
 
 
-seeds = [987654321, 539458255, 482548808]
-'''seeds = [987654321, 539458255, 841744376, 1865511657, 482548808,
-         430131813, 725267564, 1757116804, 238927874, 377966758, 306186735,
+seeds = [987654321, 539458255, 482548808
+    ,1757116804, 238927874, 841744376, 1865511657, 482548808,
+         430131813, 725267564]
+'''1757116804, 238927874, 377966758, 306186735,
          640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
 '''
 
@@ -500,6 +543,10 @@ if __name__ == '__main__':
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
 
             #  Global batch means
+            for i in range(0, 10):
+                batch_means_info["correlation_delay_arcades"].append(
+                    pearsonr(batch_means_info["avg_wait_system"][:k - i],
+                             batch_means_info["avg_wait_system"][i:])[0])
             final_avg_wait_ticket = 0.0
             final_avg_delay_arcades = 0.0
             final_std_ticket = 0.0
@@ -555,10 +602,7 @@ if __name__ == '__main__':
             batch_means_info["final_wait_system"] = final_avg_wait_system
             batch_means_info["final_std_system"] = final_std_system
             batch_means_info["final_w_system"] = final_w_system
-            for i in range(0, 10):
-                batch_means_info["correlation_delay_arcades"].append(
-                    pearsonr(batch_means_info["avg_wait_system"][:k - i],
-                             batch_means_info["avg_wait_system"][i:])[0])
+
 
             # print(pearsonr(batch_means_info["avg_delay_arcades"][:k - 1], batch_means_info["avg_delay_arcades"][1:]))
             dict_list.append(batch_means_info)
@@ -578,7 +622,7 @@ if __name__ == '__main__':
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
 
-        # plot_stats_global()
+        plot_stats_global()
         # plot_correlation()
         # plot_income()
         # acs(dict_list[0]["avg_wait_ticket"], b)

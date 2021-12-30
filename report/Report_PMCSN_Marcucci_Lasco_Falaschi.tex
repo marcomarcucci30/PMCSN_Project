@@ -86,7 +86,7 @@ Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia 
 \end{equation}
 Il costo del biglietto è di 10 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa mensile per Arcade pari a 200 \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda. La massima percentuale rimborsabile è del 75\%. L'attesa minima in coda per cui è previsto il rimborso è di 10 minuti. 
 \\
-\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 25 minuti.
+\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 38 minuti. Infatti, da un calcolo teorico basato sulle caratteristiche del sistema, specificate in seguito, si è dedotto che il tempo medio dei servizi del sistema è di circa 19 minuti. Per cui, è stata impostata una tolleranza del tempo medio di attesa nelle code sperimentato dall'utente, pari a circa il tempo di servizio.
 
 
 
@@ -283,7 +283,7 @@ Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (0
 \end{figure}
 
 Come si evince dai grafici, il numero minimo di nodi Arcade necessari per il raggiungimento della stazionarietà, nella fascia oraria 08:00-12:00 e 17:00-22:00, è pari a 3. Infatti, nella figura \ref{figura:avg_ws_mor_s} il tempo medio di risposta del sistema assume un comportamento stabile dopo il processamento di circa $5000$ jobs. Inoltre, sono stati utilizzati 3 seed iniziali diversi, in modo tale da simulare il comportamento in condizioni aleatorie differenti.Tali considerazioni, con le dovute differenze, valgono per le altre fasce orarie.
-
+\\ \\
 Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_aft_ns} e figura \ref{figura:avg_ws_aft_s}.
 
 
@@ -322,23 +322,57 @@ In questa fase sono state effettuate simulazioni con tempi
 d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. Nonostante ciò, è stato scelto un valore di \textit{b} pari a 512 al fine di ridurre maggiormente la dipendenza tra i batch.
 \todo[inline, color=red]{Controllare ultima frase}
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
-\\
-In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade.
-Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:income_mor} e figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
-\begin{figure}[H]
-	\centering
-	\captionsetup{justification=centering,margin=2cm}
-	\includegraphics[scale=0.48]{images/income_mor.png}
-	\caption{Income, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b= 256, k=64}\label{figura:income_mor}
-\end{figure}
+
+In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
+\\ \\
+Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura  figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/avg_wait_sys_mor.png}
-	\caption{Income, 08:00-12:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b= 256, k=64}\label{figura:avg_wait_sys_mor}
+	\caption{Income, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:avg_wait_sys_mor}
 \end{figure}
 
 \todo[inline, color=red]{Usare 1 seed o fare la media??}
+Come si evince dal grafico, il numero ottimale di nodi Arcade per la prima e la terza fascia oraria, che permette di raggiungere entrambi gli obiettivi prefissati, è pari a 5.
+\\ \\
+Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_wait_sys_aft}.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_wait_sys_aft.png}
+	\caption{Income, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_wait_sys_aft}
+\end{figure}
+Il numero ottimale di server Arcade, per la seconda fascia oraria, è pari a 10.
+\\ \\
+Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_wait_sys_night}.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_wait_sys_night.png}
+	\caption{Income, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_wait_sys_night}
+\end{figure}
+In questo caso, il numero ottimale di server Arcade da utilizzare è pari a 3.
+\\ \\
+In \ref{tab3} è possibile individuare la configurazione ottimale dei nodi Arcade, per ogni fascia oraria.
+
+\begin{table}[htbp]
+\caption{Configurazione ottimale}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Fascia oraria} & \textbf{Configurazione ottimale $^{\mathrm{*}}$} \\ \hline
+\textbf{08:00-12:00}  & 5 \\ \hline
+\textbf{12:00-17:00}  & 10 \\ \hline
+\textbf{17:00-22:00}  & 5 \\ \hline
+\textbf{22:00-08:00} & 3 \\ \hline
+\multicolumn{2}{l}{$^{\mathrm{*}}$ \textit{Numero di nodi Arcade nel sistema.}}
+\end{tabular}
+\label{tab3}
+\end{center}
+\end{table}
+
+
 
 \section{Implementation}
 

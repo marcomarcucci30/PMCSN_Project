@@ -89,9 +89,12 @@ if __name__ == '__main__':
         list_dict[i] = list_dict[i].fromkeys(list_dict[i], 0)
     print(list_dict)'''
 
-    avg_seed_income = 0.0
+    '''avg_seed_income = 0.0
     for i in range(0, 3):
         avg_seed_income += 1960.0
         print(avg_seed_income)
     avg_seed_income = avg_seed_income / 3
-    print(avg_seed_income)
+    print(avg_seed_income)'''
+    for i in range(1,100):
+        service = TruncatedNormal(15, 3, 3, 25)
+        print(service)
