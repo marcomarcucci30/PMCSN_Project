@@ -11,12 +11,12 @@ from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 stationary = True
-nodes = 2 # n nodi
+nodes = 2  # n nodi
 arrival_time = 35.0
 arrival_time_morning = 14.0  # 2 arcades for stationary
 arrival_time_afternoon = 5.0  # 4 arcades for stationary
 arrival_time_evening = 14.0  # 2 arcades for stationary
-arrival_time_night = .0  # 1 arcades for stationary
+arrival_time_night = 35.0  # 1 arcades for stationary
 
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
@@ -27,7 +27,7 @@ sampling_frequency = 75
 b = 128
 k = 160
 # seed = 123456789
-START = 8.0 * 1440
+START = 8.0 * 1440  # TODO: abbiamo messo 8 giorni, non le 8 del mattino
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
@@ -209,7 +209,7 @@ def plot_stats_global():
               'blueviolet']
     plt.xticks(rotation=45)
     # plt.rcParams["figure.figsize"] = (16, 9)
-    fig1 = plt.figure(figsize=(16,9), dpi=400)
+    fig1 = plt.figure(figsize=(16, 9), dpi=400)
     plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
     plt.rc('legend', fontsize=20)  # legend fontsize
     plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
@@ -221,8 +221,8 @@ def plot_stats_global():
         plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
                  'o', color=colors[i], label=dict_list[i]["seed"], mfc='none', figure=fig1)
 
-    plt.legend(["seed = "+str(dict_list[0]["seed"]), "seed = "+str(dict_list[1]["seed"]),
-                "seed = "+str(dict_list[2]["seed"])])
+    plt.legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
+                "seed = " + str(dict_list[2]["seed"])])
     # plt.title("Average Wait System\n08:00-12:00")
 
     plt.xlabel("Number of jobs")
@@ -230,7 +230,7 @@ def plot_stats_global():
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
     if stationary:
-        plt.savefig(fname=results_dir+"/transient_night_s", bbox_inches='tight')
+        plt.savefig(fname=results_dir + "/transient_night_s", bbox_inches='tight')
     else:
         plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')
     plt.show()
@@ -273,8 +273,6 @@ def plot_stats():
     y1 = [i["delay_arcades"] for i in job_list]
     plt.errorbar(x1, y1, fmt='.')
     plt.show()
-
-
 
 
 if __name__ == '__main__':
@@ -355,15 +353,15 @@ if __name__ == '__main__':
 
                     if replica == 0:
                         batch_means_info["avg_wait_ticket"].append(
-                            job_list[old_index_arcades-1]["wait_ticket"])
+                            job_list[old_index_arcades - 1]["wait_ticket"])
                         batch_means_info["std_ticket"].append(0.0)
 
                         batch_means_info["avg_delay_arcades"].append(
-                            job_list[old_index_arcades-1]["delay_arcades"])
+                            job_list[old_index_arcades - 1]["delay_arcades"])
                         batch_means_info["std_arcades"].append(0.0)
 
                         batch_means_info["avg_wait_system"].append(
-                            job_list[old_index_arcades-1]["wait_system"])
+                            job_list[old_index_arcades - 1]["wait_system"])
                         batch_means_info["std_system"].append(0.0)
                     else:
                         # aggiornare la media delle statistiche
@@ -373,17 +371,17 @@ if __name__ == '__main__':
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_wait_ticket"][batch_index],
                                                            batch_means_info["std_ticket"][batch_index],
-                                                           job_list[old_index_arcades-1]["wait_ticket"])
+                                                           job_list[old_index_arcades - 1]["wait_ticket"])
                         batch_means_info["avg_delay_arcades"][batch_index], batch_means_info["std_arcades"][
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_delay_arcades"][batch_index],
                                                            batch_means_info["std_arcades"][batch_index],
-                                                           job_list[old_index_arcades-1]["delay_arcades"])
+                                                           job_list[old_index_arcades - 1]["delay_arcades"])
                         batch_means_info["avg_wait_system"][batch_index], batch_means_info["std_system"][
                             batch_index] = online_variance(replica + 1,
                                                            batch_means_info["avg_wait_system"][batch_index],
                                                            batch_means_info["std_system"][batch_index],
-                                                           job_list[old_index_arcades-1]["wait_system"])
+                                                           job_list[old_index_arcades - 1]["wait_system"])
 
                     batch_index += 1
 
@@ -559,6 +557,6 @@ if __name__ == '__main__':
         with open(path, 'w+') as json_file:
             json.dump(batch_means_info, json_file, indent=4)
         json_file.close()
-        #plot_stats()
+        # plot_stats()
 
     plot_stats_global()
