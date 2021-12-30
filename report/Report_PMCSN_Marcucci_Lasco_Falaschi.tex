@@ -86,7 +86,7 @@ Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia 
 \end{equation}
 Il costo del biglietto è di 10 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa mensile per Arcade pari a 200 \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda. La massima percentuale rimborsabile è del 75\%. L'attesa minima in coda per cui è previsto il rimborso è di 10 minuti. 
 \\
-\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 38 minuti. Infatti, da un calcolo teorico basato sulle caratteristiche del sistema, specificate in seguito, si è dedotto che il tempo medio dei servizi del sistema è di circa 19 minuti. Per cui, è stata impostata una tolleranza del tempo medio di attesa nelle code sperimentato dall'utente, pari a circa il tempo di servizio.
+\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 40 minuti. Infatti, da un calcolo teorico basato sulle caratteristiche del sistema, specificate in seguito, si è dedotto che il tempo medio dei servizi del sistema è di circa 19 minuti. Per cui, è stata impostata una tolleranza del tempo medio di attesa nelle code sperimentato dall'utente, pari a circa il tempo di servizio.
 
 
 
@@ -323,7 +323,7 @@ d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per otte
 \todo[inline, color=red]{Controllare ultima frase}
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
 
-In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
+In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade, mediata su i seed. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
 \\ \\
 Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura  figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
 \begin{figure}[H]
@@ -354,7 +354,7 @@ Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservar
 \end{figure}
 In questo caso, il numero ottimale di server Arcade da utilizzare è pari a 3.
 \\ \\
-In \ref{tab3} è possibile individuare la configurazione ottimale dei nodi Arcade, per ogni fascia oraria.
+In tabella \ref{tab3} è possibile individuare la configurazione ottimale dei nodi Arcade, per ogni fascia oraria.
 
 \begin{table}[htbp]
 \caption{Configurazione ottimale}
@@ -371,7 +371,30 @@ In \ref{tab3} è possibile individuare la configurazione ottimale dei nodi Arcad
 \label{tab3}
 \end{center}
 \end{table}
+Sono stati effettuati run con seed diversi con la configurazione ottimale, precedentemente ricavata, per studiare il tempo di risposta medio, per ogni fascia oraria, con un intervallo di confidenza pari al $95\%$.
 
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_ws_steady_state_mor.png}
+	\caption{Average Wait System,, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_mor}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_ws_steady_state_aft.png}
+	\caption{Average Wait System,, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_eve}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_ws_steady_state_night.png}
+	\caption{Average Wait System,, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_night}
+\end{figure}
+
+\subsubsection{Analisi guadagno giornaliero}
 
 
 \section{Implementation}
