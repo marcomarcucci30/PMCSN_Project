@@ -9,8 +9,8 @@ from utils.rvms import idfNormal
 
 def online_variance(n, mean, variance, x):
     delta = x - mean
-    variance += delta * delta * (n - 1) / n
-    mean += delta / n
+    variance = variance + delta * delta * (n - 1) / n
+    mean = mean + delta / n
     return mean, variance
 
 
@@ -95,6 +95,8 @@ if __name__ == '__main__':
         print(avg_seed_income)
     avg_seed_income = avg_seed_income / 3
     print(avg_seed_income)'''
-    for i in range(1,100):
+    for i in range(0,34):
         service = TruncatedNormal(15, 3, 3, 25)
-        print(service)
+        print(i)
+    if 0.0 != 1:
+        print("vaff")
