@@ -22,13 +22,13 @@ seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
 # 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
 replicas = 64
-sampling_frequency = 2
+sampling_frequency = 10
 
 b = 100
 k = 1
 # seed = 123456789
 START = 8.0 * 60
-STOP = 1 * 100 * 28 * 1440.0 + 8.0 * 60  # Minutes
+STOP = 1 * 1 * 1 * 1440.0 + 8.0 * 60  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
@@ -39,13 +39,13 @@ p_size = 0.6
 p_positive = 0.05
 
 ticket_price = 10.0
-energy_cost = 300 * b / 1024  #TODO: farlo giornaliero invece che mensile
+energy_cost = 300 * b / 1024  # TODO: farlo giornaliero invece che mensile
 delay_max = 20.0
 delay_min = 8.0
 
-n1 = n3 = 5
-n2 = 10
-n4 = 3
+n1 = n3 = 6
+n2 = 11
+n4 = 4
 
 
 class Track:
@@ -297,6 +297,7 @@ def plot_stats():
     plt.errorbar(x1, y1, fmt='.')
     plt.show()
 
+
 def redirect_jobs(prev_nodes):
     # TUTTO SHIFTATO DI 2 PERCHè LA POSIZIONE 1 E 2 DELLA LISTA CI SONO
     # IL SISTEMA E LA CODA DEI TAMPONI
@@ -312,7 +313,7 @@ def redirect_jobs(prev_nodes):
                 for jobs in (0, n_jobs - 1):
                     pos = select_node(True)
                     # aggiorno le stats della nuova coda
-                    #print(pos, nodes, prev_nodes)
+                    # print(pos, nodes, prev_nodes)
                     node_list[pos].number += 1
                     # aggiorno le stats della coda da spegnere
                     node_list[i].number -= 1
@@ -330,7 +331,18 @@ def redirect_jobs(prev_nodes):
                     node_list[pos].number += 1
                     # aggiorno le stats della coda da spegnere
                     node_list[i].number -= 1
-                    node_list[i].arrival = None
+            if node_list[i].arrival != INFINITY and node_list[i].arrival is not None:  # per non perdere l'arrivo su un nodo spento
+                print(node_list[i].arrival)
+                pos = select_node(True)
+                node_list[pos].arrival = node_list[i].arrival
+            node_list[i].number = 0.0  # azzeramento stats nodo spento
+            node_list[i].last = 0.0
+            node_list[i].arrival = None
+            node_list[i].completion = None
+            node_list[i].index = 0.0
+            node_list[i].stat.node = 0.0
+            node_list[i].stat.queue = 0.0
+            node_list[i].stat.service = 0.0
         return
 
 
@@ -338,24 +350,25 @@ if __name__ == '__main__':
     for seed in seeds:
 
         # settings
+
         batch_means_info_struct = {
             "seed": 0,
             "n_nodes": 0,
             "lambda": 0.0,
             "b": 0,
             "k": 0,
-            "income": [],
-            "time_current": [],
-            "job_list": [],
-            "avg_wait_ticket": [],  # [elem 0-50, elem 50-100, ..]
-            "std_ticket": [],
-            "w_ticket": [],
-            "avg_delay_arcades": [],
-            "std_arcades": [],
-            "w_arcades": [],
-            "avg_wait_system": [],
-            "std_system": [],
-            "w_system": [],
+            "income": [None] * (int(STOP/sampling_frequency) + 1),
+            "time_current": [i * sampling_frequency + START for i in range(0, int(STOP/sampling_frequency) + 1)],
+            "job_list": [None] * (int(STOP/sampling_frequency) + 1),
+            "avg_wait_ticket": [None] * (int(STOP/sampling_frequency) + 1),  # [elem 0-50, elem 50-100, ..]
+            "std_ticket": [None] * (int(STOP/sampling_frequency) + 1),
+            "w_ticket": [None] * (int(STOP/sampling_frequency) + 1),
+            "avg_delay_arcades": [None] * (int(STOP/sampling_frequency) + 1),
+            "std_arcades": [None] * (int(STOP/sampling_frequency) + 1),
+            "w_arcades": [None] * (int(STOP/sampling_frequency) + 1),
+            "avg_wait_system": [None] * (int(STOP/sampling_frequency) + 1),
+            "std_system": [None] * (int(STOP/sampling_frequency) + 1),
+            "w_system": [None] * (int(STOP/sampling_frequency) + 1),
             "final_wait_ticket": 0.0,
             "final_std_ticket": 0.0,
             "final_w_ticket": 0.0,
@@ -364,15 +377,14 @@ if __name__ == '__main__':
             "final_w_arcades": 0.0,
             "correlation_delay_arcades": 0.0
         }
-
         batch_means_info = batch_means_info_struct
         batch_means_info["seed"] = seed
         batch_means_info["b"] = b
         batch_means_info["k"] = k
         batch_means_info["n_nodes"] = nodes - 1
         batch_means_info["lambda"] = 1.0 / arrival_time
-        print(batch_means_info)
-        node_list = [StatusNode(i) for i in range(max(n1, n2, n3, n4) + 2)]  # in 0 global stats
+        # (batch_means_info)
+        node_list = [StatusNode(i) for i in range(max(n1, n2, n3, n4) + 1)]  # in 0 global stats TODO: +1?
 
         plantSeeds(seed)
 
@@ -392,7 +404,8 @@ if __name__ == '__main__':
             batch_index = 0
             time.current = START
             arrival = START  # global temp var for getArrival function     [minutes]
-
+            sampling = START  # init sampling
+            sampling_count = 0
             # initialization of the first arrival event
             set_arrival_time(arrival_time_morning)
             nodes = n1
@@ -402,77 +415,55 @@ if __name__ == '__main__':
             min_arrival = arrival
             old_index = 0
 
-            while node_list[0].index <= b * k:  # (node_list[0].number > 0)
+            while min_arrival < STOP:  # (node_list[0].number > 0)
 
-                if node_list[0].index % sampling_frequency == 0 and node_list[0].index != 0 and old_index != node_list[
-                    0].index:
-                    """print("len_lists: ",len(batch_means_info["avg_wait_ticket"]), "seed: ", seed, "replica:", replica,
-                          "batch_index: ", batch_index, "min_arrival: ", min_arrival, "\n")"""
+                if time.current - sampling > sampling_frequency:
+                    step = int((time.current - sampling)/sampling_frequency)
+                    if batch_means_info["avg_wait_ticket"][sampling_count + step - 1] is None:
+                        batch_means_info["avg_wait_ticket"][sampling_count + step - 1] = job_list[-1]["wait_ticket"]
 
-                    old_index = node_list[0].index
+                        batch_means_info["std_ticket"][sampling_count + step - 1] = 0.0
 
-                    old_index_arcades = 0
-                    for center in node_list:
-                        if center.id > TICKET_QUEUE:
-                            old_index_arcades += center.index
-                    old_index_arcades = int(old_index_arcades)
+                        batch_means_info["avg_delay_arcades"][sampling_count + step - 1] = job_list[-1]["delay_arcades"]
 
-                    if replica == 0:
-                        batch_means_info["avg_wait_ticket"].append(
-                            job_list[old_index_arcades - 1]["wait_ticket"])
+                        batch_means_info["std_arcades"][sampling_count + step - 1] = 0.0
 
-                        batch_means_info["std_ticket"].append(0.0)
+                        batch_means_info["avg_wait_system"][sampling_count + step - 1] = job_list[-1]["wait_system"]
 
-                        batch_means_info["avg_delay_arcades"].append(
-                            job_list[old_index_arcades - 1]["delay_arcades"])
+                        batch_means_info["std_system"][sampling_count + step - 1] = 0.0
 
-                        batch_means_info["std_arcades"].append(0.0)
+                        income = len(job_list) * ticket_price - (
+                                nodes - 1) * energy_cost - len(job_list) * ticket_refund(
+                            job_list[-1]["delay_arcades"]) * ticket_price
 
-                        batch_means_info["avg_wait_system"].append(
-                            job_list[old_index_arcades - 1]["wait_system"])
+                        batch_means_info["income"][sampling_count + step - 1] = income
 
-                        batch_means_info["std_system"].append(0.0)
-
-                        income = old_index_arcades * ticket_price - (
-                                nodes - 1) * energy_cost - old_index_arcades * ticket_refund(
-                            job_list[old_index_arcades - 1]["delay_arcades"]) * ticket_price
-
-                        batch_means_info["income"].append(income)
-
-                        batch_means_info["time_current"].append(time.current)
+                        # batch_means_info["time_current"][sampling_count + step - 1] = time.current
                     else:
-                        # aggiornare la media delle statistiche
-                        '''if batch_index == 3:
-                            print(batch_means_info["avg_wait_ticket"][batch_index])'''
-                        batch_means_info["avg_wait_ticket"][batch_index], batch_means_info["std_ticket"][
-                            batch_index] = online_variance(replica + 1,
-                                                           batch_means_info["avg_wait_ticket"][batch_index],
-                                                           batch_means_info["std_ticket"][batch_index],
-                                                           job_list[old_index_arcades - 1]["wait_ticket"])
-                        batch_means_info["avg_delay_arcades"][batch_index], batch_means_info["std_arcades"][
-                            batch_index] = online_variance(replica + 1,
-                                                           batch_means_info["avg_delay_arcades"][batch_index],
-                                                           batch_means_info["std_arcades"][batch_index],
-                                                           job_list[old_index_arcades - 1]["delay_arcades"])
-                        batch_means_info["avg_wait_system"][batch_index], batch_means_info["std_system"][
-                            batch_index] = online_variance(replica + 1,
-                                                           batch_means_info["avg_wait_system"][batch_index],
-                                                           batch_means_info["std_system"][batch_index],
-                                                           job_list[old_index_arcades - 1]["wait_system"])
+                        batch_means_info["avg_wait_ticket"][sampling_count + step - 1], batch_means_info["std_ticket"][sampling_count + step - 1] = online_variance(replica + 1,
+                                                           batch_means_info["avg_wait_ticket"][sampling_count + step - 1],
+                                                           batch_means_info["std_ticket"][sampling_count + step - 1],
+                                                           job_list[- 1]["wait_ticket"])
+                        batch_means_info["avg_delay_arcades"][sampling_count + step - 1], batch_means_info["std_arcades"][sampling_count + step - 1] = online_variance(replica + 1,
+                                                           batch_means_info["avg_delay_arcades"][sampling_count + step - 1],
+                                                           batch_means_info["std_arcades"][sampling_count + step - 1],
+                                                           job_list[- 1]["delay_arcades"])
+                        batch_means_info["avg_wait_system"][sampling_count + step - 1], batch_means_info["std_system"][sampling_count + step - 1] = online_variance(replica + 1,
+                                                           batch_means_info["avg_wait_system"][sampling_count + step - 1],
+                                                           batch_means_info["std_system"][sampling_count + step - 1],
+                                                           job_list[- 1]["wait_system"])
 
-                        income = old_index_arcades * ticket_price - (
-                                nodes - 1) * energy_cost - old_index_arcades * ticket_refund(
-                            job_list[old_index_arcades - 1]["delay_arcades"]) * ticket_price
+                        income = len(job_list) * ticket_price - (
+                                nodes - 1) * energy_cost - len(job_list) * ticket_refund(
+                            job_list[- 1]["delay_arcades"]) * ticket_price
 
-                        batch_means_info["income"][batch_index], ignored = online_variance(replica + 1,
-                                                           batch_means_info["income"][batch_index],
-                                                           0.0, income)
+                        batch_means_info["income"][sampling_count + step - 1], ignored = online_variance(replica + 1,
+                                                                                           batch_means_info[
+                                                                                               "income"][sampling_count + step - 1],
+                                                                                           0.0, income)
 
-                        if job_list[old_index_arcades - 1]["wait_system"] < 0.0:
-                            print("avg_system: ", batch_means_info["avg_wait_system"], "job_list_system: ",
-                                  job_list[old_index_arcades - 1]["wait_system"])
-
-                    batch_index += 1
+                    sampling_count += step
+                    sampling = START + (sampling_frequency * (sampling_count + 1))
 
                 node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
                 time.next = minimum(node_to_process.arrival, node_to_process.completion)
@@ -521,15 +512,14 @@ if __name__ == '__main__':
                     node_list[0].number += 1  # update system stat
                     arrival += get_arrival(arrival_time)
                     node_selected_pos = select_node(False)
-                    print("\nnodi attivi: ", nodes, "ore: ", time.current)
+                    """print("\nnodi attivi: ", nodes, "ore: ", time.current)
                     for d in node_list:
-                        print(d.arrival)
+                        print(d.arrival)"""
                     # Se il prossimo arrivo è su un altro centro, bisogna eliminare l'arrivo sul centro processato altrimenti
                     # sarà sempre il minimo
                     if node_selected_pos != node_to_process.id:
                         node_to_process.arrival = INFINITY
                     node = node_list[node_selected_pos]
-
 
                     if node.arrival != INFINITY:
                         node.last = node.arrival
