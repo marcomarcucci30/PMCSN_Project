@@ -14,7 +14,7 @@ from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 nodes = 6  # n nodi
-arrival_time = 5.0
+arrival_time = 14.0
 arrival_time_morning = 14.0
 arrival_time_afternoon = 5.0
 arrival_time_evening = 14.0
@@ -33,8 +33,8 @@ TICKET_QUEUE = 1
 # ARCADE3 = 4
 p_size = 0.6
 ticket_price = 10.0
-energy_cost = 0.01  # euro/b*
-nodes_min = 4
+energy_cost = 0.02  # euro/b*
+nodes_min = 3
 nodes_max = 20
 delay_max = 20.0
 delay_min = 8.0

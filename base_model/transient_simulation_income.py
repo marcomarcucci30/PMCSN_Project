@@ -3,6 +3,7 @@ import os
 from math import sqrt
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
+from matplotlib.pyplot import text
 
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
@@ -48,7 +49,7 @@ ticket_price = 10.0
 delay_max = 20.0
 delay_min = 8.0
 
-best_conf = 0
+best_conf = 2
 if best_conf == 0:
     n1 = n3 = 6
     n2 = 11
@@ -63,7 +64,7 @@ else:
     n2 = 20
     n4 = 20
 
-energy_cost = 0.5#30000*110/1024/28/24/6
+energy_cost = 0.4 #30000*110/1024/28/24/6
 ec_mor = (n1-1) * energy_cost  # TODO: farlo giornaliero invece che mensile
 ec_aft = (n2-1) * energy_cost
 ec_night = (n4-1) * energy_cost
@@ -247,6 +248,58 @@ def online_variance(n, mean, variance, x):
 
 
 def plot_stats_global():
+    fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)  # permette di generare sottografici in un grafico
+    plt.setp(axs[1].xaxis.get_majorticklabels())
+    x = dict_list[0]["time_current"]
+    colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
+              'blueviolet']
+    #plt.xticks(rotation=45)
+    #fig1 = plt.figure(figsize=(16,9), dpi=400)
+    axs[1].set_ylabel(ylabel="Income €", fontsize=15)
+    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
+    #axs[0].set(ylabel="Income (€)")
+    #axs[0].ylabel("Income (€)")
+    axs[0].tick_params(labelsize=10)
+    axs[1].tick_params(labelsize=10)
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    # plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
+    #plt.show()
+    #fig2 = plt.figure(figsize=(16, 9), dpi=400)
+    axs[1].set_ylim([0, 1600])
+    axs[0].set_ylim([0, 60])
+    axs[0].set_ylabel(ylabel="Average wait system (minutes)", fontsize=15)
+    axs[1].set_xlabel(xlabel="Minutes", fontsize=15)
+    axs[0].vlines(480, 0, 60, color='lawngreen', label="")
+    axs[1].vlines(480, 0, 1600, color='lawngreen', label="")
+    axs[0].vlines(720, 0, 60, color='blue', label="")
+    axs[1].vlines(720, 0, 1600, color='blue', label="")
+    axs[0].vlines(1020, 0, 60, color='red', label="")
+    axs[1].vlines(1020, 0, 1600, color='red', label="")
+    axs[0].vlines(1320, 0, 60, color='orange', label="")
+    axs[1].vlines(1320, 0, 1600, color='orange', label="")
+    axs[0].legend(["08:00", "12:00", "17:00", "22:00"])
+    text(720, 5, "entry" , rotation=90, verticalalignment='center')
+    for i in range(0, len(dict_list)):
+        # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
+        # print(dict_list[i])
+        axs[0].plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
+                 'o', color=colors[i], label=dict_list[i]["seed"], mfc='none')
+    for i in range(0, len(dict_list)):
+        # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
+        # print(dict_list[i])
+        axs[1].plot(x, [dict_list[i]["income"][j] for j in range(0, len(dict_list[i]["income"]))],
+                 'o', color=colors[i], label=dict_list[i]["seed"], mfc='none')
+    # plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
+    axs[1].legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
+                "seed = " + str(dict_list[2]["seed"])])
+
+    plt.show()
+
+'''def plot_stats_global():
     x = dict_list[0]["time_current"]
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
@@ -282,7 +335,7 @@ def plot_stats_global():
         # print(dict_list[i])
         plt.plot(x, [dict_list[i]["income"][j] for j in range(0, len(dict_list[i]["income"]))],
                  'o', color=colors[i], label=dict_list[i]["seed"], mfc='none', figure=fig2)
-    plt.show()
+    plt.show()'''
 
 
 '''def plot_stats_global():
