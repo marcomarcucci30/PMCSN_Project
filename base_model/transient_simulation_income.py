@@ -48,7 +48,7 @@ ticket_price = 10.0
 delay_max = 20.0
 delay_min = 8.0
 
-best_conf = 2
+best_conf = 0
 if best_conf == 0:
     n1 = n3 = 6
     n2 = 11

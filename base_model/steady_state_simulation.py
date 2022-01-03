@@ -14,11 +14,11 @@ from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 nodes = 6  # n nodi
-arrival_time = 14.0
-arrival_time_morning = 15.0
+arrival_time = 5.0
+arrival_time_morning = 14.0
 arrival_time_afternoon = 5.0
-arrival_time_evening = 15.0
-arrival_time_night = 25.0
+arrival_time_evening = 14.0
+arrival_time_night = 35.0
 
 b = 256
 k = 64
@@ -33,8 +33,8 @@ TICKET_QUEUE = 1
 # ARCADE3 = 4
 p_size = 0.6
 ticket_price = 10.0
-energy_cost = 244888/k/10*0.01 #euro/b*
-nodes_min = 3
+energy_cost = 0.01  # euro/b*
+nodes_min = 4
 nodes_max = 20
 delay_max = 20.0
 delay_min = 8.0
@@ -423,7 +423,7 @@ if __name__ == '__main__':
                         "delay_arcades"]  # che rappresenta la media sul
                     avg_wait_system = job_list[index_arcades_total + index_arcades - 1]["wait_system"]
 
-                    income = index_arcades * ticket_price - (nodes - 1) * energy_cost - index_arcades * ticket_refund(
+                    income = index_arcades * ticket_price - (nodes - 1) * ((time.current / 10) * energy_cost) - index_arcades * ticket_refund(
                         avg_delay_arcades) * ticket_price
 
                     #  batch
