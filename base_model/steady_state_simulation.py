@@ -33,9 +33,9 @@ TICKET_QUEUE = 1
 # ARCADE3 = 4
 p_size = 0.6
 ticket_price = 10.0
-energy_cost = 300*b/1024
-nodes_min = 6
-nodes_max = 6
+energy_cost = 244888/k/10*0.01 #euro/b*
+nodes_min = 3
+nodes_max = 20
 delay_max = 20.0
 delay_min = 8.0
 income_list = []
@@ -113,7 +113,7 @@ def plot_stats_global():
 
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    plt.savefig(fname=results_dir + "/avg_ws_steady_state_mor", bbox_inches='tight')
+    # plt.savefig(fname=results_dir + "/avg_ws_steady_state_mor", bbox_inches='tight')
 
     plt.show()
 
@@ -326,9 +326,9 @@ def plot_stats():
     plt.show()
 
 
-seeds = [987654321, 539458255, 482548808
-    ,1757116804, 238927874, 841744376, 1865511657, 482548808,
-         430131813, 725267564]
+seeds = [987654321, 539458255, 482548808]
+''',1757116804, 238927874, 841744376, 1865511657, 482548808,
+         430131813, 725267564]'''
 '''1757116804, 238927874, 377966758, 306186735,
          640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
 '''
@@ -541,7 +541,7 @@ if __name__ == '__main__':
 
                 arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
-
+            print(time.current)
             #  Global batch means
             for i in range(0, 10):
                 batch_means_info["correlation_delay_arcades"].append(
@@ -622,7 +622,7 @@ if __name__ == '__main__':
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
 
-        plot_stats_global()
+        #plot_stats_global()
         # plot_correlation()
         # plot_income()
         # acs(dict_list[0]["avg_wait_ticket"], b)

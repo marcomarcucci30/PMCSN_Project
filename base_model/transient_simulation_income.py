@@ -24,6 +24,11 @@ seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 replicas = 64
 sampling_frequency = 10
 
+n_mor_sampl = 4 * 60 / sampling_frequency
+n_aft_sampl = n_mor_sampl + 5 * 60 / sampling_frequency
+n_eve_sampl = n_aft_sampl + 5 * 60 / sampling_frequency
+n_night_sampl = n_eve_sampl + 10 * 60 / sampling_frequency
+
 b = 256
 k = 1
 # seed = 123456789
@@ -39,15 +44,16 @@ p_size = 0.6
 p_positive = 0.05
 
 ticket_price = 10.0
-energy_cost = 50  # TODO: farlo giornaliero invece che mensile
+
 delay_max = 20.0
 delay_min = 8.0
 
-best_conf = 0
+best_conf = 2
 if best_conf == 0:
     n1 = n3 = 6
     n2 = 11
     n4 = 4
+
 elif best_conf == 1:
     n1 = n3 = 3
     n2 = 4
@@ -57,6 +63,10 @@ else:
     n2 = 20
     n4 = 20
 
+energy_cost = 0.5#30000*110/1024/28/24/6
+ec_mor = (n1-1) * energy_cost  # TODO: farlo giornaliero invece che mensile
+ec_aft = (n2-1) * energy_cost
+ec_night = (n4-1) * energy_cost
 class Track:
     node = 0.0  # time integrated number in the node
     queue = 0.0  # time integrated number in the queue
@@ -462,7 +472,22 @@ if __name__ == '__main__':
                 # print(time.current)
                 if time.current - sampling > sampling_frequency:
                     step = int((time.current - sampling) / sampling_frequency)
-                    # print("seed: ", seed, ", replica:", replica, "step: ",step, ", sampling count: ", sampling_count, ", curr: ", time.current,"\n")
+
+                    ''' L'energy cost viene sottratto alla fine dato che conosciamo perfettamente quanto spenderemo
+                    di energia elettrica per ogni intervallo temporale'''
+
+                    # Update income
+                    if step > 1:
+                        for y in range(sampling_count, sampling_count + step - 1):
+
+                            if batch_means_info["income"][sampling_count - 1] is not None:
+                                if batch_means_info["income"][y] is None:
+                                    batch_means_info["income"][y] = batch_means_info["income"][sampling_count - 1]
+                                else:
+                                    batch_means_info["income"][y], ingore_var = online_variance(replica+1, batch_means_info["income"][y], 0.0, batch_means_info["income"][sampling_count - 1])
+
+
+
                     if batch_means_info["avg_wait_ticket"][sampling_count + step - 1] is None:
                         if len(job_list) == 0:
                             batch_means_info["avg_wait_ticket"][sampling_count + step - 1] = 0.0
@@ -477,8 +502,7 @@ if __name__ == '__main__':
 
                             batch_means_info["std_system"][sampling_count + step - 1] = 0.0
 
-                            income = len(job_list) * ticket_price - (
-                                    nodes - 1) * energy_cost - 0.0
+                            income = len(job_list) * ticket_price - 0.0
 
                             batch_means_info["income"][sampling_count + step - 1] = income
                         else:
@@ -495,8 +519,7 @@ if __name__ == '__main__':
 
                             batch_means_info["std_system"][sampling_count + step - 1] = 0.0
 
-                            income = len(job_list) * ticket_price - (
-                                    nodes - 1) * energy_cost - len(job_list) * ticket_refund(
+                            income = len(job_list) * ticket_price - len(job_list) * ticket_refund(
                                 job_list[-1]["delay_arcades"]) * ticket_price
 
                             batch_means_info["income"][sampling_count + step - 1] = income
@@ -536,8 +559,7 @@ if __name__ == '__main__':
                                                                                                         job_list[- 1][
                                                                                                             "wait_system"])
 
-                            income = len(job_list) * ticket_price - (
-                                    nodes - 1) * energy_cost - len(job_list) * ticket_refund(
+                            income = len(job_list) * ticket_price - len(job_list) * ticket_refund(
                                 job_list[- 1]["delay_arcades"]) * ticket_price
 
                             batch_means_info["income"][sampling_count + step - 1], ignored = online_variance(
@@ -730,6 +752,18 @@ if __name__ == '__main__':
             #    print("   average # in the node ... = {0:6.6f}".format(node_list[i].stat.node / time.current))
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
+
+        for y in range(0, len(batch_means_info["income"])):
+            if batch_means_info["income"][y] is None:
+                continue
+            if 0 <= y <= n_mor_sampl-1:
+                batch_means_info["income"][y] -= ec_mor * (y+1)
+            if n_mor_sampl <= y <= n_aft_sampl-1:
+                batch_means_info["income"][y] -= ec_aft * (y-n_mor_sampl+1) + (ec_mor * n_mor_sampl)
+            if n_aft_sampl <= y <= n_eve_sampl-1:
+                batch_means_info["income"][y] -= ec_mor * (y-n_aft_sampl+1) + (ec_mor * n_mor_sampl) + (ec_aft * (n_aft_sampl-n_mor_sampl))
+            if n_eve_sampl <= y <= n_night_sampl - 1:
+                batch_means_info["income"][y] -= ec_night * (y-n_eve_sampl+1) + (ec_mor * (n_eve_sampl-n_aft_sampl)) + (ec_mor * n_mor_sampl) + (ec_aft * (n_aft_sampl-n_mor_sampl))
         dict_list.append(batch_means_info)
         '''for i in range(0, len(batch_means_info["std_arcades"])):
             batch_means_info["std_arcades"][i] = sqrt(batch_means_info["std_arcades"][i] / replicas)
