@@ -395,7 +395,32 @@ Sono stati effettuati run con seed diversi con la configurazione ottimale, prece
 \end{figure}
 
 \subsubsection{Analisi guadagno giornaliero}
-
+Attraverso questa analisi viene effettuata una simulazione concreta di una tipica giornata lavorativa, con tre configurazioni differenti:
+\begin{itemize}
+	\item Configurazione minima;
+	\item Configurazione ottimale;
+	\item Configurazione massima.
+\end{itemize} 
+È possibile osservare il risultato di tale analisi in figura \ref{figura:ts_min}, \ref{figura:ts_optimal} e \ref{figura:ts_max}.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/ts_min.png}
+	\caption{Average Wait System \& Income Daily, minimal configuration}\label{figura:ts_min}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/ts_optimal.png}
+	\caption{Average Wait System \& Income Daily, optimal configuration}\label{figura:ts_optimal}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/ts_max.png}
+	\caption{Average Wait System \& Income Daily, maximum configuration}\label{figura:ts_max}
+\end{figure}
+Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configurazione ottimale porta ad un guadagno giornaliero migliore. Inoltre, si può osservare come il tempo di risposta medio del sistema della configurazione massimale è comparabile con quello della configurazione ottimale, nonostante quest'ultimo abbia un numero minore di nodi Arcade.
 
 \section{Implementation}
 
