@@ -3,7 +3,7 @@ from utils.rvgs import Exponential, TruncatedNormal
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
 
-nodes = 3 # n nodi
+nodes = 6 # n nodi
 arrival_time = 0.0
 arrival_time_morning = 14.0
 arrival_time_afternoon = 14.0

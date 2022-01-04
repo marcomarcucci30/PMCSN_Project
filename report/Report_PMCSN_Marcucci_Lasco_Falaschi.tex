@@ -585,33 +585,17 @@ Al fine di validare il modello implementato, sono state eseguite diversi run var
 
 Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo di interarrivo medio del sistema converga al parametro impostato $\lambda_{system}^{-1}$.
 
-
 \begin{table}[H]
-\caption{Arcade statistics}
+\caption{Arcades statistics}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{\# nodi arcades} & \textbf{avg interarrival time} & \textbf{avg wait} & \textbf{avg delay} & \textbf{avg \# node} & \textbf{avg \# queue} & \textbf{utilization} \\ \hline
-\textbf{2} & 29.243586 & 23.024591 & 8.028968 & 0.787335 & 0.274554 & 0.512781\\ \hline
-\textbf{5} & 73.123549 & 16.937644 & 1.940329 & 0.231630 & 0.026538 & 0.205092\\ \hline
-\textbf{9} & 131.750016 & 15.999674 & 0.983205 & 0.121439 & 0.007463 & 0.113977\\ \hline
-\multicolumn{7}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028, $}
-\end{tabular}
-\label{tab2}
-\end{center}
-\end{table}
-
-\begin{table}[H]
-\caption{Tempi esecuzione clustering}
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-\textbf{\# nodi} & \multicolumn{2}{|c|}{\textbf{avg wait}} & \multicolumn{2}{|c|}{\textbf{avg \# node}} & \multicolumn{2}{|c|}{\textbf{avg \# queue}} \\ \cline{2-7} 
-\textbf{arcades} & \textbf{Priority} & \textbf{Non Priority} & \textbf{Priority} & \textbf{Non Priority} & \textbf{Priority} & \textbf{Non Priority}\\ \hline
-2 & 347.3 & 43.6 & 203.2 & 62.4 & 203.2 & 62.4\\ \hline
-5 & 136.2 & 21.6 & 127.1 & 24.8 & 203.2 & 62.4\\ \hline
-9 & 153.1 & 39.5 & 148.2 & 25.5 & 203.2 & 62.4\\ \hline
-\multicolumn{7}{l}{$^{\mathrm{*}}$I tempi sono espressi in millisecondi.}
+\textbf{\# nodi} & \multicolumn{2}{|c|}{\textbf{avg interarrival}} & \multicolumn{2}{|c|}{\textbf{avg wait}} & \multicolumn{2}{|c|}{\textbf{avg \# node}} & \multicolumn{2}{|c|}{\textbf{avg \# queue}} \\ \cline{2-9} 
+\textbf{arcades} & \textbf{Priority} & \textbf{N Priority} & \textbf{Priority} & \textbf{N Priority} & \textbf{Priority} & \textbf{N Priority}& \textbf{Priority} & \textbf{N Priority}\\ \hline
+2 & 81.467323 & 45.547404 & 17.803708 & 22.031882 & 0.218535 & 0.483710 & 0.034664 & 0.154467\\ \hline
+5 & 205.391722 & 113.252959 & 15.827623 & 16.397222 & 0.077060 & 0.144781 & 0.004122 & 0.012311\\ \hline
+9 & 370.111505 & 203.980331 & 15.425839 & 15.681829 & 0.041678 & 0.076871 & 0.001129 & 0.003296\\ \hline
+\multicolumn{9}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028 $.}
 \end{tabular}
 \label{tab2}
 \end{center}
@@ -621,6 +605,8 @@ Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo d
 Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di Little sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
 \\ \\
 Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel sistema i tempi di attesa e il numero di jobs nei rispettivi centri diminuisce coerentemente a ciò che ci si aspetta.
+\\ \\
+Inoltre si può constatare che tutte le statistiche risultano inferiori nel caso prioritario, in conformità con quanto ci si figuri.
 %----------------------------------------------------------------------------------------
 
 \end{document}
