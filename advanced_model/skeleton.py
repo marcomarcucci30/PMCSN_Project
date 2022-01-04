@@ -5,14 +5,14 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
 
 nodes = 3 # n nodi
 arrival_time = 0.0
-arrival_time_morning = 15.0
-arrival_time_afternoon = 15.0
-arrival_time_evening = 15.0
-arrival_time_night = 15.0
+arrival_time_morning = 14.0
+arrival_time_afternoon = 14.0
+arrival_time_evening = 14.0
+arrival_time_night = 14.0
 
 seed = 1234567891
 START = 8.0 * 1440
-STOP = 1 * 12 * 28 * 1440.0  # Minutes
+STOP = 15 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1

@@ -84,7 +84,7 @@ Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia 
    G = costo\; biglietto \;*\; \#giocatori\; -\; costo\; elettricit\grave a \;*\; \#arcade \;attivi\; - \\-\; \#giocatori \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda)\;*\;costo\;biglietto
 \end{split}
 \end{equation}
-Il costo del biglietto è di 10 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa mensile per Arcade pari a 200 \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda. La massima percentuale rimborsabile è del 75\%. L'attesa minima in coda per cui è previsto il rimborso è di 10 minuti. 
+Il costo del biglietto è di 10 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa giornaliera per Arcade pari a $2.4 €$ \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda nei nodi Arcade. La massima percentuale rimborsabile è del $80\%$. L'attesa minima in coda per cui è previsto il rimborso è di 8 minuti. 
 \\
 \par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 40 minuti. Infatti, da un calcolo teorico basato sulle caratteristiche del sistema, specificate in seguito, si è dedotto che il tempo medio dei servizi del sistema è di circa 19 minuti. Per cui, è stata impostata una tolleranza del tempo medio di attesa nelle code sperimentato dall'utente, pari a circa il tempo di servizio.
 
@@ -124,37 +124,36 @@ Gli eventi considerati sono:
 \item Cambio di fascia oraria.
 \end{itemize}
 Tali eventi possono causare cambiamenti dello stato. L’arrivo di un cliente causa
-l’aumento di clienti in un dato nodo e l’aumento del numero di clienti del sistema. Il completamento di un servizio causa il passaggio di un cliente da un
+l’aumento della popolazione in un dato nodo e l’aumento del numero della popolazione del sistema. Il completamento di un servizio causa il passaggio di un cliente da un
 nodo ad un altro o la sua uscita dal sistema. Il cambio di fascia oraria può causare
-l’accensione o lo spegnimento degli arcade. Se un nodo arcade viene spento quando ha ancora
-clienti in servizio o in coda, questo continuerà a processarli, pur non ricevendo altri
-arrivi. Il tempo in cui un nodo arcade idle, ma acceso, viene considerato nel calcolo dei
+l’accensione o lo spegnimento degli Arcade. Se un nodo arcade viene spento quando ha ancora
+clienti in servizio, questo continuerà a processarli, pur non ricevendo altri
+arrivi, mentre i clienti in coda vengono distribuiti uniformemente tra i nodi Arcade rimasti operativi. Il tempo in cui un nodo Arcade è idle, ma acceso, viene considerato nel calcolo dei
 costi.
-\todo[inline, color=red]{Implementare transient\_simulation\_income.py}
 
 
 \subsection{Modello delle Specifiche}
 \todo[inline, color=red]{Controllare tutti i parametri definiti}
-Gli arrivi sono modellati con un processo di Poisson, con media variabile a seconda della fascia oraria. In particolare, la media per la prima fascia oraria è di $0.0\overline{6}$  minuti (15 clienti/minuto), la media per la seconda fascia oraria è di $0.2$  minuti (5 clienti/minuto), la media per la terza fascia oraria è di $0.0\overline{6}$   minuti (15 clienti/minuto), la media per la quarta fascia oraria è di $0.0\overline{2}$  minuti (45 clienti/minuto).
+Gli arrivi sono modellati con un processo di Poisson, con media variabile a seconda della fascia oraria. In particolare, la media per la prima fascia oraria è di $0.07143$  minuti (14 minuti/cliente), la media per la seconda fascia oraria è di $0.2$  minuti (5 minuti/cliente), la media per la terza fascia oraria è di $0.07143$   minuti (15 minuti/cliente), la media per la quarta fascia oraria è di $0.02857$  minuti (35 minuti/cliente).
 \\ \\
-La percentuale di clienti con biglietto online è del 20\%. La percentuale di clienti che si sottopone al controllo del  Green-pass è del 0.48\%. La percentuale di clienti che si sottopone al tampone è del 32\%.
+La percentuale di clienti con biglietto online è del 20\%. La percentuale di clienti che si sottopone al controllo del  Green-pass è del 48\%. La percentuale di clienti che si sottopone al tampone è del 32\%.
 \\ \\
 La distribuzione del tempo di servizio per il controllo del green-pass è stata modellata
-come una distribuzione Normale con media 2 minuti (0.5 passeggeri/minuto) e varianza 1.5 minuti, troncata tra 1 e 3 minuti. 
+come una distribuzione Normale con media 2 minuti (0.5 passeggeri/minuto) e varianza 2.25 minuti, troncata tra 1 e 3 minuti. 
 \\
 La distribuzione del tempo di servizio per il tampone è stata modellata
-come una distribuzione Normale con media 10 minuti (0.1 passeggeri/minuto) e varianza 1.5 minuti, troncata tra 8 e 12 minuti. 
+come una distribuzione Normale con media 10 minuti (0.1 passeggeri/minuto) e varianza 2.25 minuti, troncata tra 8 e 12 minuti. 
 \\
 È stata scelta una Normale troncata con questi valori poiché permette di modellare un'operazione con bassa variabilità e di scartare valori eccessivamente piccoli o grandi che non rispecchierebbero tempi di servizio reali.
 \\ \\
 La distribuzione del tempo di servizio per un generico arcade è stata modellata
-come una distribuzione Normale con media $0.0\overline{6}$ minuti (0.1 passeggeri/minuto) e varianza 3 minuti, troncata tra 3 e 25 minuti.
+come una distribuzione Normale con media $0.0\overline{6}$ minuti (0.1 passeggeri/minuto) e varianza 9 minuti, troncata tra 3 e 25 minuti.
 \\ \\
 La percentuale di clienti che risulta positiva al Covid-19 oppure presenta un green-pass non idoneo è in totale del 5\%.
 \\ \\
 Le probabilità per la scelta del node arcade è stata modellata tramite una distribuzione Uniforme in modo che ciascun servente abbia la stessa probabilità di essere selezionato. Questa scelta permette di mantenere circa la stessa utilizzazione per tutti i serventi dato che hanno lo stesso tasso di servizio.
 \\ \\
-Si considera un numero di nodi per il controllo Covid-19 pari a 1 ed un numero massimo di nodi arcade pari a 20.
+Infine, si considera un numero di nodi per il controllo Covid-19 pari a 1 ed un numero massimo di nodi arcade pari a 20.
 
 
 \subsection{Modello Computazionale}
@@ -208,6 +207,7 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 \end{algorithmic}
 \end{algorithm}
 
+\todo[inline, color=red]{Cambiare o no lo pseudocodice?}
 
 \subsection{Verifica}
 Le strutture e le funzioni precedentemente accennate sono state sottoposte ad una fase di testing in modo da garantire il loro corretto funzionamento. Durante l'implementazione del progetto, l'applicazione iterativa di tale fase ha permesso di individuare e correggere diversi difetti, emersi a seguito del manifestarsi di malfunzionamenti del sistema.
@@ -221,10 +221,10 @@ Al fine di validare il modello implementato, sono state eseguite diversi run var
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{\# nodi arcades} & \textbf{avg interarrival time} & \textbf{avg wait} & \textbf{avg \# node} \\ \hline
-\textbf{2} & 15.042965 & 26.475121 & 1.759960 \\ \hline
-\textbf{5} & 15.042963 & 21.542646 & 1.432069 \\ \hline
-\textbf{9} & 15.042963 & 20.694456 & 1.375685 \\ \hline
-\multicolumn{4}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{15} , \# jobs=482453, $}
+\textbf{2} & 14.037119 & 27.6247051 & 1.967967 \\ \hline
+\textbf{5} & 14.037119 & 21.808119 & 1.553597 \\ \hline
+\textbf{9} & 14.037119 & 20.885323 & 1.487860 \\ \hline
+\multicolumn{4}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028, $}
 \end{tabular}
 \label{tab1}
 \end{center}
@@ -239,10 +239,10 @@ Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo d
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 \textbf{\# nodi arcades} & \textbf{avg interarrival time} & \textbf{avg wait} & \textbf{avg delay} & \textbf{avg \# node} & \textbf{avg \# queue} & \textbf{utilization} \\ \hline
-\textbf{2} & 31.347341 & 21.898857 & 6.903420 & 0.698586 & 0.2202234 & 0.478363\\ \hline
-\textbf{5} & 78.255828 & 16.770644 & 1.788041 & 0.214305 & 0.022849 & 0.191456\\ \hline
-\textbf{9} & 141.269751 & 15.911570 & 0.900827 & 0.112629 & 0.006376 & 0.106252\\ \hline
-\multicolumn{7}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{15} , \# jobs=482453, $}
+\textbf{2} & 29.243586 & 23.024591 & 8.028968 & 0.787335 & 0.274554 & 0.512781\\ \hline
+\textbf{5} & 73.123549 & 16.937644 & 1.940329 & 0.231630 & 0.026538 & 0.205092\\ \hline
+\textbf{9} & 131.750016 & 15.999674 & 0.983205 & 0.121439 & 0.007463 & 0.113977\\ \hline
+\multicolumn{7}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028, $}
 \end{tabular}
 \label{tab2}
 \end{center}
@@ -422,41 +422,205 @@ Attraverso questa analisi viene effettuata una simulazione concreta di una tipic
 \end{figure}
 Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configurazione ottimale porta ad un guadagno giornaliero migliore. Inoltre, si può osservare come il tempo di risposta medio del sistema della configurazione massimale è comparabile con quello della configurazione ottimale, nonostante quest'ultimo abbia un numero minore di nodi Arcade.
 
-\section{Implementation}
+\section{Modello Avanzato} % Numbered section
 
-Proin lobortis efficitur dictum. Pellentesque vitae pharetra eros, quis dignissim magna. Sed tellus leo, semper non vestibulum vel, tincidunt eu mi. Aenean pretium ut velit sed facilisis. Ut placerat urna facilisis dolor suscipit vehicula. Ut ut auctor nunc. Nulla non massa eros. Proin rhoncus arcu odio, eu lobortis metus sollicitudin eu. Duis maximus ex dui, id bibendum diam dignissim id. Aliquam quis lorem lorem. Phasellus sagittis aliquet dolor, vulputate cursus dolor convallis vel. Suspendisse eu tellus feugiat, bibendum lectus quis, fermentum nunc. Nunc euismod condimentum magna nec bibendum. Curabitur elementum nibh eu sem cursus, eu aliquam leo rutrum. Sed bibendum augue sit amet pharetra ullamcorper. Aenean congue sit amet tortor vitae feugiat.
+Si procede alla realizzazione di un modello avanzato che sia in grado di adattarsi ai nuovi obiettivi, descritti in seguito, a costo zero. Per tale scopo, è stata introdotta nella sala giochi, la possibilità, da parte di un utente, di acquistare un biglietto \textit{premium} che gli permette di passare avanti agli utenti che sono in possesso di un biglietto standard.
+\todo[inline, color=green]{Inserire figura 2 (alto livello)}
 
-In congue risus leo, in gravida enim viverra id. Donec eros mauris, bibendum vel dui at, tempor commodo augue. In vel lobortis lacus. Nam ornare ullamcorper mauris vel molestie. Maecenas vehicula ornare turpis, vitae fringilla orci consectetur vel. Nam pulvinar justo nec neque egestas tristique. Donec ac dolor at libero congue varius sed vitae lectus. Donec et tristique nulla, sit amet scelerisque orci. Maecenas a vestibulum lectus, vitae gravida nulla. Proin eget volutpat orci. Morbi eu aliquet turpis. Vivamus molestie urna quis tempor tristique. Proin hendrerit sem nec tempor sollicitudin.
+\subsection{Obiettivi}
+\label{Advanced_Goal}
 
-% File contents
-\begin{file}[hello.py]
-\begin{lstlisting}[language=Python]
-#! /usr/bin/python
+\todo[inline, color=red]{Controllare tutti i parametri definiti}
+\par Il primo obiettivo dello studio avanzato è quello di massimizzare i profitti della sala giochi. A tale scopo è stata definita una funzione guadagno:
+\begin{align*}
+G = costo biglietto standard;* \#giocatori standard; + costo biglietto premium ; \#giocatoripremium - costo elettricit\grave a  \#arcade \;attivi\; -\; \#giocatori \; standard \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;standard)\;*\;costo\;biglietto\;standard - \\-\; \#giocatori \; premium \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;premium)\;*\;costo\;biglietto\;premium
+\end{align*}
 
-import sys
-sys.stdout.write("Hello World!\n")
-\end{lstlisting}
-\end{file}
+\begin{equation}
+\begin{split}
+   G = costo\; biglietto \; standard \;*\; \#giocatori\; standard\; + costo\; biglietto\;premium \;*\; \#giocatori\;premium\;\\ -\; costo\; elettricit\grave a \;*\; \#arcade \;attivi\; -\; \#giocatori \; standard \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;standard)\;*\;costo\;biglietto\;standard - \\-\; \#giocatori \; premium \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;premium)\;*\;costo\;biglietto\;premium
+\end{split}
+\end{equation}
+Il costo del biglietto standard è di 10 \euro, mentre il costo del biglietto premium è di 20 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa giornaliera per Arcade pari a $2.4 €$ \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda nei nodi Arcade. La massima percentuale rimborsabile è del $80\%$. L'attesa minima in coda per cui è previsto il rimborso è di 8 minuti. 
+\\
+\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di attesa nel nodo Covid-19, inferiore a quello del modello base, per gli utenti che possiedono il green-pass.
 
-Fusce eleifend porttitor arcu, id accumsan elit pharetra eget. Mauris luctus velit sit amet est sodales rhoncus. Donec cursus suscipit justo, sed tristique ipsum fermentum nec. Ut tortor ex, ullamcorper varius congue in, efficitur a tellus. Vivamus ut rutrum nisi. Phasellus sit amet enim efficitur, aliquam nulla id, lacinia mauris. Quisque viverra libero ac magna maximus efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum mollis eros in tellus fermentum, vitae tristique justo finibus. Sed quis vehicula nibh. Etiam nulla justo, pellentesque id sapien at, semper aliquam arcu. Integer at commodo arcu. Quisque dapibus ut lacus eget vulputate.
+\subsection{Modello Concettuale}
+\todo[inline, color=green]{Inserire figura 2 (basso livello)}
+Nel modello avanzato la sala giochi è modellata attraverso una rete aperta composta da N nodi rappresentanti i videogiochi (Arcade) e da un nodo rappresentante il controllo Covid-19. Ogni nodo Arcade si compone di un servente e di due code infinite con priorità astratta senza prelazione. L'accesso alla coda con priorità più alta è riservato agli utenti che acquistano il biglietto premium.
+Il nodo Covid-19 si compone di un servente e di due code infinite con priorità size-based senza prelazione. L'accesso alla prima coda è riservato agli utenti che possiedono il green-pass, dato che questi ultimi hanno un tempo di servizio inferiori rispetto a chi esegue il test antigenico rapido.
+\par Non sono state scelte code di priorità con prelazione poiché, nonostante esse avrebbero avuto prestazioni migliori per gli obiettivi prefissati, non rispecchiano uno scenario reale.
+\\
+La struttura è aperta H24 e la giornata è suddivisa in 4 fasce orarie caratterizzate da tassi di arrivo differenti:
+\begin{itemize}
+\item 08:00-12:00
+\item 12:00-17:00
+\item 17:00-22:00
+\item 22:00-08:00
 
-% Command-line "screenshot"
-\begin{commandline}
-	\begin{verbatim}
-		$ chmod +x hello.py
-		$ ./hello.py
 
-		Hello World!
-	\end{verbatim}
-\end{commandline}
 
-Vestibulum sodales orci a nisi interdum tristique. In dictum vehicula dui, eget bibendum purus elementum eu. Pellentesque lobortis mattis mauris, non feugiat dolor vulputate a. Cras porttitor dapibus lacus at pulvinar. Praesent eu nunc et libero porttitor malesuada tempus quis massa. Aenean cursus ipsum a velit ultricies sagittis. Sed non leo ullamcorper, suscipit massa ut, pulvinar erat. Aliquam erat volutpat. Nulla non lacus vitae mi placerat tincidunt et ac diam. Aliquam tincidunt augue sem, ut vestibulum est volutpat eget. Suspendisse potenti. Integer condimentum, risus nec maximus elementum, lacus purus porta arcu, at ultrices diam nisl eget urna. Curabitur sollicitudin diam quis sollicitudin varius. Ut porta erat ornare laoreet euismod. In tincidunt purus dui, nec egestas dui convallis non. In vestibulum ipsum in dictum scelerisque.
+\end{itemize}
+Le variabili di stato del sistema considerate sono:
+\begin{itemize}
+\item Numero di clienti standard in ogni nodo;
+\item Numero di clienti premium in ogni nodo;
+\item Numero di nodi attivi;
+\item Tipologia di cliente.
+\end{itemize}
+Le code inizialmente vengono considerate vuote, conseguentemente il numero di
+clienti ad ogni nodo è 0. La tipologia di ogni cliente (Green-pass, tampone o biglietto online) è decisa aleatoriamente al suo arrivo. I nodi per ogni fase vengono definiti aperti o chiusi in base alla configurazione scelta durante lo studio, che può essere ottima o non
+ottima.
+\\ \\
+Gli eventi considerati sono:
+\begin{itemize}
+\item Arrivo di un cliente standard;
+\item Arrivo di un cliente premium;
+\item Completamento di un servizio;
+\item Cambio di fascia oraria.
+\end{itemize}
+Tali eventi possono causare cambiamenti dello stato. L’arrivo di un cliente causa
+l’aumento della popolazione in un dato nodo e l’aumento del numero della popolazione del sistema. Il completamento di un servizio causa il passaggio di un cliente da un
+nodo ad un altro o la sua uscita dal sistema. Il cambio di fascia oraria può causare
+l’accensione o lo spegnimento degli Arcade. Se un nodo arcade viene spento quando ha ancora
+clienti in servizio, questo continuerà a processarli, pur non ricevendo altri
+arrivi, mentre i clienti in coda vengono distribuiti uniformemente tra i nodi Arcade rimasti operativi. Il tempo in cui un nodo Arcade è idle, ma acceso, viene considerato nel calcolo dei
+costi.
 
-% Warning text, with a custom title
-\begin{warn}[Notice:]
-  In congue risus leo, in gravida enim viverra id. Donec eros mauris, bibendum vel dui at, tempor commodo augue. In vel lobortis lacus. Nam ornare ullamcorper mauris vel molestie. Maecenas vehicula ornare turpis, vitae fringilla orci consectetur vel. Nam pulvinar justo nec neque egestas tristique. Donec ac dolor at libero congue varius sed vitae lectus. Donec et tristique nulla, sit amet scelerisque orci. Maecenas a vestibulum lectus, vitae gravida nulla. Proin eget volutpat orci. Morbi eu aliquet turpis. Vivamus molestie urna quis tempor tristique. Proin hendrerit sem nec tempor sollicitudin.
-\end{warn}
 
+\subsection{Modello delle Specifiche}
+\todo[inline, color=red]{Controllare tutti i parametri definiti}
+Gli arrivi sono modellati con un processo di Poisson, con media variabile a seconda della fascia oraria. In particolare, la media per la prima fascia oraria è di $0.07143$  minuti (14 minuti/cliente), la media per la seconda fascia oraria è di $0.2$  minuti (5 minuti/cliente), la media per la terza fascia oraria è di $0.07143$   minuti (15 minuti/cliente), la media per la quarta fascia oraria è di $0.02857$  minuti (35 minuti/cliente).
+\\ \\
+La percentuale di clienti con biglietto online è del 20\%. La percentuale di clienti che si sottopone al controllo del  Green-pass è del 48\%. La percentuale di clienti che si sottopone al tampone è del 32\%.
+\\ \\
+La distribuzione del tempo di servizio per il controllo del green-pass è stata modellata
+come una distribuzione Normale con media 2 minuti (0.5 passeggeri/minuto) e varianza 2.25 minuti, troncata tra 1 e 3 minuti. 
+\\
+La distribuzione del tempo di servizio per il tampone è stata modellata
+come una distribuzione Normale con media 10 minuti (0.1 passeggeri/minuto) e varianza 2.25 minuti, troncata tra 8 e 12 minuti. 
+\\
+È stata scelta una Normale troncata con questi valori poiché permette di modellare un'operazione con bassa variabilità e di scartare valori eccessivamente piccoli o grandi che non rispecchierebbero tempi di servizio reali.
+\\ \\
+La distribuzione del tempo di servizio per un generico arcade è stata modellata
+come una distribuzione Normale con media $0.0\overline{6}$ minuti (0.1 passeggeri/minuto) e varianza 9 minuti, troncata tra 3 e 25 minuti.
+\\ \\
+La percentuale di clienti che acquista un biglietto premium è pari al 36\%.
+\\ \\
+La percentuale di clienti che risulta positiva al Covid-19 oppure presenta un green-pass non idoneo è in totale del 5\%.
+\\ \\
+Le probabilità per la scelta del node arcade è stata modellata tramite una distribuzione Uniforme in modo che ciascun servente abbia la stessa probabilità di essere selezionato. Questa scelta permette di mantenere circa la stessa utilizzazione per tutti i serventi dato che hanno lo stesso tasso di servizio.
+\\ \\
+Infine, si considera un numero di nodi per il controllo Covid-19 pari a 1 ed un numero massimo di nodi arcade pari a 20.
+
+\subsection{Modello Computazionale}
+L’approccio di simulazione utilizzato è stato quello Next-Event Simulation. Il linguaggio di programmazione utilizzato è \textit{Python v.3.8}.
+Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{algo2}. Quest'ultimo si avvale di ulteriori strutture dati e funzioni necessarie al corretto funzionamento.
+
+\begin{algorithm}[H]
+\caption{M/G/1 Multiqueue Priority - Rete Aperta - Scheduling FIFO}\label{algo2}
+\begin{algorithmic}[1]
+\Procedure{Modello Base}{}
+\State $\textit{Inizializzazione clock}$
+\State $\textit{Inizializzazione lista dei nodi}$
+\State $\textit{Inizializzazione struttura Integrali}$
+\State $\textit{Selezione nodo su cui generare il primo arrivo}$
+\State $\textit{Generazione primo arrivo}$
+\While{\textit{ultimo arrivo $<$ STOP} \textbf{or} \textit{ci sono job nel sistema}}
+  \State $\textit{Scelta del prossimo evento}$
+  \For{$i\gets 0, \textit{numero nodi}$}
+    \If{$\textit{nodi non vuoti}$}
+      \State $\textit{Aggiornamento statistiche}$
+    \EndIf
+
+  \EndFor
+  \State $\textit{Avanzamento del clock}$
+  \If{\textit{Evento} $= Arrivo$} \Comment{Arrivo}
+    \If{\textit{Evento} $= \textit{Cambio fascia oraria}$}
+      \State $\textit{Selezione tasso arrivi corretto}$
+    \EndIf
+    \State $\textit{Aggiornamento stato nodo e code di priorità}$ \Comment{Aggiornamento code di priorità}
+    \State $\textit{Aggiornamento stato sistema}$
+    \State $\textit{Schedulazione prossimo arrivo}$
+    \If{\textit{Jobs nel centro} $= 1$}
+      \State $\textit{Schedulazione prossimo servizio}$
+    \EndIf
+  \Else  \Comment{Completamento}
+    \State $\textit{Aggiornamento stato nodo e code di priorità}$ \Comment{Aggiornamento code di priorità}
+    \If{\textit{Nodo Arcade}}
+      \State $\textit{Aggiornamento stato sistema}$
+    \EndIf
+    \If{\textit{Jobs nel centro} $> 0$}
+      \State $\textit{Schedulazione prossimo servizio}$
+    \EndIf
+    \If{\textit{Nodo Covid-Check}}
+      \If{\textit{Covid test negativo }\text{\textbf{and}} \textit{Green-pass valido}}
+        \State $\textit{Aggiornamento stato sistema}$
+      \EndIf
+    \EndIf
+  \EndIf
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Validazione}
+Al fine di validare il modello implementato, sono state eseguite diversi run variando determinati parametri. I risultati possono essere osservati in tabella \ref{tab1} e \ref{tab2}.
+
+\begin{table}[htbp]
+\caption{System statistics}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{\# nodi arcades} & \textbf{avg interarrival time} & \textbf{avg wait} & \textbf{avg \# node} \\ \hline
+\textbf{2} & 14.037119 & 27.424052 & 1.953673 \\ \hline
+\textbf{5} & 14.037119 & 21.654822 & 1.542677 \\ \hline
+\textbf{9} & 14.037119 &  20.727016 & 1.476581 \\ \hline
+\multicolumn{4}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028, $}
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo di interarrivo medio del sistema converga al parametro impostato $\lambda_{system}^{-1}$.
+
+
+\begin{table}[H]
+\caption{Arcade statistics}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{\# nodi arcades} & \textbf{avg interarrival time} & \textbf{avg wait} & \textbf{avg delay} & \textbf{avg \# node} & \textbf{avg \# queue} & \textbf{utilization} \\ \hline
+\textbf{2} & 29.243586 & 23.024591 & 8.028968 & 0.787335 & 0.274554 & 0.512781\\ \hline
+\textbf{5} & 73.123549 & 16.937644 & 1.940329 & 0.231630 & 0.026538 & 0.205092\\ \hline
+\textbf{9} & 131.750016 & 15.999674 & 0.983205 & 0.121439 & 0.007463 & 0.113977\\ \hline
+\multicolumn{7}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} , \# jobs=517028, $}
+\end{tabular}
+\label{tab2}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\caption{Tempi esecuzione clustering}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{\# nodi} & \multicolumn{2}{|c|}{\textbf{avg wait}} & \multicolumn{2}{|c|}{\textbf{avg \# node}} & \multicolumn{2}{|c|}{\textbf{avg \# queue}} \\ \cline{2-7} 
+\textbf{arcades} & \textbf{Priority} & \textbf{Non Priority} & \textbf{Priority} & \textbf{Non Priority} & \textbf{Priority} & \textbf{Non Priority}\\ \hline
+2 & 347.3 & 43.6 & 203.2 & 62.4 & 203.2 & 62.4\\ \hline
+5 & 136.2 & 21.6 & 127.1 & 24.8 & 203.2 & 62.4\\ \hline
+9 & 153.1 & 39.5 & 148.2 & 25.5 & 203.2 & 62.4\\ \hline
+\multicolumn{7}{l}{$^{\mathrm{*}}$I tempi sono espressi in millisecondi.}
+\end{tabular}
+\label{tab2}
+\end{center}
+\end{table}
+
+
+Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di Little sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
+\\ \\
+Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel sistema i tempi di attesa e il numero di jobs nei rispettivi centri diminuisce coerentemente a ciò che ci si aspetta.
 %----------------------------------------------------------------------------------------
 
 \end{document}

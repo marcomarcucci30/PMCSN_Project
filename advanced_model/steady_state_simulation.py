@@ -429,9 +429,9 @@ if __name__ == '__main__':
                             index_less_p_arcades += center.less_p_stat.index
 
                     income = index_less_p_arcades * ticket_price + index_more_p_arcades * ticket_price_premium - \
-                             (nodes - 1) * energy_cost - (index_less_p_arcades * ticket_refund(avg_delay_arcades) +
+                             (nodes - 1) * energy_cost - (index_less_p_arcades * ticket_refund(avg_delay_arcades)* ticket_price +
                                                           index_more_p_arcades * ticket_refund(
-                                avg_delay_arcades_priority)) * ticket_price
+                                avg_delay_arcades_priority) * ticket_price_premium)
 
                     #  batch
                     #  azzeriamo le statistiche (index e track)?
