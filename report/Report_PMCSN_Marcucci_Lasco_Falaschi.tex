@@ -71,13 +71,15 @@ L'uscita dalla struttura può avvenire in tre modi:
 \end{itemize}
 Nei primi due casi, il giocatore esce dal sistema senza pagare il biglietto.
 Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia diritto ad un rimborso del biglietto proporzionale al tempo di attesa che ha sperimentato.
+\par In figura \ref{figura:base_model_high_level} è possibile osservare lo schema ad alto livello del modello base.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
-	\includegraphics[scale=1]{images/schema.jpg}
-	\caption{Advanced Model, Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:schema}
+	\includegraphics[scale=0.75]{images/base_model_high_level.jpg}
+	\caption{Advanced Model, High-level view}\label{figura:base_model_high_level}
 \end{figure}
-\todo[inline, color=green]{Inserire figura 1 (alto livello)}
+
+
 %------------------------------------------------
 
 \subsection{Obiettivi}
@@ -136,6 +138,14 @@ l’accensione o lo spegnimento degli Arcade. Se un nodo arcade viene spento qua
 clienti in servizio, questo continuerà a processarli, pur non ricevendo altri
 arrivi, mentre i clienti in coda vengono distribuiti uniformemente tra i nodi Arcade rimasti operativi. Il tempo in cui un nodo Arcade è idle, ma acceso, viene considerato nel calcolo dei
 costi.
+\par In figura \ref{figura:base_model_low_level} è possibile osservare lo schema a basso livello del modello base. 
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.70]{images/base_model_low_level.jpg}
+	\caption{Base Model, Low-level view}\label{figura:base_model_low_level}
+\end{figure}
 
 
 \subsection{Modello delle Specifiche}
@@ -433,7 +443,13 @@ Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configura
 \section{Modello Avanzato} % Numbered section
 
 Si procede alla realizzazione di un modello avanzato che sia in grado di adattarsi ai nuovi obiettivi, descritti in seguito, a costo zero. Per tale scopo, è stata introdotta nella sala giochi, la possibilità, da parte di un utente, di acquistare un biglietto \textit{premium} che gli permette di passare avanti agli utenti che sono in possesso di un biglietto standard.
-\todo[inline, color=green]{Inserire figura 2 (alto livello)}
+\par In figura \ref{figura:adv_model_high_level} è possibile osservare lo schema ad alto livello del modello base.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.65]{images/adv_model_high_level.jpg}
+	\caption{Advanced Model, High-level view}\label{figura:adv_model_high_level}
+\end{figure}
 
 \subsection{Obiettivi}
 \label{Advanced_Goal}
@@ -454,7 +470,6 @@ Il costo del biglietto standard è di 10 \euro, mentre il costo del biglietto pr
 \par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di attesa nella coda Covid-19, inferiore a quello del modello base, per gli utenti che possiedono il green-pass.
 
 \subsection{Modello Concettuale}
-\todo[inline, color=green]{Inserire figura 2 (basso livello)}
 Nel modello avanzato la sala giochi è modellata attraverso una rete aperta composta da N nodi rappresentanti i videogiochi (Arcade) e da un nodo rappresentante il controllo Covid-19. Ogni nodo Arcade si compone di un servente e di due code infinite con priorità astratta senza prelazione. L'accesso alla coda con priorità più alta è riservato agli utenti che acquistano il biglietto premium.
 Il nodo Covid-19 si compone di un servente e di due code infinite con priorità size-based senza prelazione. L'accesso alla prima coda è riservato agli utenti che possiedono il green-pass, dato che questi ultimi hanno un tempo di servizio inferiori rispetto a chi esegue il test antigenico rapido.
 \par Non sono state scelte code di priorità con prelazione poiché, nonostante esse avrebbero avuto prestazioni migliori per gli obiettivi prefissati, non rispecchiano uno scenario reale.
@@ -465,8 +480,6 @@ La struttura è aperta H24 e la giornata è suddivisa in 4 fasce orarie caratter
 \item 12:00-17:00
 \item 17:00-22:00
 \item 22:00-08:00
-
-
 
 \end{itemize}
 Le variabili di stato del sistema considerate sono:
@@ -495,6 +508,14 @@ clienti in servizio, questo continuerà a processarli, pur non ricevendo altri
 arrivi, mentre i clienti in coda vengono distribuiti uniformemente tra i nodi Arcade rimasti operativi. Il tempo in cui un nodo Arcade è idle, ma acceso, viene considerato nel calcolo dei
 costi.
 
+\par In figura \ref{figura:adv_model_low_level} è possibile osservare lo schema a basso livello del modello base. 
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.70]{images/adv_model_low_level.jpg}
+	\caption{Base Model, Low-level view}\label{figura:adv_model_low_level}
+\end{figure}
 
 \subsection{Modello delle Specifiche}
 \todo[inline, color=red]{Controllare tutti i parametri definiti}
