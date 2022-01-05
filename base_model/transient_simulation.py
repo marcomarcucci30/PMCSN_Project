@@ -13,10 +13,10 @@ from utils.rvms import idfStudent
 stationary = True
 nodes = 2  # n nodi
 arrival_time = 35.0
-arrival_time_morning = 14.0  # 2 arcades for stationary
-arrival_time_afternoon = 5.0  # 4 arcades for stationary
-arrival_time_evening = 14.0  # 2 arcades for stationary
-arrival_time_night = 35.0  # 1 arcades for stationary
+arrival_time_morning = 14.0  # nodes = 3 min
+arrival_time_afternoon = 5.0  # nodes = 4 min
+arrival_time_evening = 14.0
+arrival_time_night = 35.0  # nodes = 2 min
 
 
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
@@ -28,7 +28,7 @@ sampling_frequency = 75
 b = 128
 k = 160
 # seed = 123456789
-START = 8.0 * 1440  # TODO: abbiamo messo 8 giorni, non le 8 del mattino
+START = 8.0 * 60 # TODO: abbiamo messo 8 giorni, non le 8 del mattino
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8

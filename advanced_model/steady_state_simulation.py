@@ -12,16 +12,16 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
 from advanced_model.skeleton import select_queue_premium
 
 nodes = 4  # n nodi
-arrival_time = 45.0
-arrival_time_morning = 15.0
-arrival_time_afternoon = 15.0
-arrival_time_evening = 15.0
-arrival_time_night = 15.0
+arrival_time = 35.0
+arrival_time_morning = 14.0  # nodes = 3 min
+arrival_time_afternoon = 5.0  # nodes = 4 min
+arrival_time_evening = 14.0
+arrival_time_night = 35.0  # nodes = 2 min
 
-b = 512
+b = 256
 k = 64
 seed = 1234567891
-START = 8.0 * 1440
+START = 8.0 * 60
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
@@ -31,18 +31,18 @@ p_premium = 0.36
 p_positive = 0.05
 ticket_price = 10.0
 ticket_price_premium = 20.0
-energy_cost = 300 * b / 1024
+energy_cost = 0.4
 nodes_min = 2
-nodes_max = 2
-delay_max = 5.0
-delay_min = 0.0
+nodes_max = 20
+delay_max = 20.0
+delay_min = 8.0
 income_list = []
 
 
 def ticket_refund(avg_delay_arcades):
-    perc = (avg_delay_arcades - delay_min) / (delay_max - delay_min)
-    if perc > 1.0:
-        return 1.0
+    perc = (avg_delay_arcades - delay_min) / (delay_max - delay_min)  # TODO: non rimborsare il biglietto al 100% ?
+    if perc > 0.8:
+        return 0.8
     else:
         return perc
 
@@ -398,6 +398,7 @@ if __name__ == '__main__':
             node.arrival = arrival
             min_arrival = arrival
             old_index = 0
+            old_batch_current = START
 
             while node_list[0].index_support <= b * (k - 1):
                 # print(node_list[0].index)
@@ -429,9 +430,9 @@ if __name__ == '__main__':
                             index_less_p_arcades += center.less_p_stat.index
 
                     income = index_less_p_arcades * ticket_price + index_more_p_arcades * ticket_price_premium - \
-                             (nodes - 1) * energy_cost - (index_less_p_arcades * ticket_refund(avg_delay_arcades)* ticket_price +
-                                                          index_more_p_arcades * ticket_refund(
-                                avg_delay_arcades_priority) * ticket_price_premium)
+                             (nodes - 1) * (((time.current-old_batch_current) / 10) * energy_cost) - \
+                             (index_less_p_arcades * ticket_refund(avg_delay_arcades) * ticket_price +
+                              index_more_p_arcades * ticket_refund(avg_delay_arcades_priority) * ticket_price_premium)
 
                     #  batch
                     #  azzeriamo le statistiche (index e track)?
@@ -464,6 +465,7 @@ if __name__ == '__main__':
                     batch_means_info["avg_wait_system"].append(avg_wait_system)
                     batch_means_info["income"].append(income)
                     batch_index += 1
+                    old_batch_current = time.current
 
                 node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
                 time.next = minimum(node_to_process.arrival, node_to_process.completion)

@@ -9,7 +9,7 @@ arrival_time_evening = 14.0
 arrival_time_night = 14.0
 
 seed = 1234567891
-START = 8.0 * 1440
+START = 8.0 * 60
 STOP = 15 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8

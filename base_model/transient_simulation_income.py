@@ -14,10 +14,10 @@ from utils.rvms import idfStudent
 stationary = True
 nodes = 2  # n nodi
 arrival_time = 35.0
-arrival_time_morning = 14.0  # 2 arcades for stationary
-arrival_time_afternoon = 5.0  # 4 arcades for stationary
-arrival_time_evening = 14.0  # 2 arcades for stationary
-arrival_time_night = 35.0  # 1 arcades for stationary
+arrival_time_morning = 14.0  # nodes = 3 min
+arrival_time_afternoon = 5.0  # nodes = 4 min
+arrival_time_evening = 14.0
+arrival_time_night = 35.0  # nodes = 2 min
 
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
@@ -64,7 +64,7 @@ else:
     n2 = 20
     n4 = 20
 
-energy_cost = 0.4 #30000*110/1024/28/24/6
+energy_cost = 0.4
 ec_mor = (n1-1) * energy_cost  # TODO: farlo giornaliero invece che mensile
 ec_aft = (n2-1) * energy_cost
 ec_night = (n4-1) * energy_cost

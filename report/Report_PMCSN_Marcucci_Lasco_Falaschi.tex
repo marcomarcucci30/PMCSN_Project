@@ -257,7 +257,7 @@ Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel s
 %----Introduzione
 Al fine di raggiungere gli obiettivi prefissati, è utile dedurre il minimo numero di nodi che permette al sistema di raggiungere la stazionarietà e, in seguito, ricavare la configurazione ottimale del sistema.
 
-Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente.
+Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente. 
 \subsubsection{Analisi del comportamento transiente}
 %----Minimo n per stazionarietà
 Attraverso l'analisi del comportamento transiente viene studiato il tempo medio di risposta del sistema, per ogni fascia oraria, utilizzando il metodo delle repliche.
@@ -317,9 +317,10 @@ In questo caso, il tempo di risposta medio del sistema si stabilizza anche con l
 
 \subsubsection{Analisi del comportamento stazionario}
 %----Massimizzazione del guadagno
+Considerati i risultati dell'analisi transiente, è possibile procedere allo studio del comportamento stazionario.
 Attraverso l'analisi del comportamento stazionario si vuole trovare la configurazione ottima di nodi arcade, per ogni fascia oraria, che permetta di raggiungere gli obiettivi prefissati in \ref{Goal}, partendo dai risultati ottenuti dallo studio precedente.
 In questa fase sono state effettuate simulazioni con tempi
-d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. Nonostante ciò, è stato scelto un valore di \textit{b} pari a 512 al fine di ridurre maggiormente la dipendenza tra i batch.
+d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. 
 \todo[inline, color=red]{Controllare ultima frase}
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
 
@@ -343,7 +344,7 @@ Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osserva
 	\includegraphics[scale=0.48]{images/avg_wait_sys_aft.png}
 	\caption{Income, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_wait_sys_aft}
 \end{figure}
-Il numero ottimale di server Arcade, per la seconda fascia oraria, è pari a 10.
+Il numero ottimale di server Arcade, per la seconda fascia oraria, è pari a 12.
 \\ \\
 Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_wait_sys_night}.
 \begin{figure}[H]
@@ -352,7 +353,7 @@ Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservar
 	\includegraphics[scale=0.48]{images/avg_wait_sys_night.png}
 	\caption{Income, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_wait_sys_night}
 \end{figure}
-In questo caso, il numero ottimale di server Arcade da utilizzare è pari a 3.
+In questo caso, il numero ottimale di server Arcade da utilizzare è pari a 2.
 \\ \\
 In tabella \ref{tab3} è possibile individuare la configurazione ottimale dei nodi Arcade, per ogni fascia oraria.
 
@@ -363,9 +364,9 @@ In tabella \ref{tab3} è possibile individuare la configurazione ottimale dei no
 \hline
 \textbf{Fascia oraria} & \textbf{Configurazione ottimale $^{\mathrm{*}}$} \\ \hline
 \textbf{08:00-12:00}  & 5 \\ \hline
-\textbf{12:00-17:00}  & 10 \\ \hline
+\textbf{12:00-17:00}  & 12 \\ \hline
 \textbf{17:00-22:00}  & 5 \\ \hline
-\textbf{22:00-08:00} & 3 \\ \hline
+\textbf{22:00-08:00} & 2 \\ \hline
 \multicolumn{2}{l}{$^{\mathrm{*}}$ \textit{Numero di nodi Arcade nel sistema.}}
 \end{tabular}
 \label{tab3}
@@ -377,21 +378,21 @@ Sono stati effettuati run con seed diversi con la configurazione ottimale, prece
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/avg_ws_steady_state_mor.png}
-	\caption{Average Wait System,, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_mor}
+	\caption{Average Wait System, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_mor}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/avg_ws_steady_state_aft.png}
-	\caption{Average Wait System,, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_eve}
+	\caption{Average Wait System, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_eve}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/avg_ws_steady_state_night.png}
-	\caption{Average Wait System,, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_night}
+	\caption{Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_ws_steady_state_night}
 \end{figure}
 
 \subsubsection{Analisi guadagno giornaliero}
@@ -406,19 +407,19 @@ Attraverso questa analisi viene effettuata una simulazione concreta di una tipic
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_min.png}
-	\caption{Average Wait System \& Income Daily, minimal configuration}\label{figura:ts_min}
+	\caption{Average Wait System \& Income Daily, minimal configuration, sampling frequency=10 min}\label{figura:ts_min}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_optimal.png}
-	\caption{Average Wait System \& Income Daily, optimal configuration}\label{figura:ts_optimal}
+	\caption{Average Wait System \& Income Daily, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_max.png}
-	\caption{Average Wait System \& Income Daily, maximum configuration}\label{figura:ts_max}
+	\caption{Average Wait System \& Income Daily, maximum configuration, sampling frequency=10 min}\label{figura:ts_max}
 \end{figure}
 Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configurazione ottimale porta ad un guadagno giornaliero migliore. Inoltre, si può osservare come il tempo di risposta medio del sistema della configurazione massimale è comparabile con quello della configurazione ottimale, nonostante quest'ultimo abbia un numero minore di nodi Arcade.
 
@@ -613,9 +614,7 @@ Inoltre si può constatare che tutte le statistiche risultano inferiori nel caso
 
 \subsection{Esperimenti di Simulazione}
 %----Introduzione
-Al fine di raggiungere gli obiettivi prefissati, è utile dedurre il minimo numero di nodi che permette al sistema di raggiungere la stazionarietà e, in seguito, ricavare la configurazione ottimale del sistema.
-
-Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente.
+Al fine di raggiungere gli obiettivi prefissati, è utile effettuare degli esperimenti di simulazione, utilizzando la configurazione ottimale dello studio precedente.
 
 \subsubsection{Analisi del comportamento transiente}
 %----Minimo n per stazionarietà
@@ -623,12 +622,52 @@ Attraverso l'analisi del comportamento transiente viene studiato il tempo medio 
 In particolare, vengono effettuate run di simulazione
 consecutive, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
 La tecnica delle repliche permette di calcolare stime puntuali e intervallari ad ogni acquisizione, ognuna di queste corrispondente ad un certo numero di richieste processate.
-
-Una prima analisi ha portato ad osservare che il sistema non può raggiungere la stazionarietà per via dei limiti introdotti dalla coda del controllo Covid-19, essendo unica per modellazione. Infatti, per un $\lambda_{arrival} \gtrsim \frac{1}{4.1}$, l'utilizzazione di tale centro è approssimativamente pari ad 1, mentre quella dei centri Arcade risulta essere inferiore. Questo studio permette di concludere che il collo di bottiglia è rappresentato dalla coda del controllo Covid-19, per questo motivo, segue solamente lo studio dei nodi Arcade, considerando un $\lambda_{arrival} < \frac{1}{4.1}$.
 \\ \\
-Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_mor_ns} e figura \ref{figura:avg_ws_mor_s}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
+Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:adv_avg_ws_mor_s}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/adv_avg_ws_mor_s.png}
+\caption{Average Wait System, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, Arcades: 5, repliche=64, Sampling\_freq=75}\label{figura:adv_avg_ws_mor_s}
+\end{figure}
 
 
+Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:adv_avg_ws_aft_ns}.
+
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/adv_avg_ws_aft_s.png}
+\caption{Average Wait System, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, Arcades: 12, repliche=64, Sampling\_freq=75}\label{figura:adv_avg_ws_aft_s}
+\end{figure}
+
+
+Per quanto riguarda la quarta fascia oraria (22:00-08:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:adv_avg_ws_night_s}.
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=2cm}
+\includegraphics[scale=0.48]{images/adv_avg_ws_night_s.png}
+\caption{Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, Arcades: 2, repliche=64, Sampling\_freq=75}\label{figura:adv_avg_ws_night_s}
+\end{figure}
+
+Come si evince dai risultati dell'analisi, il modello avanzato, come previsto, raggiunge la stazionarietà utilizzando la configurazione ottimale ottenuta nel modello base.
+
+
+
+\subsubsection{Analisi del comportamento stazionario}
+Considerati i risultati dell'analisi transiente, è possibile procedere allo studio del comportamento stazionario.
+Attraverso l'analisi del comportamento stazionario si vuole confrontare, con la configurazione ottima di nodi arcade, per ogni fascia oraria, i tempi di attesa nella coda Covid-19 sperimentati dagli utenti con green-pass, per quanto riguarda il modello base e quello avanzato, verificando che l'obiettivo 2 in \ref{Advanced_Goal} venga raggiunto.
+
+In questa fase sono state effettuate simulazioni con tempi
+d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256.
+Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
+
+In seguito per ogni fascia oraria viene riportato il grafico relativo al tempo medio di attesa nella coda Covid-19, mediata su i seed, per il modello base e il modello avanzato.
 %----------------------------------------------------------------------------------------
 
 \end{document}

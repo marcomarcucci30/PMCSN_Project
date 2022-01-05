@@ -14,16 +14,16 @@ from utils.rvgs import Exponential, TruncatedNormal
 from utils.rvms import idfStudent
 
 nodes = 6  # n nodi
-arrival_time = 35.0
-arrival_time_morning = 14.0
-arrival_time_afternoon = 5.0
+arrival_time = 14.0
+arrival_time_morning = 14.0  # nodes = 3 min
+arrival_time_afternoon = 5.0  # nodes = 4 min
 arrival_time_evening = 14.0
-arrival_time_night = 35.0
+arrival_time_night = 35.0  # nodes = 2 min
 
 b = 256
 k = 64
 # seed = 123456789
-START = 8.0 * 1440
+START = 8.0 * 60
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
@@ -33,8 +33,8 @@ TICKET_QUEUE = 1
 # ARCADE3 = 4
 p_size = 0.6
 ticket_price = 10.0
-energy_cost = 0.01  # euro/b*
-nodes_min = 2
+energy_cost = 0.4
+nodes_min = 3
 nodes_max = 20
 delay_max = 20.0
 delay_min = 8.0
@@ -44,12 +44,6 @@ p_positive = 0.05
 
 
 def ticket_refund(avg_delay_arcades):
-    '''if avg_delay_arcades < 10.0:
-        return 0.0
-    elif 20.0 > avg_delay_arcades >= 10.0:
-        return 0.25
-    else:
-        return 0.50'''
     perc = (avg_delay_arcades-delay_min)/(delay_max-delay_min)  # TODO: non rimborsare il biglietto al 100% ?
     if perc > 0.8:
         return 0.8
@@ -143,7 +137,7 @@ def plot_income():
     axs[1].set_xlabel(xlabel="Number of Arcades", fontsize=15)
     y2 = [income_list[i][2] for i in range(0, len(income_list))]
     axs[1].plot(x, y2, 'o', mfc='none', color='red')
-    plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
+    plt.savefig(fname=results_dir + "/avg_wait_sys_mor", bbox_inches='tight')
     plt.show()
 
 
@@ -404,6 +398,7 @@ if __name__ == '__main__':
             node.arrival = arrival
             min_arrival = arrival
             old_index = 0
+            old_batch_current = START
 
             while node_list[0].index_support <= b * (k - 1):  # (node_list[0].number > 0)
                 # print(node_list[0].index_support, b * (k - 1))
@@ -423,7 +418,7 @@ if __name__ == '__main__':
                         "delay_arcades"]  # che rappresenta la media sul
                     avg_wait_system = job_list[index_arcades_total + index_arcades - 1]["wait_system"]
 
-                    income = index_arcades * ticket_price - (nodes - 1) * ((time.current / 10) * energy_cost) - index_arcades * ticket_refund(
+                    income = index_arcades * ticket_price - (nodes - 1) * (((time.current-old_batch_current) / 10) * energy_cost) - index_arcades * ticket_refund(
                         avg_delay_arcades) * ticket_price
 
                     #  batch
@@ -441,6 +436,7 @@ if __name__ == '__main__':
                     batch_means_info["avg_wait_system"].append(avg_wait_system)
                     batch_means_info["income"].append(income)
                     batch_index += 1
+                    old_batch_current = time.current
 
                 node_to_process = node_list[next_event()]  # node with minimum arrival or completion time
                 time.next = minimum(node_to_process.arrival, node_to_process.completion)

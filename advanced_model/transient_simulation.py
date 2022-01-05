@@ -12,18 +12,18 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
     select_node_arcades, select_node_stream
 from advanced_model.skeleton import select_queue_premium
 stationary = True
-nodes = 6 # n nodi
-arrival_time = 14.0
-arrival_time_morning = 14.0
-arrival_time_afternoon = 14.0
+nodes = 3 # n nodi
+arrival_time = 35.0
+arrival_time_morning = 14.0  # nodes = 3 min
+arrival_time_afternoon = 5.0  # nodes = 4 min
 arrival_time_evening = 14.0
-arrival_time_night = 14.0
+arrival_time_night = 35.0  # nodes = 2 min
 
 b = 128
 k = 160
 
 # seed = 1234567891
-START = 8.0 * 1440
+START = 8.0 * 60
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
@@ -288,7 +288,7 @@ def plot_stats_global():
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
     if stationary:
-        plt.savefig(fname=results_dir + "/adv_avg_ws_mor_s", bbox_inches='tight')
+        plt.savefig(fname=results_dir + "/adv_avg_ws_night_s", bbox_inches='tight')
     else:
         plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')
     plt.show()
@@ -381,7 +381,6 @@ if __name__ == '__main__':
             arrival = START  # global temp var for getArrival function     [minutes]
 
             # initialization of the first arrival event
-            set_arrival_time(arrival_time_night)
             arrival += get_arrival(arrival_time)
             node = node_list[select_node(False)]  # node in cui schedulare l'arrivo
             select_queue(node.id)  # discriminazione della coda relativa all'arrivo
