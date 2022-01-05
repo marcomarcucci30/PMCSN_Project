@@ -402,30 +402,31 @@ Sono stati effettuati run con seed diversi con la configurazione ottimale, prece
 \end{figure}
 
 \subsubsection{Analisi guadagno giornaliero}
+\todo[inline, color=red]{Intervalli di confidenza??}
 Attraverso questa analisi viene effettuata una simulazione concreta di una tipica giornata lavorativa, con tre configurazioni differenti:
 \begin{itemize}
-	\item Configurazione minima;
-	\item Configurazione ottimale;
-	\item Configurazione massima.
+	\item Configurazione minima (2 Arcade 08:00-12:00 \& 17:00-22:00, 3 Arcade 12:00-17:00, 1 Arcade 22:00-08:00);
+	\item Configurazione ottimale(5 Arcade 08:00-12:00 \& 17:00-22:00, 12 Arcade 12:00-17:00, 2 Arcade 22:00-08:00);
+	\item Configurazione massima(20 Arcade 08:00-12:00 \& 17:00-22:00, 20 Arcade 12:00-17:00, 20 Arcade 22:00-08:00).
 \end{itemize} 
 È possibile osservare il risultato di tale analisi in figura \ref{figura:ts_min}, \ref{figura:ts_optimal} e \ref{figura:ts_max}.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_min.png}
-	\caption{Average Wait System \& Income Daily, minimal configuration, sampling frequency=10 min}\label{figura:ts_min}
+	\caption{Average Wait System \& Income Daily, Base Model, minimal configuration, sampling frequency=10 min}\label{figura:ts_min}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_optimal.png}
-	\caption{Average Wait System \& Income Daily, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal}
+	\caption{Average Wait System \& Income Daily, Base Model, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_max.png}
-	\caption{Average Wait System \& Income Daily, maximum configuration, sampling frequency=10 min}\label{figura:ts_max}
+	\caption{Average Wait System \& Income Daily, Base Model, maximum configuration, sampling frequency=10 min}\label{figura:ts_max}
 \end{figure}
 Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configurazione ottimale porta ad un guadagno giornaliero migliore. Inoltre, si può osservare come il tempo di risposta medio del sistema della configurazione massimale è comparabile con quello della configurazione ottimale, nonostante quest'ultimo abbia un numero minore di nodi Arcade.
 
@@ -746,6 +747,25 @@ Inoltre, per ogni fascia oraria viene riportato il grafico relativo al tempo med
 \subsubsection{Analisi guadagno giornaliero}
 Attraverso questa analisi viene effettuata una simulazione concreta di una tipica giornata lavorativa, ricavata nelle studio precedente, utilizzando il modello avanzato.
 
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/ts_optimal_confronto.png}
+	\caption{Average Wait System \& Income Daily, Base Model, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal_1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_ts_optimal.png}
+	\caption{Average Wait System \& Income Daily, Advanced Model, optimal configuration, sampling frequency=10 min}\label{figura:adv_ts_optimal}
+\end{figure}
+
+Nelle figure \ref{figura:ts_optimal_1} e \ref{figura:adv_ts_optimal} si può notare il confronto tra il modello base e quello avanzato in corrispondenza della configurazione ottimale. In particolare si osserva un aumento del guadagno, nel caso avanzato, semplicemente introducendo code di priorità, senza incrementare il numero di nodi o i tempi di servizio. Inoltre, si ottiene, mediamente, un tempo di risposta medio del sistema pari o minore a quello del modello base, per via dell'introduzione della priorità basata sulla size per quanto riguarda il nodo Covid-19, nonostante quest'ultima impatti poco sul sistema stesso. Questa analisi conduce al raggiungimento del primo obiettivo.
+
+\section{Conclusioni}
+
+L'obiettivo cardine dello studio è quello di massimizzare i profitti di una sala giochi, lavorando sulla struttura della rete, in modo da evitare ulteriori spese dovute all'introduzione di centri aggiuntivi. Inoltre, è stata adottata una politica più fair nei confronti dei clienti provvisti di green-pass, infatti questi sperimentano un tempo di attesa in coda proporzionale al tempo di servizio, corrispondente al raggiungimento del secondo obiettivo del caso avanzato. 
+ 
 %----------------------------------------------------------------------------------------
 
 \end{document}

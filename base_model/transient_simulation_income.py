@@ -52,8 +52,8 @@ delay_min = 8.0
 best_conf = 2
 if best_conf == 0:
     n1 = n3 = 6
-    n2 = 11
-    n4 = 4
+    n2 = 13
+    n4 = 3
 
 elif best_conf == 1:
     n1 = n3 = 3
@@ -295,7 +295,7 @@ def plot_stats_global():
     # plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
     axs[1].legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
                 "seed = " + str(dict_list[2]["seed"])])
-
+    plt.savefig(fname=results_dir + "/ts_max", bbox_inches='tight')
     plt.show()
 
 '''def plot_stats_global():

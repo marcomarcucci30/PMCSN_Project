@@ -51,7 +51,7 @@ ticket_price_premium = 20.0
 delay_max = 20.0
 delay_min = 8.0
 
-best_conf = 1
+best_conf = 2
 if best_conf == 0:
     n1 = n3 = 6
     n2 = 13
@@ -334,23 +334,23 @@ def plot_stats_global():
     # plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
     #plt.show()
     #fig2 = plt.figure(figsize=(16, 9), dpi=400)
-    '''axs[1].set_ylim([0, 1600])
-    axs[0].set_ylim([0, 60])'''
+    axs[1].set_ylim([0, 2500])
+    axs[0].set_ylim([0, 55])
     axs[0].set_ylabel(ylabel="Average wait system (minutes)", fontsize=15)
     axs[1].set_xlabel(xlabel="Minutes", fontsize=15)
-    '''axs[0].vlines(480, 0, 60, color='lawngreen', label="")
-    axs[1].vlines(480, 0, 1600, color='lawngreen', label="")
-    axs[0].vlines(720, 0, 60, color='blue', label="")
-    axs[1].vlines(720, 0, 1600, color='blue', label="")
-    axs[0].vlines(1020, 0, 60, color='red', label="")
-    axs[1].vlines(1020, 0, 1600, color='red', label="")
-    axs[0].vlines(1320, 0, 60, color='orange', label="")
-    axs[1].vlines(1320, 0, 1600, color='orange', label="")'''
+    axs[0].vlines(480, 0, 55, color='lawngreen', label="")
+    axs[1].vlines(480, 0, 2500, color='lawngreen', label="")
+    axs[0].vlines(720, 0, 55, color='blue', label="")
+    axs[1].vlines(720, 0, 2500, color='blue', label="")
+    axs[0].vlines(1020, 0, 55, color='red', label="")
+    axs[1].vlines(1020, 0, 2500, color='red', label="")
+    axs[0].vlines(1320, 0, 55, color='orange', label="")
+    axs[1].vlines(1320, 0, 2500, color='orange', label="")
     axs[0].legend(["08:00", "12:00", "17:00", "22:00"])
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
         # print(dict_list[i])
-        axs[0].plot(x, [dict_list[i]["avg_delay_arcades"][j] for j in range(0, len(dict_list[i]["avg_delay_arcades"]))],
+        axs[0].plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
                  'o', color=colors[i], label=dict_list[i]["seed"], mfc='none')
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
@@ -360,6 +360,7 @@ def plot_stats_global():
     # plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
     axs[1].legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
                 "seed = " + str(dict_list[2]["seed"])])
+    #plt.savefig(fname=results_dir + "/adv_ts_max", bbox_inches='tight')
 
     plt.show()
 
@@ -651,7 +652,6 @@ if __name__ == '__main__':
             old_index = 0
             count_index = 0
             count_arrival = 0
-            print("\n")
 
             while min_arrival < STOP:  # (node_list[0].number > 0)
 
@@ -861,9 +861,6 @@ if __name__ == '__main__':
                     redirect_jobs(prev_nodes)
 
                 if time.current == node_to_process.arrival:
-                    count_arrival +=1
-                    print("arrivi: ", count_arrival, "curr: ", time.current)
-
                     if node_to_process.priority_arrival is True:  # vediamo su quale coda è stato schedulato l'arrivo che stiamo processando
                         node_to_process.more_p_stat.number += 1
                     else:
@@ -922,11 +919,6 @@ if __name__ == '__main__':
                         node_to_process.completion = time.current + get_service(node_to_process.id)
 
                 else:
-                    if node_to_process.id != 1:
-                        count_index += 1
-                        print("compl: ", count_index, "curr: ", time.current)
-                        if replica == 3:
-                            print("ciao")
                     if node_to_process.priority_completion is True:
                         node_to_process.more_p_stat.index += 1  # node stats update
                         node_to_process.more_p_stat.number -= 1
