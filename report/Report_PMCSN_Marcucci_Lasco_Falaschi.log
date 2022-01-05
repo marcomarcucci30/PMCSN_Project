@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.21)  5 JAN 2022 11:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.9.21)  5 JAN 2022 19:41
 entering extended mode
 **./Report_PMCSN_Marcucci_Lasco_Falaschi.tex
 (Report_PMCSN_Marcucci_Lasco_Falaschi.tex
@@ -1424,406 +1424,524 @@ File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 63.
+<images/schema.jpg, id=118, 404.712pt x 225.0006pt>
+File: images/schema.jpg Graphic file (type jpg)
+<use images/schema.jpg>
+Package pdftex.def Info: images/schema.jpg  used on input line 77.
+(pdftex.def)             Requested size: 404.71101pt x 225.00003pt.
+ [1
+
+{C:/Users/marco/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 74.
+ine 80.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 77.
+(Font)              scaled to size 12.0pt on input line 83.
 
 
-LaTeX Warning: Command \texteuro invalid in math mode on input line 87.
+LaTeX Warning: Command \texteuro invalid in math mode on input line 93.
 
 
-LaTeX Warning: Command \texteuro invalid in math mode on input line 87.
+LaTeX Warning: Command \texteuro invalid in math mode on input line 93.
 
 Missing character: There is no ¿ in font cmr10!
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 87.
+(Font)              scaled to size 10.0pt on input line 93.
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--89
-
- []
-
-[1
-
-{C:/Users/marco/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 116--121
+Underfull \hbox (badness 10000) in paragraph at lines 92--95
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+[2 <./images/schema.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 122--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--157
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
 
  []
 
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 164.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 164.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 166.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 166.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 167.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 167.
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--163
+
+ []
+
 [3]
-Overfull \hbox (40.32536pt too wide) in paragraph at lines 239--248
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 170.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 170.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 172.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/sc' will be
+(Font)              scaled to size 10.0pt on input line 172.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 173.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 173.
+ [4]
+Overfull \hbox (40.32536pt too wide) in paragraph at lines 245--254
  [] 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 252--255
+
+Underfull \hbox (badness 10000) in paragraph at lines 258--261
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 268--271
+Underfull \hbox (badness 10000) in paragraph at lines 274--277
 
- []
-
-<images/transient_mor_ns.png, id=162, 979.2585pt x 560.27318pt>
-File: images/transient_mor_ns.png Graphic file (type png)
-<use images/transient_mor_ns.png>
-Package pdftex.def Info: images/transient_mor_ns.png  used on input line 275.
-(pdftex.def)             Requested size: 470.03874pt x 268.92807pt.
-
-Overfull \hbox (14.79463pt too wide) in paragraph at lines 275--276
- [][] 
- []
-
-<images/transient_mor_s.png, id=164, 974.38028pt x 560.27318pt>
-File: images/transient_mor_s.png Graphic file (type png)
-<use images/transient_mor_s.png>
-Package pdftex.def Info: images/transient_mor_s.png  used on input line 281.
-(pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
-
-Overfull \hbox (12.45311pt too wide) in paragraph at lines 281--282
- [][] 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 285--288
+<images/transient_mor_ns.png, id=174, 979.2585pt x 560.27318pt>
+File: images/transient_mor_ns.png Graphic file (type png)
+<use images/transient_mor_ns.png>
+Package pdftex.def Info: images/transient_mor_ns.png  used on input line 281.
+(pdftex.def)             Requested size: 470.03874pt x 268.92807pt.
+
+Overfull \hbox (14.79463pt too wide) in paragraph at lines 281--282
+ [][] 
+ []
+
+<images/transient_mor_s.png, id=176, 974.38028pt x 560.27318pt>
+File: images/transient_mor_s.png Graphic file (type png)
+<use images/transient_mor_s.png>
+Package pdftex.def Info: images/transient_mor_s.png  used on input line 287.
+(pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
+
+Overfull \hbox (12.45311pt too wide) in paragraph at lines 287--288
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 291--294
 
  []
 
 [6 <./images/transient_mor_ns.png> <./images/transient_mor_s.png>]
-<images/transient_aft_ns.png, id=182, 988.83427pt x 560.27318pt>
+<images/transient_aft_ns.png, id=188, 988.83427pt x 560.27318pt>
 File: images/transient_aft_ns.png Graphic file (type png)
 <use images/transient_aft_ns.png>
-Package pdftex.def Info: images/transient_aft_ns.png  used on input line 295.
+Package pdftex.def Info: images/transient_aft_ns.png  used on input line 301.
 (pdftex.def)             Requested size: 474.63506pt x 268.92807pt.
 
-Overfull \hbox (19.39095pt too wide) in paragraph at lines 295--296
+Overfull \hbox (19.39095pt too wide) in paragraph at lines 301--302
  [][] 
  []
 
-<images/transient_aft_s.png, id=183, 969.68272pt x 560.27318pt>
+<images/transient_aft_s.png, id=189, 969.68272pt x 560.27318pt>
 File: images/transient_aft_s.png Graphic file (type png)
 <use images/transient_aft_s.png>
-Package pdftex.def Info: images/transient_aft_s.png  used on input line 301.
+Package pdftex.def Info: images/transient_aft_s.png  used on input line 307.
 (pdftex.def)             Requested size: 465.44243pt x 268.92807pt.
 
-Overfull \hbox (10.19832pt too wide) in paragraph at lines 301--302
+Overfull \hbox (10.19832pt too wide) in paragraph at lines 307--308
  [][] 
  []
 
-[7 <./images/transient_aft_ns.png> <./images/transient_aft_s.png>]
-<images/transient_night_s.png, id=194, 974.38028pt x 560.27318pt>
+[7 <./images/transient_aft_ns.png>]
+<images/transient_night_s.png, id=199, 974.38028pt x 560.27318pt>
 File: images/transient_night_s.png Graphic file (type png)
 <use images/transient_night_s.png>
-Package pdftex.def Info: images/transient_night_s.png  used on input line 312.
+Package pdftex.def Info: images/transient_night_s.png  used on input line 318.
 (pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
 
-Overfull \hbox (12.45311pt too wide) in paragraph at lines 312--313
+Overfull \hbox (12.45311pt too wide) in paragraph at lines 318--319
  [][] 
  []
 
-
-Overfull \hbox (7.57637pt too wide) in paragraph at lines 320--324
+[8 <./images/transient_aft_s.png> <./images/transient_night_s.png>]
+Overfull \hbox (7.57637pt too wide) in paragraph at lines 326--330
 \T1/XCharter-TLF/m/n/10 Considerati i risul-tati dell'analisi tran-siente, è po
 s-si-bile pro-cedere allo stu-dio del com-por-ta-mento stazionario.
  []
 
-<images/avg_wait_sys_mor.png, id=197, 961.73303pt x 550.6974pt>
+<images/avg_wait_sys_mor.png, id=209, 961.73303pt x 550.6974pt>
 File: images/avg_wait_sys_mor.png Graphic file (type png)
 <use images/avg_wait_sys_mor.png>
-Package pdftex.def Info: images/avg_wait_sys_mor.png  used on input line 333.
+Package pdftex.def Info: images/avg_wait_sys_mor.png  used on input line 339.
 (pdftex.def)             Requested size: 461.62662pt x 264.33174pt.
 
-Overfull \hbox (6.3825pt too wide) in paragraph at lines 333--334
+Overfull \hbox (6.3825pt too wide) in paragraph at lines 339--340
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 327--335
+Underfull \hbox (badness 10000) in paragraph at lines 333--341
 
  []
 
-[8 <./images/transient_night_s.png>]
-<images/avg_wait_sys_aft.png, id=207, 961.73303pt x 550.6974pt>
+<images/avg_wait_sys_aft.png, id=211, 961.73303pt x 550.6974pt>
 File: images/avg_wait_sys_aft.png Graphic file (type png)
 <use images/avg_wait_sys_aft.png>
-Package pdftex.def Info: images/avg_wait_sys_aft.png  used on input line 344.
+Package pdftex.def Info: images/avg_wait_sys_aft.png  used on input line 350.
 (pdftex.def)             Requested size: 461.62662pt x 264.33174pt.
 
-Overfull \hbox (6.3825pt too wide) in paragraph at lines 344--345
+Overfull \hbox (6.3825pt too wide) in paragraph at lines 350--351
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--346
+Underfull \hbox (badness 10000) in paragraph at lines 344--352
 
  []
 
-<images/avg_wait_sys_night.png, id=209, 970.04407pt x 550.6974pt>
+[9 <./images/avg_wait_sys_mor.png>]
+<images/avg_wait_sys_night.png, id=221, 961.73303pt x 550.6974pt>
 File: images/avg_wait_sys_night.png Graphic file (type png)
 <use images/avg_wait_sys_night.png>
-Package pdftex.def Info: images/avg_wait_sys_night.png  used on input line 353.
+Package pdftex.def Info: images/avg_wait_sys_night.png  used on input line 359.
 
-(pdftex.def)             Requested size: 465.61586pt x 264.33174pt.
+(pdftex.def)             Requested size: 461.62662pt x 264.33174pt.
 
-Overfull \hbox (10.37175pt too wide) in paragraph at lines 353--354
+Overfull \hbox (6.3825pt too wide) in paragraph at lines 359--360
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--355
+Underfull \hbox (badness 10000) in paragraph at lines 353--361
 
  []
 
-[9 <./images/avg_wait_sys_mor.png> <./images/avg_wait_sys_aft.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 356--359
+[10 <./images/avg_wait_sys_aft.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 362--365
 
  []
 
-<images/avg_ws_steady_state_mor.png, id=219, 958.48088pt x 515.2851pt>
+<images/avg_ws_steady_state_mor.png, id=230, 958.48088pt x 515.2851pt>
 File: images/avg_ws_steady_state_mor.png Graphic file (type png)
 <use images/avg_ws_steady_state_mor.png>
 Package pdftex.def Info: images/avg_ws_steady_state_mor.png  used on input line
- 380.
+ 386.
 (pdftex.def)             Requested size: 460.0656pt x 247.33403pt.
 
-Overfull \hbox (4.82149pt too wide) in paragraph at lines 380--381
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 386--387
  [][] 
  []
 
-[10 <./images/avg_wait_sys_night.png>]
-<images/avg_ws_steady_state_aft.png, id=227, 948.9051pt x 515.2851pt>
+[11 <./images/avg_wait_sys_night.png>]
+<images/avg_ws_steady_state_aft.png, id=237, 948.9051pt x 515.2851pt>
 File: images/avg_ws_steady_state_aft.png Graphic file (type png)
 <use images/avg_ws_steady_state_aft.png>
 Package pdftex.def Info: images/avg_ws_steady_state_aft.png  used on input line
- 387.
+ 393.
 (pdftex.def)             Requested size: 455.46928pt x 247.33403pt.
-<images/avg_ws_steady_state_night.png, id=228, 958.48088pt x 515.2851pt>
+<images/avg_ws_steady_state_night.png, id=238, 958.48088pt x 515.2851pt>
 File: images/avg_ws_steady_state_night.png Graphic file (type png)
 <use images/avg_ws_steady_state_night.png>
 Package pdftex.def Info: images/avg_ws_steady_state_night.png  used on input li
-ne 394.
+ne 400.
 (pdftex.def)             Requested size: 460.0656pt x 247.33403pt.
 
-Overfull \hbox (4.82149pt too wide) in paragraph at lines 394--395
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 400--401
  [][] 
  []
 
-[11 <./images/avg_ws_steady_state_mor.png> <./images/avg_ws_steady_state_aft.pn
+[12 <./images/avg_ws_steady_state_mor.png> <./images/avg_ws_steady_state_aft.pn
 g>]
-<images/ts_min.png, id=240, 961.73303pt x 554.49158pt>
+<images/ts_min.png, id=250, 961.73303pt x 554.49158pt>
 File: images/ts_min.png Graphic file (type png)
 <use images/ts_min.png>
-Package pdftex.def Info: images/ts_min.png  used on input line 409.
-(pdftex.def)             Requested size: 461.62662pt x 266.15292pt.
-
-Overfull \hbox (6.3825pt too wide) in paragraph at lines 409--410
- [][] 
- []
-
-<images/ts_optimal.png, id=241, 961.73303pt x 554.49158pt>
-File: images/ts_optimal.png Graphic file (type png)
-<use images/ts_optimal.png>
-Package pdftex.def Info: images/ts_optimal.png  used on input line 415.
+Package pdftex.def Info: images/ts_min.png  used on input line 415.
 (pdftex.def)             Requested size: 461.62662pt x 266.15292pt.
 
 Overfull \hbox (6.3825pt too wide) in paragraph at lines 415--416
  [][] 
  []
 
-[12 <./images/avg_ws_steady_state_night.png>]
-<images/ts_max.png, id=251, 961.73303pt x 554.49158pt>
-File: images/ts_max.png Graphic file (type png)
-<use images/ts_max.png>
-Package pdftex.def Info: images/ts_max.png  used on input line 421.
+<images/ts_optimal.png, id=251, 961.73303pt x 554.49158pt>
+File: images/ts_optimal.png Graphic file (type png)
+<use images/ts_optimal.png>
+Package pdftex.def Info: images/ts_optimal.png  used on input line 421.
 (pdftex.def)             Requested size: 461.62662pt x 266.15292pt.
 
 Overfull \hbox (6.3825pt too wide) in paragraph at lines 421--422
  [][] 
  []
 
-[13 <./images/ts_min.png> <./images/ts_optimal.png>]
-Overfull \hbox (597.7864pt too wide) detected at line 438
+[13 <./images/avg_ws_steady_state_night.png>]
+<images/ts_max.png, id=262, 961.73303pt x 554.49158pt>
+File: images/ts_max.png Graphic file (type png)
+<use images/ts_max.png>
+Package pdftex.def Info: images/ts_max.png  used on input line 427.
+(pdftex.def)             Requested size: 461.62662pt x 266.15292pt.
+
+Overfull \hbox (6.3825pt too wide) in paragraph at lines 427--428
+ [][] 
+ []
+
+[14 <./images/ts_min.png> <./images/ts_optimal.png>]
+Overfull \hbox (597.7864pt too wide) detected at line 444
 []
  []
 
 
-Overfull \hbox (190.83754pt too wide) detected at line 444
+Overfull \hbox (190.83754pt too wide) detected at line 450
 []
  []
 
 
-LaTeX Warning: Command \texteuro invalid in math mode on input line 445.
+LaTeX Warning: Command \texteuro invalid in math mode on input line 451.
 
 
-LaTeX Warning: Command \texteuro invalid in math mode on input line 445.
+LaTeX Warning: Command \texteuro invalid in math mode on input line 451.
 
 Missing character: There is no ¿ in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 444--447
+Underfull \hbox (badness 10000) in paragraph at lines 450--453
 
  []
 
-[14 <./images/ts_max.png>]
-Overfull \hbox (3.75246pt too wide) in paragraph at lines 453--456
+[15 <./images/ts_max.png>]
+Overfull \hbox (3.75246pt too wide) in paragraph at lines 459--462
 []\T1/XCharter-TLF/m/n/10 Non sono state scelte code di pri-or-ità con prelazio
 ne poiché, nonos-tante esse avreb-bero avuto prestazioni
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--477
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 494--516
+Underfull \hbox (badness 10000) in paragraph at lines 478--483
 
  []
 
 [16]
-Overfull \hbox (62.91566pt too wide) in paragraph at lines 594--604
- [] 
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--522
+
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 608--613
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 608--613
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 621--627
-
- []
-
-<images/adv_avg_ws_mor_s.png, id=288, 983.95605pt x 560.27318pt>
-File: images/adv_avg_ws_mor_s.png Graphic file (type png)
-<use images/adv_avg_ws_mor_s.png>
-Package pdftex.def Info: images/adv_avg_ws_mor_s.png  used on input line 631.
-(pdftex.def)             Requested size: 472.29355pt x 268.92807pt.
-
-Overfull \hbox (17.04944pt too wide) in paragraph at lines 631--632
- [][] 
+Overfull \hbox (62.91566pt too wide) in paragraph at lines 600--610
+ [] 
  []
 
 [18]
+Underfull \hbox (badness 10000) in paragraph at lines 614--619
 
-LaTeX Warning: Reference `figura:adv_avg_ws_aft_ns' on page 19 undefined on inp
-ut line 636.
+ []
 
-<images/adv_avg_ws_aft_s.png, id=295, 974.38028pt x 560.27318pt>
-File: images/adv_avg_ws_aft_s.png Graphic file (type png)
-<use images/adv_avg_ws_aft_s.png>
-Package pdftex.def Info: images/adv_avg_ws_aft_s.png  used on input line 643.
-(pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
 
-Overfull \hbox (12.45311pt too wide) in paragraph at lines 643--644
+Underfull \hbox (badness 10000) in paragraph at lines 614--619
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 627--633
+
+ []
+
+<images/adv_avg_ws_mor_s.png, id=298, 983.95605pt x 560.27318pt>
+File: images/adv_avg_ws_mor_s.png Graphic file (type png)
+<use images/adv_avg_ws_mor_s.png>
+Package pdftex.def Info: images/adv_avg_ws_mor_s.png  used on input line 637.
+(pdftex.def)             Requested size: 472.29355pt x 268.92807pt.
+
+Overfull \hbox (17.04944pt too wide) in paragraph at lines 637--638
  [][] 
  []
 
-<images/adv_avg_ws_night_s.png, id=297, 983.95605pt x 560.27318pt>
+[19]
+
+LaTeX Warning: Reference `figura:adv_avg_ws_aft_ns' on page 20 undefined on inp
+ut line 642.
+
+<images/adv_avg_ws_aft_s.png, id=306, 974.38028pt x 560.27318pt>
+File: images/adv_avg_ws_aft_s.png Graphic file (type png)
+<use images/adv_avg_ws_aft_s.png>
+Package pdftex.def Info: images/adv_avg_ws_aft_s.png  used on input line 649.
+(pdftex.def)             Requested size: 467.69722pt x 268.92807pt.
+
+Overfull \hbox (12.45311pt too wide) in paragraph at lines 649--650
+ [][] 
+ []
+
+<images/adv_avg_ws_night_s.png, id=308, 983.95605pt x 560.27318pt>
 File: images/adv_avg_ws_night_s.png Graphic file (type png)
 <use images/adv_avg_ws_night_s.png>
-Package pdftex.def Info: images/adv_avg_ws_night_s.png  used on input line 654.
+Package pdftex.def Info: images/adv_avg_ws_night_s.png  used on input line 660.
 
 (pdftex.def)             Requested size: 472.29355pt x 268.92807pt.
 
-Overfull \hbox (17.04944pt too wide) in paragraph at lines 654--655
+Overfull \hbox (17.04944pt too wide) in paragraph at lines 660--661
  [][] 
  []
 
-[19 <./images/adv_avg_ws_mor_s.png> <./images/adv_avg_ws_aft_s.png>]
-Overfull \hbox (7.57637pt too wide) in paragraph at lines 663--665
+[20 <./images/adv_avg_ws_mor_s.png> <./images/adv_avg_ws_aft_s.png>]
+Overfull \hbox (7.57637pt too wide) in paragraph at lines 669--671
 \T1/XCharter-TLF/m/n/10 Considerati i risul-tati dell'analisi tran-siente, è po
 s-si-bile pro-cedere allo stu-dio del com-por-ta-mento stazionario.
  []
 
-[20 <./images/adv_avg_ws_night_s.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 673.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 673.
+
+Underfull \hbox (badness 10000) in paragraph at lines 672--677
+
+ []
+
+<images/avg_d_covid_steady_state_mor.png, id=318, 958.48088pt x 558.28575pt>
+File: images/avg_d_covid_steady_state_mor.png Graphic file (type png)
+<use images/avg_d_covid_steady_state_mor.png>
+Package pdftex.def Info: images/avg_d_covid_steady_state_mor.png  used on input
+ line 681.
+(pdftex.def)             Requested size: 460.0656pt x 267.9741pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 681--682
+ [][] 
+ []
+
+[21 <./images/adv_avg_ws_night_s.png>]
+<images/adv_avg_d_covid_steady_state_mor.png, id=324, 958.48088pt x 557.38237pt
+>
+File: images/adv_avg_d_covid_steady_state_mor.png Graphic file (type png)
+<use images/adv_avg_d_covid_steady_state_mor.png>
+Package pdftex.def Info: images/adv_avg_d_covid_steady_state_mor.png  used on i
+nput line 688.
+(pdftex.def)             Requested size: 460.0656pt x 267.5405pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 688--689
+ [][] 
+ []
+
+<images/avg_d_covid_steady_state_aft.png, id=325, 948.9051pt x 558.28575pt>
+File: images/avg_d_covid_steady_state_aft.png Graphic file (type png)
+<use images/avg_d_covid_steady_state_aft.png>
+Package pdftex.def Info: images/avg_d_covid_steady_state_aft.png  used on input
+ line 695.
+(pdftex.def)             Requested size: 455.46928pt x 267.9741pt.
+[22 <./images/avg_d_covid_steady_state_mor.png> <./images/adv_avg_d_covid_stead
+y_state_mor.png>]
+<images/adv_avg_d_covid_steady_state_aft.png, id=334, 958.48088pt x 557.38237pt
+>
+File: images/adv_avg_d_covid_steady_state_aft.png Graphic file (type png)
+<use images/adv_avg_d_covid_steady_state_aft.png>
+Package pdftex.def Info: images/adv_avg_d_covid_steady_state_aft.png  used on i
+nput line 702.
+(pdftex.def)             Requested size: 460.0656pt x 267.5405pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 702--703
+ [][] 
+ []
+
+<images/avg_d_covid_steady_state_night.png, id=335, 958.48088pt x 558.28575pt>
+File: images/avg_d_covid_steady_state_night.png Graphic file (type png)
+<use images/avg_d_covid_steady_state_night.png>
+Package pdftex.def Info: images/avg_d_covid_steady_state_night.png  used on inp
+ut line 709.
+(pdftex.def)             Requested size: 460.0656pt x 267.9741pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 709--710
+ [][] 
+ []
+
+[23 <./images/avg_d_covid_steady_state_aft.png> <./images/adv_avg_d_covid_stead
+y_state_aft.png>]
+<images/adv_avg_d_covid_steady_state_night.png, id=344, 964.8045pt x 557.38237p
+t>
+File: images/adv_avg_d_covid_steady_state_night.png Graphic file (type png)
+<use images/adv_avg_d_covid_steady_state_night.png>
+Package pdftex.def Info: images/adv_avg_d_covid_steady_state_night.png  used on
+ input line 716.
+(pdftex.def)             Requested size: 463.10089pt x 267.5405pt.
+
+Overfull \hbox (7.85678pt too wide) in paragraph at lines 716--717
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 720--722
+
+ []
+
+[24 <./images/avg_d_covid_steady_state_night.png> <./images/adv_avg_d_covid_ste
+ady_state_night.png>]
+<images/adv_avg_ws_steady_state_mor.png, id=353, 958.48088pt x 515.2851pt>
+File: images/adv_avg_ws_steady_state_mor.png Graphic file (type png)
+<use images/adv_avg_ws_steady_state_mor.png>
+Package pdftex.def Info: images/adv_avg_ws_steady_state_mor.png  used on input 
+line 728.
+(pdftex.def)             Requested size: 460.0656pt x 247.33403pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 728--729
+ [][] 
+ []
+
+<images/adv_avg_ws_steady_state_aft.png, id=354, 948.9051pt x 515.2851pt>
+File: images/adv_avg_ws_steady_state_aft.png Graphic file (type png)
+<use images/adv_avg_ws_steady_state_aft.png>
+Package pdftex.def Info: images/adv_avg_ws_steady_state_aft.png  used on input 
+line 735.
+(pdftex.def)             Requested size: 455.46928pt x 247.33403pt.
+<images/adv_avg_ws_steady_state_night.png, id=355, 958.48088pt x 515.2851pt>
+File: images/adv_avg_ws_steady_state_night.png Graphic file (type png)
+<use images/adv_avg_ws_steady_state_night.png>
+Package pdftex.def Info: images/adv_avg_ws_steady_state_night.png  used on inpu
+t line 742.
+(pdftex.def)             Requested size: 460.0656pt x 247.33403pt.
+
+Overfull \hbox (4.82149pt too wide) in paragraph at lines 742--743
+ [][] 
+ []
+
+[25 <./images/adv_avg_ws_steady_state_mor.png> <./images/adv_avg_ws_steady_stat
+e_aft.png>] [26 <./images/adv_avg_ws_steady_state_night.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 751.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 751.
 
 (Report_PMCSN_Marcucci_Lasco_Falaschi.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 673.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 673.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 751.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 751.
 Package rerunfilecheck Info: File `Report_PMCSN_Marcucci_Lasco_Falaschi.out' ha
 s not changed.
-(rerunfilecheck)             Checksum: 5FDA47D5632914CE2F34FAE80C80FE79;1503.
+(rerunfilecheck)             Checksum: 44DD5E30D62011635A6E4E143358E07E;1591.
 
 
 LaTeX Warning: There were undefined references.
@@ -1831,16 +1949,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 673.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 751.
  ) 
 Here is how much of TeX's memory you used:
- 24613 strings out of 480790
- 458576 string characters out of 2897301
- 710246 words of memory out of 3000000
- 40005 multiletter control sequences out of 15000+200000
+ 24703 strings out of 480790
+ 461624 string characters out of 2897301
+ 711667 words of memory out of 3000000
+ 40066 multiletter control sequences out of 15000+200000
  631359 words of font info for 84 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,16n,99p,1052b,861s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 71i,16n,99p,1052b,860s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/xcharter/xch_ye
 lf2i.enc}{C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/xcharter
 /xch_rydp4l.enc}{C:/Users/marco/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/x
@@ -1858,10 +1976,10 @@ pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/marco/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/marco/AppData/Local/Program
 s/MiKTeX/fonts/type1/public/eurosym/feymr10.pfb><C:/Users/marco/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Report_PMCSN_Marcucci_Lasco_Falaschi.pdf (20 pages, 8146129 b
-ytes).
+Output written on Report_PMCSN_Marcucci_Lasco_Falaschi.pdf (26 pages, 12991773 
+bytes).
 PDF statistics:
- 405 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
- 362 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 467 PDF objects out of 1000 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 420 words of extra memory for PDF output out of 10000 (max. 10000000)
 

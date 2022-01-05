@@ -14,7 +14,7 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
 from advanced_model.skeleton import select_queue_premium
 
 nodes = 4  # n nodi
-arrival_time = 14.0
+arrival_time = 35.0
 arrival_time_morning = 14.0  # nodes = 3 min
 arrival_time_afternoon = 5.0  # nodes = 4 min
 arrival_time_evening = 14.0
@@ -34,8 +34,8 @@ p_positive = 0.05
 ticket_price = 10.0
 ticket_price_premium = 20.0
 energy_cost = 0.4
-nodes_min = 6
-nodes_max = 6
+nodes_min = 3
+nodes_max = 3
 delay_max = 20.0
 delay_min = 8.0
 seeds = [987654321, 539458255, 482548808,
@@ -121,7 +121,7 @@ def plot_stats_global():
 
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    plt.savefig(fname=results_dir + "/adv_avg_ws_steady_state_mor", bbox_inches='tight')
+    plt.savefig(fname=results_dir + "/adv_avg_ws_steady_state_night", bbox_inches='tight')
 
     plt.show()
 
@@ -171,7 +171,7 @@ def plot_stats_global_ticket():
 
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    plt.savefig(fname=results_dir + "/adv_avg_d_covid_steady_state_mor", bbox_inches='tight')
+    plt.savefig(fname=results_dir + "/adv_avg_d_covid_steady_state_night", bbox_inches='tight')
 
     plt.show()
 

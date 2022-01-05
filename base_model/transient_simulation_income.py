@@ -282,7 +282,6 @@ def plot_stats_global():
     axs[0].vlines(1320, 0, 60, color='orange', label="")
     axs[1].vlines(1320, 0, 1600, color='orange', label="")
     axs[0].legend(["08:00", "12:00", "17:00", "22:00"])
-    text(720, 5, "entry" , rotation=90, verticalalignment='center')
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
         # print(dict_list[i])

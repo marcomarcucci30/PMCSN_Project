@@ -95,8 +95,6 @@ if __name__ == '__main__':
         print(avg_seed_income)
     avg_seed_income = avg_seed_income / 3
     print(avg_seed_income)'''
-    for i in range(0,34):
-        service = TruncatedNormal(15, 3, 3, 25)
+    for i in range(34):
+        # service = TruncatedNormal(15, 3, 3, 25)
         print(i)
-    if 0.0 != 1:
-        print("vaff")

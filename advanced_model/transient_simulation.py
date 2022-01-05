@@ -287,10 +287,10 @@ def plot_stats_global():
     plt.ylabel("Avg wait system")
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    if stationary:
+    '''if stationary:
         plt.savefig(fname=results_dir + "/adv_avg_ws_night_s", bbox_inches='tight')
     else:
-        plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')
+        plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')'''
     plt.show()
 
 
@@ -307,12 +307,15 @@ if __name__ == '__main__':
             "avg_wait_ticket_green_pass": [],  # [elem 0-50, elem 50-100, ..]
             "std_ticket_green_pass": [],
             "w_ticket_green_pass": [],
+
             "avg_delay_arcades": [],
             "std_arcades": [],
             "w_arcades": [],
+
             "avg_delay_arcades_priority": [],
             "std_arcades_priority": [],
             "w_arcades_priority": [],
+
             "avg_wait_system": [],
             "std_system": [],
             "w_system": [],
@@ -320,12 +323,15 @@ if __name__ == '__main__':
             "final_wait_ticket_green_pass": 0.0,
             "final_std_ticket_green_pass": 0.0,
             "final_w_ticket_green_pass": 0.0,
+
             "final_delay_arcades": 0.0,
             "final_std_arcades": 0.0,
             "final_w_arcades": 0.0,
+
             "final_delay_arcades_priority": 0.0,
             "final_std_arcades_priority": 0.0,
             "final_w_arcades_priority": 0.0,
+
             "correlation_delay_arcades": 0.0
         }
 
@@ -361,8 +367,8 @@ if __name__ == '__main__':
                 else:
                     center.arrival = None
                     center.completion = None
-                    priority_arrival = False
-                    priority_completion = False
+                    center.priority_arrival = False
+                    center.priority_completion = False
                     center.more_p_stat.node = 0.0
                     center.more_p_stat.queue = 0.0
                     center.more_p_stat.service = 0.0

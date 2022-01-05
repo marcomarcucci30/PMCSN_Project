@@ -71,6 +71,12 @@ L'uscita dalla struttura può avvenire in tre modi:
 \end{itemize}
 Nei primi due casi, il giocatore esce dal sistema senza pagare il biglietto.
 Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia diritto ad un rimborso del biglietto proporzionale al tempo di attesa che ha sperimentato.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=1]{images/schema.jpg}
+	\caption{Advanced Model, Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:schema}
+\end{figure}
 \todo[inline, color=green]{Inserire figura 1 (alto livello)}
 %------------------------------------------------
 
@@ -324,7 +330,7 @@ d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per otte
 \todo[inline, color=red]{Controllare ultima frase}
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
 
-In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade, mediata su i seed. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
+In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade, mediata sui seed. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
 \\ \\
 Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura  figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
 \begin{figure}[H]
@@ -444,7 +450,7 @@ G = costo biglietto standard;* \#giocatori standard; + costo biglietto premium ;
 \end{equation}
 Il costo del biglietto standard è di 10 \euro, mentre il costo del biglietto premium è di 20 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa giornaliera per Arcade pari a $2.4 €$ \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda nei nodi Arcade. La massima percentuale rimborsabile è del $80\%$. L'attesa minima in coda per cui è previsto il rimborso è di 8 minuti. 
 \\
-\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di attesa nel nodo Covid-19, inferiore a quello del modello base, per gli utenti che possiedono il green-pass.
+\par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di attesa nella coda Covid-19, inferiore a quello del modello base, per gli utenti che possiedono il green-pass.
 
 \subsection{Modello Concettuale}
 \todo[inline, color=green]{Inserire figura 2 (basso livello)}
@@ -666,8 +672,80 @@ Attraverso l'analisi del comportamento stazionario si vuole confrontare, con la 
 In questa fase sono state effettuate simulazioni con tempi
 d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256.
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
+\\ \\
+In seguito per ogni fascia oraria viene riportato il grafico relativo al tempo medio di attesa nella coda Covid-19 per i clienti dotati di green-pass, mediata sui seed, per il modello base e il modello avanzato.
 
-In seguito per ogni fascia oraria viene riportato il grafico relativo al tempo medio di attesa nella coda Covid-19, mediata su i seed, per il modello base e il modello avanzato.
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_d_covid_steady_state_mor.png}
+	\caption{Base Model, Average delay Covid-19 Green-Pass, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:avg_d_covid_steady_state_mor}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_d_covid_steady_state_mor.png}
+	\caption{Advanced Model, Average delay Covid-19 Green-Pass, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_d_covid_steady_state_mor}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_d_covid_steady_state_aft.png}
+	\caption{Base Model, Average delay Covid-19 Green-Pass, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:avg_d_covid_steady_state_aft}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_d_covid_steady_state_aft.png}
+	\caption{Advanced Model, Average delay Covid-19 Green-Pass, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_d_covid_steady_state_aft}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/avg_d_covid_steady_state_night.png}
+	\caption{Base Model, Average delay Covid-19 Green-Pass, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:avg_d_covid_steady_state_night}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_d_covid_steady_state_night.png}
+	\caption{Advanced Model, Average delay Covid-19 Green-Pass, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_d_covid_steady_state_night}
+\end{figure}
+
+Come si può osservare dai grafici e dalle tabelle riportate, il tempo di attesa medio nella coda Covid-19, per i clienti che possiedono un Green-Pass valido, diminuisce sensibilmente utilizzando il modello avanzato, a parità di configurazione e fascia oraria. Tale risultato permette di raggiungere il secondo obiettivo prefissato relativo al modello avanzato.
+\\ \\
+\todo[inline, color=red]{La notte il modello avanzato va peggio. Non metterli o mettere solo una/detemrinate fasce?}
+Inoltre, per ogni fascia oraria viene riportato il grafico relativo al tempo medio di attesa nel sistema per i clienti, mediata sui seed, per il modello avanzato.
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_ws_steady_state_mor.png}
+	\caption{Advanced Model, Average Wait System, 08:00-12:00 \& 17:00-22:00, $\lambda_{arrival}=\frac{1}{14} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_ws_steady_state_mor}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_ws_steady_state_aft.png}
+	\caption{Advanced Model, Average Wait System, 12:00-17:00, $\lambda_{arrival}=\frac{1}{5} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_ws_steady_state_aft}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.48]{images/adv_avg_ws_steady_state_night.png}
+	\caption{Advanced Model, Average Wait System, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_ws_steady_state_night}
+\end{figure}
+
+\subsubsection{Analisi guadagno giornaliero}
+Attraverso questa analisi viene effettuata una simulazione concreta di una tipica giornata lavorativa, ricavata nelle studio precedente, utilizzando il modello avanzato.
+
 %----------------------------------------------------------------------------------------
 
 \end{document}

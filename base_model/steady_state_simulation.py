@@ -118,13 +118,14 @@ def plot_stats_global():
 
     plt.show()
 
+
 def plot_stats_global_ticket():
     fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)
     x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
     y = [dict_list[i]["final_delay_ticket"] for i in range(0, len(dict_list))]
     plt.xticks(rotation=45)
     # fig1 = plt.figure(figsize=(16, 9), dpi=400)
-    axs[0].set_ylabel(ylabel="Avg delay Covid-19 (minutes)", fontsize=15)
+    axs[0].set_ylabel(ylabel="Avg delay Covid-19 Green-pass (minutes)", fontsize=15)
     """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
     plt.rc('legend', fontsize=20)  # legend fontsize
     plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
