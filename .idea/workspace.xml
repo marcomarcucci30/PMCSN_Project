@@ -19,36 +19,33 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Project updated">
-      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_ws_aft_s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_ws_mor_s.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_ws_night_s.png" afterDir="false" />
+    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Income Steady state simulation fixed (same energy cost now)">
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_1757116804.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_1865511657.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_238927874.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_430131813.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_725267564.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advanced_model/stats_841744376.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_d_covid_steady_state_mor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_w_covid_steady_state_mor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_wcovid_steady_state_mor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/images/adv_avg_ws_steady_state_mor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/images/avg_w_covid_steady_state_mor.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/advanced_model/skeleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/skeleton.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/advanced_model/stats_482548808.json" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/stats_482548808.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/advanced_model/stats_539458255.json" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/stats_539458255.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/advanced_model/stats_987654321.json" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/stats_987654321.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/advanced_model/steady_state_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/steady_state_simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/advanced_model/transient_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/transient_simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base_model/skeleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/skeleton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_1757116804.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_1757116804.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_1865511657.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_1865511657.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_238927874.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_238927874.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_430131813.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_430131813.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base_model/stats_482548808.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_482548808.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base_model/stats_539458255.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_539458255.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_725267564.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_725267564.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base_model/stats_841744376.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_841744376.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base_model/stats_987654321.json" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/stats_987654321.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base_model/steady_state_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/steady_state_simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base_model/transient_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/transient_simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base_model/transient_simulation_income.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/transient_simulation_income.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/avg_wait_sys_aft.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/avg_wait_sys_aft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/avg_wait_sys_mor.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/avg_wait_sys_mor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/avg_wait_sys_night.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/avg_wait_sys_night.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/avg_ws_steady_state_aft.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/avg_ws_steady_state_aft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/avg_ws_steady_state_night.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/avg_ws_steady_state_night.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/images/transient_night_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/images/transient_night_s.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +89,7 @@
       <recent name="C:\Users\marco\PycharmProjects\PMCSN_Project\report" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.steady_state_simulation (1)">
+  <component name="RunManager" selected="Python.steady_state_simulation">
     <configuration name="skeleton (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PMCSN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,6 +156,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="steady_state_simulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PMCSN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/advanced_model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/advanced_model/steady_state_simulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="transient_simulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PMCSN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,39 +200,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="transient_simulation_income" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PMCSN" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/base_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/base_model/transient_simulation_income.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.steady_state_simulation" />
         <item itemvalue="Python.steady_state_simulation (1)" />
         <item itemvalue="Python.transient_simulation" />
         <item itemvalue="Python.skeleton" />
         <item itemvalue="Python.skeleton (1)" />
-        <item itemvalue="Python.transient_simulation_income" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -238,6 +235,7 @@
       <workItem from="1641148782341" duration="2346000" />
       <workItem from="1641227001002" duration="1204000" />
       <workItem from="1641315469404" duration="1158000" />
+      <workItem from="1641384368623" duration="1583000" />
     </task>
     <task id="LOCAL-00001" summary="- Adavanced model transient simulation added">
       <created>1640348342576</created>
@@ -281,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641373319543</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- Income Steady state simulation fixed (same energy cost now)">
+      <created>1641382835164</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1641382835164</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +338,8 @@
     <MESSAGE value="- Steady state simulation base updated" />
     <MESSAGE value="- Transient simulation income base: Bug fixed&#10;- Transient simulation income base: Energy Cost bug" />
     <MESSAGE value="- Project updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Project updated" />
+    <MESSAGE value="- Income Steady state simulation fixed (same energy cost now)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Income Steady state simulation fixed (same energy cost now)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -355,14 +361,14 @@
     <SUITE FILE_PATH="coverage/PMCSN_Project$skeleton.coverage" NAME="skeleton Coverage Results" MODIFIED="1640340162039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
     <SUITE FILE_PATH="coverage/PMCSN_Project$steady_state_simulation.coverage" NAME="steady_state_simulation Coverage Results" MODIFIED="1640348917709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
     <SUITE FILE_PATH="coverage/PMCSN_Project$transient_simulation.coverage" NAME="transient_simulation Coverage Results" MODIFIED="1640347539289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
-    <SUITE FILE_PATH="coverage/README_md$steady_state_simulation.coverage" NAME="steady_state_simulation Coverage Results" MODIFIED="1640623958769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
+    <SUITE FILE_PATH="coverage/README_md$steady_state_simulation.coverage" NAME="steady_state_simulation Coverage Results" MODIFIED="1641385339859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
     <SUITE FILE_PATH="coverage/README_md$transient_simulation__1_.coverage" NAME="transient_simulation (1) Coverage Results" MODIFIED="1640780356180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/PMCSN_Project$steady_state_simulation__1_.coverage" NAME="steady_state_simulation (1) Coverage Results" MODIFIED="1640348914974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/PMCSN_Project$transient_simulation__1_.coverage" NAME="transient_simulation (1) Coverage Results" MODIFIED="1640347537610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/README_md$prova.coverage" NAME="prova Coverage Results" MODIFIED="1641148580169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/README_md$transient_simulation.coverage" NAME="transient_simulation Coverage Results" MODIFIED="1641378998578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />
     <SUITE FILE_PATH="coverage/PMCSN_Project$skeleton__1_.coverage" NAME="skeleton (1) Coverage Results" MODIFIED="1640340171799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
-    <SUITE FILE_PATH="coverage/README_md$steady_state_simulation__1_.coverage" NAME="steady_state_simulation (1) Coverage Results" MODIFIED="1641382340889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
+    <SUITE FILE_PATH="coverage/README_md$steady_state_simulation__1_.coverage" NAME="steady_state_simulation (1) Coverage Results" MODIFIED="1641385111788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/README_md$transient_simulation_income.coverage" NAME="transient_simulation_income Coverage Results" MODIFIED="1641226864483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/README_md$skeleton__1_.coverage" NAME="skeleton (1) Coverage Results" MODIFIED="1641312425299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/base_model" />
     <SUITE FILE_PATH="coverage/README_md$skeleton.coverage" NAME="skeleton Coverage Results" MODIFIED="1641313804306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/advanced_model" />

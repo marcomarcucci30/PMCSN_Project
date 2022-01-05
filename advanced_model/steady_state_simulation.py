@@ -1,4 +1,6 @@
 import json
+import os
+
 from scipy.stats import pearsonr
 import statistics
 from math import sqrt
@@ -12,7 +14,7 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
 from advanced_model.skeleton import select_queue_premium
 
 nodes = 4  # n nodi
-arrival_time = 35.0
+arrival_time = 14.0
 arrival_time_morning = 14.0  # nodes = 3 min
 arrival_time_afternoon = 5.0  # nodes = 4 min
 arrival_time_evening = 14.0
@@ -32,11 +34,15 @@ p_positive = 0.05
 ticket_price = 10.0
 ticket_price_premium = 20.0
 energy_cost = 0.4
-nodes_min = 2
-nodes_max = 20
+nodes_min = 6
+nodes_max = 6
 delay_max = 20.0
 delay_min = 8.0
+seeds = [987654321, 539458255, 482548808,
+         1757116804, 238927874, 841744376,
+         1865511657, 482548808,430131813, 725267564]
 income_list = []
+
 
 
 def ticket_refund(avg_delay_arcades):
@@ -71,12 +77,102 @@ def plot_income():
 
 
 def plot_stats_global():
+    fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)
     x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
-    y = [dict_list[i]["final_delay_arcades"] for i in range(0, len(dict_list))]
+    y = [dict_list[i]["final_wait_system"] for i in range(0, len(dict_list))]
     plt.xticks(rotation=45)
-    plt.errorbar(x, y, yerr=batch_means_info["final_w_arcades"], fmt='.',
-                 color='black',
+    # fig1 = plt.figure(figsize=(16, 9), dpi=400)
+    axs[0].set_ylabel(ylabel="Avg wait system (minutes)", fontsize=15)
+    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
+    #axs[0].set(ylabel="Income (€)")
+    #axs[0].ylabel("Income (€)")
+    axs[0].tick_params(labelsize=10)
+
+    axs[0].errorbar(x, y, yerr=[dict_list[i]["final_w_system"] for i in range(0, len(dict_list))], fmt='.',
+                 color='blue',
                  ecolor='red', elinewidth=3, capsize=0)
+
+    axs[0].set_xlabel(xlabel="Seed", fontsize=15)
+
+    cellText = []
+    for j in range(len(dict_list)):
+        # Building cellText to create table
+        row = []
+        row.append(str(dict_list[j]["seed"]))
+        row.append(str(dict_list[j]["final_wait_system"]))
+        row.append(str(dict_list[j]["final_std_system"]))
+        row.append("±" + str(dict_list[j]["final_w_system"]))
+        row.append("95%")
+        cellText.append(row)
+
+    # Plotting Table and Graph
+    # rows = [(str(dict_list[j]["seed"])) for j in range(0, len(dict_list))]
+    cols = ("SEED", "MEAN VALUE", "STD", "CONFIDENCE INTERVAL", "CONFIDENCE LEVEL")
+    axs[1].axis('tight')
+    axs[1].axis('off')
+    axs[1].table(cellText=cellText,
+                 cellLoc='center',
+                 colLabels=cols,
+                 loc='center')
+
+
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    plt.savefig(fname=results_dir + "/adv_avg_ws_steady_state_mor", bbox_inches='tight')
+
+    plt.show()
+
+
+def plot_stats_global_ticket():
+    fig, axs = plt.subplots(2, 1, figsize=(16, 9), dpi=400)
+    x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
+    y = [dict_list[i]["final_delay_ticket_green_pass"] for i in range(0, len(dict_list))]
+    plt.xticks(rotation=45)
+    # fig1 = plt.figure(figsize=(16, 9), dpi=400)
+    axs[0].set_ylabel(ylabel="Avg delay Covid-19 Green Pass (minutes)", fontsize=15)
+    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
+    #axs[0].set(ylabel="Income (€)")
+    #axs[0].ylabel("Income (€)")
+    axs[0].tick_params(labelsize=10)
+
+    axs[0].errorbar(x, y, yerr=[dict_list[i]["final_w_ticket_green_pass"] for i in range(0, len(dict_list))], fmt='.',
+                 color='blue',
+                 ecolor='red', elinewidth=3, capsize=0)
+
+    axs[0].set_xlabel(xlabel="Seed", fontsize=15)
+
+    cellText = []
+    for j in range(len(dict_list)):
+        # Building cellText to create table
+        row = []
+        row.append(str(dict_list[j]["seed"]))
+        row.append(str(dict_list[j]["final_delay_ticket_green_pass"]))
+        row.append(str(dict_list[j]["final_std_ticket_green_pass"]))
+        row.append("±" + str(dict_list[j]["final_w_ticket_green_pass"]))
+        row.append("95%")
+        cellText.append(row)
+
+    # Plotting Table and Graph
+    # rows = [(str(dict_list[j]["seed"])) for j in range(0, len(dict_list))]
+    cols = ("SEED", "MEAN VALUE", "STD", "CONFIDENCE INTERVAL", "CONFIDENCE LEVEL")
+    axs[1].axis('tight')
+    axs[1].axis('off')
+    axs[1].table(cellText=cellText,
+                 cellLoc='center',
+                 colLabels=cols,
+                 loc='center')
+
+
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    plt.savefig(fname=results_dir + "/adv_avg_d_covid_steady_state_mor", bbox_inches='tight')
+
     plt.show()
 
 
@@ -337,9 +433,6 @@ def online_variance(n, mean, variance, x):
     return mean, variance
 
 
-
-seeds = [987654321, 539458255, 482548808]
-
 if __name__ == '__main__':
     for n_nodes in range(nodes_min, nodes_max + 1):
         nodes = n_nodes
@@ -357,19 +450,27 @@ if __name__ == '__main__':
                 "k": 0,
                 "income": [],
                 "job_list": [],
-                "avg_wait_ticket_green_pass": [],  # [elem 0-50, elem 50-100, ..]
+                "avg_delay_ticket_green_pass": [],  # [elem 0-50, elem 50-100, ..]
                 "avg_delay_arcades": [],
                 "avg_delay_arcades_priority": [],
                 "avg_wait_system": [],
-                "final_wait_ticket_green_pass": 0.0,
+
+                "final_delay_ticket_green_pass": 0.0,
                 "final_std_ticket_green_pass": 0.0,
                 "final_w_ticket_green_pass": 0.0,
+
                 "final_delay_arcades": 0.0,
                 "final_std_arcades": 0.0,
                 "final_w_arcades": 0.0,
+
                 "final_delay_arcades_priority": 0.0,
                 "final_std_arcades_priority": 0.0,
                 "final_w_arcades_priority": 0.0,
+
+                "final_wait_system": 0.0,
+                "final_std_system": 0.0,
+                "final_w_system": 0.0,
+
                 "correlation_delay_arcades": []
             }
 
@@ -412,8 +513,8 @@ if __name__ == '__main__':
                     index_arcades = int(index_arcades)
                     index_arcades_total = int(index_arcades_total)
                     old_index = node_list[0].index
-                    avg_wait_ticket_green_pass = job_list[index_arcades_total + index_arcades - 1][
-                        "wait_ticket_green_pass"]  # prendo l'ultimo elemento
+                    avg_delay_ticket_green_pass = job_list[index_arcades_total + index_arcades - 1][
+                        "delay_ticket_green_pass"]  # prendo l'ultimo elemento
                     avg_delay_arcades = job_list[index_arcades_total + index_arcades - 1][
                         "delay_arcades"]  # che rappresenta la media sul
                     avg_delay_arcades_priority = job_list[index_arcades_total + index_arcades - 1][
@@ -459,7 +560,7 @@ if __name__ == '__main__':
                             center.less_p_stat.queue = 0.0
                             center.less_p_stat.service = 0.0
 
-                    batch_means_info["avg_wait_ticket_green_pass"].append(avg_wait_ticket_green_pass)
+                    batch_means_info["avg_delay_ticket_green_pass"].append(avg_delay_ticket_green_pass)
                     batch_means_info["avg_delay_arcades"].append(avg_delay_arcades)
                     batch_means_info["avg_delay_arcades_priority"].append(avg_delay_arcades_priority)
                     batch_means_info["avg_wait_system"].append(avg_wait_system)
@@ -579,7 +680,7 @@ if __name__ == '__main__':
 
                         #  Inserimento statistiche puntuali ad ogni completamento
                         actual_stats = {
-                            "wait_ticket_green_pass": 0.0,
+                            "delay_ticket_green_pass": 0.0,
                             "delay_arcades": 0.0,
                             "delay_arcades_priority": 0.0,
                             "wait_system": 0.0
@@ -588,7 +689,9 @@ if __name__ == '__main__':
                         if node_list[0].index != 0:
                             act_st["wait_system"] = node_list[0].stat.node / node_list[0].index
                         if node_list[1].more_p_stat.index != 0:  # prendiamo il tempo di risposte del green pass
-                            act_st["wait_ticket_green_pass"] = node_list[1].more_p_stat.node / node_list[
+                            '''act_st["wait_ticket_green_pass"] = node_list[1].more_p_stat.node / node_list[
+                                1].more_p_stat.index'''
+                            act_st["delay_ticket_green_pass"] = node_list[1].more_p_stat.queue / node_list[
                                 1].more_p_stat.index
                         delay_arcades_avg = 0
                         delay_arcades_avg_priority = 0
@@ -645,7 +748,7 @@ if __name__ == '__main__':
                 arrival_list = [node_list[n].arrival for n in range(1, len(node_list))]
                 min_arrival = sorted(arrival_list, key=lambda x: (x is None, x))[0]
             #  Global batch means
-            final_avg_wait_ticket_green_pass = 0.0
+            final_avg_delay_ticket_green_pass = 0.0
             final_avg_delay_arcades = 0.0
             final_avg_delay_arcades_priority = 0.0
             final_std_ticket_green_pass = 0.0
@@ -656,16 +759,16 @@ if __name__ == '__main__':
             final_avg_wait_system = 0.0
             final_std_system = 0.0
             n = 0
-            for i in range(4, len(batch_means_info["avg_wait_ticket_green_pass"])):
+            for i in range(4, len(batch_means_info["avg_delay_ticket_green_pass"])):
                 # print("len job list: ", len(job_list), ", index: ",node_list[0].index, ", batch_index: ",batch_index,", begin for: ", b * batch_index, ", end for: ", b * batch_index + b, ", elem_index: ", i)
                 n += 1
                 #  avg calculation,  std calculation
 
-                final_avg_wait_ticket_green_pass, final_std_ticket_green_pass = online_variance(n,
-                                                                                                final_avg_wait_ticket_green_pass,
+                final_avg_delay_ticket_green_pass, final_std_ticket_green_pass = online_variance(n,
+                                                                                                final_avg_delay_ticket_green_pass,
                                                                                                 final_std_ticket_green_pass,
                                                                                                 batch_means_info[
-                                                                                                    "avg_wait_ticket_green_pass"][
+                                                                                                    "avg_delay_ticket_green_pass"][
                                                                                                     i])
                 final_avg_delay_arcades, final_std_arcades = online_variance(n, final_avg_delay_arcades,
                                                                              final_std_arcades,
@@ -683,7 +786,7 @@ if __name__ == '__main__':
                                                                           final_std_system,
                                                                           batch_means_info["avg_wait_system"][i])
 
-            final_std_ticket_green_pass = statistics.variance(batch_means_info["avg_wait_ticket_green_pass"][4:])
+            final_std_ticket_green_pass = statistics.variance(batch_means_info["avg_delay_ticket_green_pass"][4:])
             final_std_arcades = statistics.variance(batch_means_info["avg_delay_arcades"][4:])
             final_std_arcades_priority = statistics.variance(batch_means_info["avg_delay_arcades_priority"][4:])
             final_std_income = statistics.variance(batch_means_info["income"][4:])
@@ -703,7 +806,7 @@ if __name__ == '__main__':
             final_w_arcades_priority = t * final_std_arcades_priority / sqrt(n - 1)  # interval half width
             final_w_income = t * final_std_income / sqrt(n - 1)  # interval half width
             final_w_system = t * final_std_system / sqrt(n - 1)  # interval half width
-            batch_means_info["final_wait_ticket_green_pass"] = final_avg_wait_ticket_green_pass
+            batch_means_info["final_delay_ticket_green_pass"] = final_avg_delay_ticket_green_pass
             batch_means_info["final_delay_arcades"] = final_avg_delay_arcades
             batch_means_info["final_delay_arcades_priority"] = final_avg_delay_arcades_priority
             batch_means_info["final_std_ticket_green_pass"] = final_std_ticket_green_pass
@@ -743,7 +846,8 @@ if __name__ == '__main__':
             #    print("   average # in the queue .. = {0:6.6f}".format(node_list[i].stat.queue / time.current))
             #    print("   utilization ............. = {0:6.6f}".format(node_list[i].stat.service / time.current))
 
-        # plot_stats_global()
+        plot_stats_global()
+        plot_stats_global_ticket()
         # plot_correlation()
         # plot_income()
         # acs(dict_list[0]["avg_wait_ticket"], b)
@@ -757,7 +861,7 @@ if __name__ == '__main__':
         avg_wait_system = avg_wait_system / len(dict_list)
         income_list.append((avg_seed_income, nodes - 1, avg_wait_system))
 
-    plot_income()
+    # plot_income()
     """for i in range(0, len(node_list)):
         if i == 0:
 
