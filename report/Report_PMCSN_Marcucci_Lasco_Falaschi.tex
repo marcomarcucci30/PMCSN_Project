@@ -564,6 +564,8 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 \end{algorithmic}
 \end{algorithm}
 
+\subsection{Verifica}
+Le strutture e le funzioni precedentemente accennate sono state sottoposte ad una fase di testing in modo da garantire il loro corretto funzionamento. Durante l'implementazione del progetto, l'applicazione iterativa di tale fase ha permesso di individuare e correggere diversi difetti, emersi a seguito del manifestarsi di malfunzionamenti del sistema.
 
 \subsection{Validazione}
 Al fine di validare il modello implementato, sono state eseguite diversi run variando determinati parametri. I risultati possono essere osservati in tabella \ref{tab1} e \ref{tab2}.
@@ -607,6 +609,26 @@ Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di L
 Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel sistema i tempi di attesa e il numero di jobs nei rispettivi centri diminuisce coerentemente a ciò che ci si aspetta.
 \\ \\
 Inoltre si può constatare che tutte le statistiche risultano inferiori nel caso prioritario, in conformità con quanto ci si figuri.
+\todo[inline, color=red]{Se confronta con la tabella sopra so cazzi. Che fare?}
+
+\subsection{Esperimenti di Simulazione}
+%----Introduzione
+Al fine di raggiungere gli obiettivi prefissati, è utile dedurre il minimo numero di nodi che permette al sistema di raggiungere la stazionarietà e, in seguito, ricavare la configurazione ottimale del sistema.
+
+Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impiego dell'analisi a orizzonte finito, mentre quella a orizzonte infinito permette di confrontare le configurazioni del sistema a partire dai risultati ottenuti dal comportamento transiente.
+
+\subsubsection{Analisi del comportamento transiente}
+%----Minimo n per stazionarietà
+Attraverso l'analisi del comportamento transiente viene studiato il tempo medio di risposta del sistema, per ogni fascia oraria, utilizzando il metodo delle repliche.
+In particolare, vengono effettuate run di simulazione
+consecutive, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
+La tecnica delle repliche permette di calcolare stime puntuali e intervallari ad ogni acquisizione, ognuna di queste corrispondente ad un certo numero di richieste processate.
+
+Una prima analisi ha portato ad osservare che il sistema non può raggiungere la stazionarietà per via dei limiti introdotti dalla coda del controllo Covid-19, essendo unica per modellazione. Infatti, per un $\lambda_{arrival} \gtrsim \frac{1}{4.1}$, l'utilizzazione di tale centro è approssimativamente pari ad 1, mentre quella dei centri Arcade risulta essere inferiore. Questo studio permette di concludere che il collo di bottiglia è rappresentato dalla coda del controllo Covid-19, per questo motivo, segue solamente lo studio dei nodi Arcade, considerando un $\lambda_{arrival} < \frac{1}{4.1}$.
+\\ \\
+Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:avg_ws_mor_ns} e figura \ref{figura:avg_ws_mor_s}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
+
+
 %----------------------------------------------------------------------------------------
 
 \end{document}

@@ -1,4 +1,5 @@
 import json
+import os
 from math import sqrt
 
 from matplotlib import pyplot as plt
@@ -10,16 +11,16 @@ from utils.rvms import idfStudent
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
 from advanced_model.skeleton import select_queue_premium
-
-nodes = 3 # n nodi
-arrival_time = 15.0
-arrival_time_morning = 15.0
-arrival_time_afternoon = 15.0
-arrival_time_evening = 15.0
-arrival_time_night = 15.0
+stationary = True
+nodes = 6 # n nodi
+arrival_time = 14.0
+arrival_time_morning = 14.0
+arrival_time_afternoon = 14.0
+arrival_time_evening = 14.0
+arrival_time_night = 14.0
 
 b = 128
-k = 128
+k = 160
 
 # seed = 1234567891
 START = 8.0 * 1440
@@ -30,6 +31,9 @@ TICKET_QUEUE = 1
 p_size = 0.6
 p_premium = 0.36
 p_positive = 0.05
+seeds = [987654321, 539458255, 482548808]
+replicas = 64
+sampling_frequency = 75
 
 
 class Time:
@@ -249,9 +253,7 @@ def select_queue(node_id):
             return
 
 
-seeds = [987654321, 539458255, 482548808]
-replicas = 10
-sampling_frequency = 50
+
 dict_list = []
 
 
@@ -266,8 +268,11 @@ def plot_stats_global():
     x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_wait_system"]))]
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
-    plt.xticks(rotation=45)
-    plt.rcParams["figure.figsize"] = (16, 9)
+    fig1 = plt.figure(figsize=(16, 9), dpi=400)
+    plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
+    plt.rc('legend', fontsize=20)  # legend fontsize
+    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
+    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels
 
     for i in range(0, len(dict_list)):
         # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
@@ -275,9 +280,17 @@ def plot_stats_global():
         plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
                  'o',
                  color=colors[i], label=dict_list[i]["seed"], mfc='none')
+    plt.legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
+                "seed = " + str(dict_list[2]["seed"])])
 
     plt.xlabel("Number of jobs")
     plt.ylabel("Avg wait system")
+    script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, '../report/images')
+    if stationary:
+        plt.savefig(fname=results_dir + "/adv_avg_ws_mor_s", bbox_inches='tight')
+    else:
+        plt.savefig(fname=results_dir + "/transient_night_ns", bbox_inches='tight')
     plt.show()
 
 

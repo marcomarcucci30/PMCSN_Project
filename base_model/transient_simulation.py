@@ -18,6 +18,7 @@ arrival_time_afternoon = 5.0  # 4 arcades for stationary
 arrival_time_evening = 14.0  # 2 arcades for stationary
 arrival_time_night = 35.0  # 1 arcades for stationary
 
+
 seeds = [987654321, 539458255, 482548808]  # , 1865511657, 841744376,
 # 430131813, 725267564]# 1757116804, 238927874, 377966758, 306186735,
 # 640977820, 893367702, 468482873, 60146203, 258621233, 298382896, 443460125, 250910117, 163127968]
@@ -207,7 +208,6 @@ def plot_stats_global():
     x = [i * sampling_frequency for i in range(0, len(dict_list[0]["avg_wait_system"]))]
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
-    plt.xticks(rotation=45)
     # plt.rcParams["figure.figsize"] = (16, 9)
     fig1 = plt.figure(figsize=(16, 9), dpi=400)
     plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
