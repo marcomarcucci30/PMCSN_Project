@@ -87,11 +87,13 @@ Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia 
 \todo[inline, color=red]{Controllare tutti i parametri definiti}
 \par Il primo obiettivo dello studio è quello di massimizzare i profitti della sala giochi. A tale scopo è stata definita una funzione guadagno:
 
-\begin{equation}
-\begin{split}
-   G = costo\; biglietto \;*\; \#giocatori\; -\; costo\; elettricit\grave a \;*\; \#arcade \;attivi\; - \\-\; \#giocatori \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda)\;*\;costo\;biglietto
-\end{split}
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.33]{images/base_income.png}
+	\label{figura:adv_income}
+\end{figure}
+
 Il costo del biglietto è di 10 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa giornaliera per Arcade pari a $2.4 €$ \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda nei nodi Arcade. La massima percentuale rimborsabile è del $80\%$. L'attesa minima in coda per cui è previsto il rimborso è di 8 minuti. 
 \\
 \par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di risposta del sistema inferiore a 40 minuti. Infatti, da un calcolo teorico basato sulle caratteristiche del sistema, specificate in seguito, si è dedotto che il tempo medio dei servizi del sistema è di circa 19 minuti. Per cui, è stata impostata una tolleranza del tempo medio di attesa nelle code sperimentato dall'utente, pari a circa il tempo di servizio.
@@ -456,15 +458,14 @@ Si procede alla realizzazione di un modello avanzato che sia in grado di adattar
 
 \todo[inline, color=red]{Controllare tutti i parametri definiti}
 \par Il primo obiettivo dello studio avanzato è quello di massimizzare i profitti della sala giochi. A tale scopo è stata definita una funzione guadagno:
-\begin{align*}
-G = costo biglietto standard;* \#giocatori standard; + costo biglietto premium ; \#giocatoripremium - costo elettricit\grave a  \#arcade \;attivi\; -\; \#giocatori \; standard \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;standard)\;*\;costo\;biglietto\;standard - \\-\; \#giocatori \; premium \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;premium)\;*\;costo\;biglietto\;premium
-\end{align*}
 
-\begin{equation}
-\begin{split}
-   G = costo\; biglietto \; standard \;*\; \#giocatori\; standard\; + costo\; biglietto\;premium \;*\; \#giocatori\;premium\;\\ -\; costo\; elettricit\grave a \;*\; \#arcade \;attivi\; -\; \#giocatori \; standard \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;standard)\;*\;costo\;biglietto\;standard - \\-\; \#giocatori \; premium \;*\; rimborso \;biglietto(attesa\;media\;nella\;coda\;premium)\;*\;costo\;biglietto\;premium
-\end{split}
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\captionsetup{justification=centering,margin=2cm}
+	\includegraphics[scale=0.33]{images/adv_income.png}
+	\label{figura:adv_income}
+\end{figure}
+
 Il costo del biglietto standard è di 10 \euro, mentre il costo del biglietto premium è di 20 \euro . Per quanto riguarda l'elettricità è stata considerata una spesa giornaliera per Arcade pari a $2.4 €$ \euro. La funzione \textit{rimborso biglietto}, che calcola la percentuale del \textit{costo biglietto} da restituire al giocatore, è proporzionale al tempo di attesa speso da quest'ultimo in coda nei nodi Arcade. La massima percentuale rimborsabile è del $80\%$. L'attesa minima in coda per cui è previsto il rimborso è di 8 minuti. 
 \\
 \par Il secondo obiettivo dello studio è quello di assicurare un tempo medio di attesa nella coda Covid-19, inferiore a quello del modello base, per gli utenti che possiedono il green-pass.

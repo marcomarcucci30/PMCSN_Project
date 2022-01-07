@@ -19,15 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Steady state simulation Advanced fixed">
-      <change afterPath="$PROJECT_DIR$/report/images/adv_model_high_level.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/images/adv_model_low_level.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/images/base_model_high_level.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/images/base_model_low_level.jpg" afterDir="false" />
+    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Report Updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" afterDir="false" />
@@ -60,6 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/report/images" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -226,7 +222,8 @@
       <workItem from="1641393457238" duration="11856000" />
       <workItem from="1641410171107" duration="537000" />
       <workItem from="1641411060324" duration="1592000" />
-      <workItem from="1641420982697" duration="963000" />
+      <workItem from="1641420982697" duration="1071000" />
+      <workItem from="1641589301745" duration="1243000" />
     </task>
     <task id="LOCAL-00001" summary="- Adavanced model transient simulation added">
       <created>1640348342576</created>
@@ -284,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641385984977</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- Report Updated">
+      <created>1641422460037</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1641422460037</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,29 +342,8 @@
     <MESSAGE value="- Project updated" />
     <MESSAGE value="- Income Steady state simulation fixed (same energy cost now)" />
     <MESSAGE value="- Steady state simulation Advanced fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Steady state simulation Advanced fixed" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1877" height="149" key="GridCell.Tab.0.bottom" timestamp="1641411426107">
-      <screen x="0" y="0" width="1920" height="1032" />
-    </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.bottom/0.0.1920.1032/-1280.61.1280.976@0.0.1920.1032" timestamp="1641411426107" />
-    <state width="1877" height="149" key="GridCell.Tab.0.center" timestamp="1641411426107">
-      <screen x="0" y="0" width="1920" height="1032" />
-    </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.center/0.0.1920.1032/-1280.61.1280.976@0.0.1920.1032" timestamp="1641411426107" />
-    <state width="1877" height="149" key="GridCell.Tab.0.left" timestamp="1641411426107">
-      <screen x="0" y="0" width="1920" height="1032" />
-    </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.left/0.0.1920.1032/-1280.61.1280.976@0.0.1920.1032" timestamp="1641411426107" />
-    <state width="1877" height="149" key="GridCell.Tab.0.right" timestamp="1641411426107">
-      <screen x="0" y="0" width="1920" height="1032" />
-    </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.right/0.0.1920.1032/-1280.61.1280.976@0.0.1920.1032" timestamp="1641411426107" />
-    <state x="-823" y="463" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1641408175859">
-      <screen x="-1280" y="61" width="1280" height="976" />
-    </state>
-    <state x="-823" y="463" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032/-1280.61.1280.976@-1280.61.1280.976" timestamp="1641408175859" />
+    <MESSAGE value="- Report Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Report Updated" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
