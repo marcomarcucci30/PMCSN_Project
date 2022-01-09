@@ -3,7 +3,7 @@ from utils.rvgs import Exponential, TruncatedNormal
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
 
-nodes = 6 # n nodi
+nodes = 6  # n nodi
 arrival_time = 0.0
 arrival_time_morning = 14.0
 arrival_time_afternoon = 14.0
@@ -52,7 +52,7 @@ class StatusNode:
     completion = None  # next completion time
     priority_arrival = False
     priority_completion = False
-    last = 0.0  # last arrival time # TODO: DA TOGLIERE?
+    last = 0.0  # last arrival time
     more_p_stat = None
     less_p_stat = None
 
@@ -106,13 +106,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    # if r <= 1 / (nodes - 1):
-    #     return ARCADE1
-    # elif r <= 2 / (nodes - 1):
-    #     return ARCADE2
-    # else:
-    #     return ARCADE3
-
     # Caso arrivo dall'esterno
 
     r = random()
@@ -126,14 +119,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    #  if r <= 1.0 / float(nodes - 1):
-    #      # print(1.0 / float(nodes - 1))
-    #      return ARCADE1
-    #  elif r <= 2.0 / float(nodes - 1):
-    #      # print(2.0 / float(nodes - 1))
-    #      return ARCADE2
-    #  else:
-    #      return ARCADE3
 
 
 def minimum(a, b):
@@ -175,7 +160,6 @@ def next_event():
             return i
 
 
-
 def get_arrival(y):
     # ---------------------------------------------
     # * generate the next arrival time from an Exponential distribution.
@@ -206,6 +190,8 @@ def get_service(id_node):
 
 
 select_queue_premium = 35
+
+
 def select_queue(node_id):
     if node_id == TICKET_QUEUE:
         selectStream(select_node_random)
@@ -226,6 +212,7 @@ def select_queue(node_id):
             node_list[node_id].priority_arrival = False  # standard ticket
             return
 
+
 select_node_positive = 75
 
 
@@ -236,6 +223,7 @@ def is_positive():
         return True
     else:
         return False
+
 
 if __name__ == '__main__':
     # settings
@@ -265,52 +253,34 @@ if __name__ == '__main__':
         time.next = minimum(node_to_process.arrival, node_to_process.completion)
         # Aggiornamento delle aree basate sul giro prima
         for i in range(0, len(node_list)):
-            '''if i != 0:
-                if node_list[i].priority_completion == True:
-                    if node_list[i].more_p_stat.number > 0:
-                        node_list[i].more_p_stat.node += (time.next - time.current) * node_list[i].more_p_stat.number
-                        node_list[i].more_p_stat.queue += (time.next - time.current) * (node_list[i].more_p_stat.number - 1)
-                        node_list[i].more_p_stat.service += (time.next - time.current)
-                    if node_list[i].less_p_stat.number > 0:
-                        node_list[i].less_p_stat.node += (time.next - time.current) * (node_list[i].less_p_stat.number )
-                        node_list[i].less_p_stat.queue += (time.next - time.current) * (node_list[i].less_p_stat.number - 1)
-                        node_list[i].less_p_stat.service += (time.next - time.current)
-                else:
-                    if node_list[i].more_p_stat.number > 0:
-                        node_list[i].more_p_stat.node += (time.next - time.current) * (node_list[i].more_p_stat.number)
-                        node_list[i].more_p_stat.queue += (time.next - time.current) * (node_list[i].more_p_stat.number - 1)
-                        node_list[i].more_p_stat.service += (time.next - time.current)
-                    if node_list[i].less_p_stat.number > 0:
-                        node_list[i].less_p_stat.node += (time.next - time.current) * (node_list[i].less_p_stat.number)
-                        node_list[i].less_p_stat.queue += (time.next - time.current) * (node_list[i].less_p_stat.number - 1)
-                        node_list[i].less_p_stat.service += (time.next - time.current)
-            else:
-                if node_list[i].number > 0:
-                    node_list[i].stat.node += (time.next - time.current) * node_list[i].number
-                    node_list[i].stat.queue += (time.next - time.current) * (node_list[i].number - 1)
-                    node_list[i].stat.service += (time.next - time.current)'''
             if i != 0:
-                if node_list[i].priority_completion == True:
+                if node_list[i].priority_completion:
                     if node_list[i].more_p_stat.number > 0:
-                        #count_global_number += 1
+                        # count_global_number += 1
                         node_list[i].more_p_stat.node += (time.next - time.current) * node_list[i].more_p_stat.number
-                        node_list[i].more_p_stat.queue += (time.next - time.current) * (node_list[i].more_p_stat.number - 1)
+                        node_list[i].more_p_stat.queue += (time.next - time.current) * (
+                                    node_list[i].more_p_stat.number - 1)
                         node_list[i].more_p_stat.service += (time.next - time.current)
                     if node_list[i].less_p_stat.number > 0:
                         count_global_number += 1
-                        node_list[i].less_p_stat.node += (time.next - time.current) * (node_list[i].less_p_stat.number - 1)
-                        node_list[i].less_p_stat.queue += (time.next - time.current) * (node_list[i].less_p_stat.number - 1)
+                        node_list[i].less_p_stat.node += (time.next - time.current) * (
+                                    node_list[i].less_p_stat.number - 1)
+                        node_list[i].less_p_stat.queue += (time.next - time.current) * (
+                                    node_list[i].less_p_stat.number - 1)
                         node_list[i].less_p_stat.service += (time.next - time.current)
                 else:
                     if node_list[i].more_p_stat.number > 0:
-                        #count_global_number += 1
-                        node_list[i].more_p_stat.node += (time.next - time.current) * (node_list[i].more_p_stat.number - 1)
-                        node_list[i].more_p_stat.queue += (time.next - time.current) * (node_list[i].more_p_stat.number - 1)
+                        # count_global_number += 1
+                        node_list[i].more_p_stat.node += (time.next - time.current) * (
+                                    node_list[i].more_p_stat.number - 1)
+                        node_list[i].more_p_stat.queue += (time.next - time.current) * (
+                                    node_list[i].more_p_stat.number - 1)
                         node_list[i].more_p_stat.service += (time.next - time.current)
                     if node_list[i].less_p_stat.number > 0:
                         count_global_number += 1
                         node_list[i].less_p_stat.node += (time.next - time.current) * (node_list[i].less_p_stat.number)
-                        node_list[i].less_p_stat.queue += (time.next - time.current) * (node_list[i].less_p_stat.number - 1)
+                        node_list[i].less_p_stat.queue += (time.next - time.current) * (
+                                    node_list[i].less_p_stat.number - 1)
                         node_list[i].less_p_stat.service += (time.next - time.current)
             else:
                 if node_list[i].number > 0:
@@ -360,9 +330,6 @@ if __name__ == '__main__':
                 if node.more_p_stat.last is not None and node_list[0].last is not None and node_list[0].last < max_last:
                     node_list[0].last = max_last
 
-                # node.last = node.arrival
-                '''if node.last is not None and node_list[0].last is not None and node_list[0].last < node.last:
-                    node_list[0].last = node.last'''
             # update node and system last arrival time
 
             # Controllo che l'arrivo sul nodo i-esimo sia valido. In caso negativo
@@ -374,7 +341,6 @@ if __name__ == '__main__':
                         node.more_p_stat.last = node.arrival
                     else:
                         node.less_p_stat.last = node.arrival
-                    # node.last = node.arrival
                 # update node and system last arrival time
                 max_last = maximum(node.more_p_stat.last, node.less_p_stat.last)
                 if node_list[0].last < max_last:
@@ -418,19 +384,12 @@ if __name__ == '__main__':
                     select_queue(arcade_node.id)
 
                     # Update partial stats for arcade nodes
-                    # if arcade_node.number > 0:
-                    #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                    #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                    #     arcade_node.stat.service += (time.next - current_for_update)
                     if arcade_node.priority_arrival is True:
                         arcade_node.more_p_stat.number += 1  # system stats don't updated
                         arcade_node.more_p_stat.last = time.current
                     else:
                         arcade_node.less_p_stat.number += 1  # system stats don't updated
                         arcade_node.less_p_stat.last = time.current
-
-                    # arcade_node.last = time.current
-
                     if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
                         arcade_node.priority_completion = True
                         arcade_node.completion = time.current + get_service(arcade_node.id)
@@ -459,24 +418,29 @@ if __name__ == '__main__':
             print(node_list[i].last)
         else:
             tot_index = node_list[i].more_p_stat.index + node_list[i].less_p_stat.index
-            print("\n\nNode " + str(i)+" priority queue")
+            print("\n\nNode " + str(i) + " priority queue")
             print("\nfor {0} jobs".format(node_list[i].more_p_stat.index))
             if node_list[i].more_p_stat.index != 0:
-                print("   average interarrival time = {0:6.6f}".format(node_list[i].more_p_stat.last / node_list[i].more_p_stat.index))
-                print("   average wait ............ = {0:6.6f}".format(node_list[i].more_p_stat.node / node_list[i].more_p_stat.index))
-                print("   average delay ........... = {0:6.6f}".format(node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index))
+                print("   average interarrival time = {0:6.6f}".format(
+                    node_list[i].more_p_stat.last / node_list[i].more_p_stat.index))
+                print("   average wait ............ = {0:6.6f}".format(
+                    node_list[i].more_p_stat.node / node_list[i].more_p_stat.index))
+                print("   average delay ........... = {0:6.6f}".format(
+                    node_list[i].more_p_stat.queue / node_list[i].more_p_stat.index))
                 print("   average # in the node ... = {0:6.6f}".format(node_list[i].more_p_stat.node / time.current))
                 print("   average # in the queue .. = {0:6.6f}".format(node_list[i].more_p_stat.queue / time.current))
                 print("   utilization ............. = {0:6.6f}".format(node_list[i].more_p_stat.service / time.current))
                 print(node_list[i].more_p_stat.last, node_list[i].more_p_stat.index)
 
-
             print("\n\nNode " + str(i) + " NON priority queue")
             print("\nfor {0} jobs".format(node_list[i].less_p_stat.index))
             if node_list[i].less_p_stat.index != 0:
-                print("   average interarrival time = {0:6.6f}".format(node_list[i].less_p_stat.last / node_list[i].less_p_stat.index))
-                print("   average wait ............ = {0:6.6f}".format(node_list[i].less_p_stat.node / node_list[i].less_p_stat.index))
-                print("   average delay ........... = {0:6.6f}".format(node_list[i].less_p_stat.queue / node_list[i].less_p_stat.index))
+                print("   average interarrival time = {0:6.6f}".format(
+                    node_list[i].less_p_stat.last / node_list[i].less_p_stat.index))
+                print("   average wait ............ = {0:6.6f}".format(
+                    node_list[i].less_p_stat.node / node_list[i].less_p_stat.index))
+                print("   average delay ........... = {0:6.6f}".format(
+                    node_list[i].less_p_stat.queue / node_list[i].less_p_stat.index))
                 print("   average # in the node ... = {0:6.6f}".format(node_list[i].less_p_stat.node / time.current))
                 print("   average # in the queue .. = {0:6.6f}".format(node_list[i].less_p_stat.queue / time.current))
                 print("   utilization ............. = {0:6.6f}".format(node_list[i].less_p_stat.service / time.current))
