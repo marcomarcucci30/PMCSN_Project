@@ -22,7 +22,6 @@ arrival_time_night = 35.0  # nodes = 2 min
 b = 128
 k = 160
 
-# seed = 1234567891
 START = 8.0 * 60
 STOP = 1000 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
@@ -67,7 +66,7 @@ class StatusNode:
     completion = None  # next completion time
     priority_arrival = False
     priority_completion = False
-    last = 0.0  # last arrival time # TODO: DA TOGLIERE?
+    last = 0.0  # last arrival time
     more_p_stat = None
     less_p_stat = None
 
@@ -133,12 +132,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    # if r <= 1 / (nodes - 1):
-    #     return ARCADE1
-    # elif r <= 2 / (nodes - 1):
-    #     return ARCADE2
-    # else:
-    #     return ARCADE3
 
     # Caso arrivo dall'esterno
 
@@ -153,14 +146,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    #  if r <= 1.0 / float(nodes - 1):
-    #      # print(1.0 / float(nodes - 1))
-    #      return ARCADE1
-    #  elif r <= 2.0 / float(nodes - 1):
-    #      # print(2.0 / float(nodes - 1))
-    #      return ARCADE2
-    #  else:
-    #      return ARCADE3
 
 
 def minimum(a, b):
@@ -275,8 +260,6 @@ def plot_stats_global():
     plt.rc('ytick', labelsize=15)  # fontsize of the tick labels
 
     for i in range(0, len(dict_list)):
-        # prova = [dict_list[i]["job_list"][j]["delay_arcades"] for j in range(0, len(dict_list[i]["job_list"]), 10)]
-        # print(dict_list[i])
         plt.plot(x, [dict_list[i]["avg_wait_system"][j] for j in range(0, len(dict_list[i]["avg_wait_system"]))],
                  'o',
                  color=colors[i], label=dict_list[i]["seed"], mfc='none')
@@ -507,11 +490,6 @@ if __name__ == '__main__':
                         if node.more_p_stat.last is not None and node_list[0].last is not None and node_list[0].last < max_last:
                             node_list[0].last = max_last
 
-                        # node.last = node.arrival
-                        '''if node.last is not None and node_list[0].last is not None and node_list[0].last < node.last:
-                            node_list[0].last = node.last'''
-                    # update node and system last arrival time
-
                     # Controllo che l'arrivo sul nodo i-esimo sia valido. In caso negativo
                     # imposto come ultimo arrivo del nodo i-esimo l'arrivo precedentemente
                     # considerato
@@ -521,7 +499,6 @@ if __name__ == '__main__':
                                 node.more_p_stat.last = node.arrival
                             else:
                                 node.less_p_stat.last = node.arrival
-                            # node.last = node.arrival
                         # update node and system last arrival time
                         max_last = maximum(node.more_p_stat.last, node.less_p_stat.last)
                         if node_list[0].last < max_last:
@@ -588,11 +565,6 @@ if __name__ == '__main__':
                             arcade_node = node_list[select_node(True)]  # on first global stats
                             select_queue(arcade_node.id)
 
-                            # Update partial stats for arcade nodes
-                            # if arcade_node.number > 0:
-                            #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                            #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                            #     arcade_node.stat.service += (time.next - current_for_update)
                             if arcade_node.priority_arrival is True:
                                 arcade_node.more_p_stat.number += 1  # system stats don't updated
                                 arcade_node.more_p_stat.last = time.current
@@ -600,7 +572,6 @@ if __name__ == '__main__':
                                 arcade_node.less_p_stat.number += 1  # system stats don't updated
                                 arcade_node.less_p_stat.last = time.current
 
-                            # arcade_node.last = time.current
 
                             if arcade_node.more_p_stat.number == 1 and arcade_node.less_p_stat.number == 0:
                                 arcade_node.priority_completion = True
