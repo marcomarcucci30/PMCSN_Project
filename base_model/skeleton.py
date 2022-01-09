@@ -14,9 +14,6 @@ STOP = 15 * 12 * 28 * 1440.0  # Minutes
 INFINITY = STOP * 100.0
 p_ticket_queue = 0.8
 TICKET_QUEUE = 1
-# ARCADE1 = 2
-# ARCADE2 = 3
-# ARCADE3 = 4
 p_size = 0.6
 p_positive = 0.05
 
@@ -75,12 +72,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    # if r <= 1 / (nodes - 1):
-    #     return ARCADE1
-    # elif r <= 2 / (nodes - 1):
-    #     return ARCADE2
-    # else:
-    #     return ARCADE3
 
     # Caso arrivo dall'esterno
 
@@ -95,14 +86,6 @@ def select_node(from_tkt_queue):
         for i in range(1, nodes):
             if r <= i / (nodes - 1):
                 return i + 1
-    #  if r <= 1.0 / float(nodes - 1):
-    #      # print(1.0 / float(nodes - 1))
-    #      return ARCADE1
-    #  elif r <= 2.0 / float(nodes - 1):
-    #      # print(2.0 / float(nodes - 1))
-    #      return ARCADE2
-    #  else:
-    #      return ARCADE3
 
 
 def minimum(a, b):
@@ -159,17 +142,14 @@ def get_service(id_node):
         if r <= p_size:  # green pass
             selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(2, 1.5, 1, 3)  # green pass
-            # print("Green pass: ", service)
             return service
         else:
             selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(10, 1.5, 8, 12)  # covid test
-            # print("covid test: ", service)
             return service
     else:
         selectStream(select_node_arcades + 1)
         service = TruncatedNormal(15, 3, 3, 25)  # arcade game time
-        # print("arcade game time: ", service)
         return service
 
 
@@ -212,7 +192,6 @@ if __name__ == '__main__':
             if node_list[i].number > 0:
                 if i != 0:
                     count_global_number += 1
-                # if i == 0 or i == node_to_process.id:
                 node_list[i].stat.node += (time.next - time.current) * node_list[i].number
                 node_list[i].stat.queue += (time.next - time.current) * (node_list[i].number - 1)
                 node_list[i].stat.service += (time.next - time.current)
@@ -237,9 +216,6 @@ if __name__ == '__main__':
             else:  # 22-8
                 set_arrival_time(arrival_time_night)
                 times[3] += 1
-            # print("day: ", day, ", current_lambda: ", current_lambda, ", t_current: ", time.current,
-            # ", lambda: ", get_arrival_time())
-            # print(day, time.current)
             node_to_process.number += 1
             node_list[0].number += 1  # update system stat
             arrival += get_arrival(arrival_time)
@@ -288,12 +264,6 @@ if __name__ == '__main__':
                 if not is_positive():
 
                     arcade_node = node_list[select_node(True)]  # on first global stats
-
-                    # Update partial stats for arcade nodes
-                    # if arcade_node.number > 0:
-                    #     arcade_node.stat.node += (time.next - current_for_update) * arcade_node.number
-                    #     arcade_node.stat.queue += (time.next - current_for_update) * (arcade_node.number - 1)
-                    #     arcade_node.stat.service += (time.next - current_for_update)
 
                     arcade_node.number += 1  # system stats don't updated
                     arcade_node.last = time.current
