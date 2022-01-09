@@ -112,7 +112,6 @@ def select_node(from_tkt_queue):
     if r <= p_ticket_queue:
         global arr_est
         arr_est += 1
-        # print(arr_est)
         return TICKET_QUEUE
     else:
         r = random()
@@ -256,7 +255,6 @@ if __name__ == '__main__':
             if i != 0:
                 if node_list[i].priority_completion:
                     if node_list[i].more_p_stat.number > 0:
-                        # count_global_number += 1
                         node_list[i].more_p_stat.node += (time.next - time.current) * node_list[i].more_p_stat.number
                         node_list[i].more_p_stat.queue += (time.next - time.current) * (
                                     node_list[i].more_p_stat.number - 1)
@@ -270,7 +268,6 @@ if __name__ == '__main__':
                         node_list[i].less_p_stat.service += (time.next - time.current)
                 else:
                     if node_list[i].more_p_stat.number > 0:
-                        # count_global_number += 1
                         node_list[i].more_p_stat.node += (time.next - time.current) * (
                                     node_list[i].more_p_stat.number - 1)
                         node_list[i].more_p_stat.queue += (time.next - time.current) * (

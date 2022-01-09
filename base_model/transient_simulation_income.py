@@ -1,15 +1,11 @@
 import json
 import os
-from math import sqrt
 from matplotlib import pyplot as plt
-from matplotlib.figure import Figure
-from matplotlib.pyplot import text
 
 from base_model.skeleton import select_node_arrival, select_node_random, select_node_ticket, \
     select_node_arcades, select_node_stream
 from utils.rngs import random, selectStream, plantSeeds
 from utils.rvgs import Exponential, TruncatedNormal
-from utils.rvms import idfStudent
 
 stationary = True
 nodes = 2  # n nodi
@@ -223,19 +219,10 @@ def plot_stats_global():
     colors = ['red', 'royalblue', 'green', 'lawngreen', 'lightseagreen', 'orange',
               'blueviolet']
     axs[1].set_ylabel(ylabel="Income €", fontsize=15)
-    """plt.rc('axes', labelsize=20)  # fontsize of the x and y labels
-    plt.rc('legend', fontsize=20)  # legend fontsize
-    plt.rc('xtick', labelsize=15)  # fontsize of the tick labels
-    plt.rc('ytick', labelsize=15)  # fontsize of the tick labels"""
-    #axs[0].set(ylabel="Income (€)")
-    #axs[0].ylabel("Income (€)")
     axs[0].tick_params(labelsize=10)
     axs[1].tick_params(labelsize=10)
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    # plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
-    #plt.show()
-    #fig2 = plt.figure(figsize=(16, 9), dpi=400)
     axs[1].set_ylim([0, 1600])
     axs[0].set_ylim([0, 60])
     axs[0].set_ylabel(ylabel="Average wait system (minutes)", fontsize=15)
@@ -255,7 +242,6 @@ def plot_stats_global():
     for i in range(0, len(dict_list)):
         axs[1].plot(x, [dict_list[i]["income"][j] for j in range(0, len(dict_list[i]["income"]))],
                  'o', color=colors[i], label=dict_list[i]["seed"], mfc='none')
-    # plt.savefig(fname=results_dir + "/avg_wait_sys_night", bbox_inches='tight')
     axs[1].legend(["seed = " + str(dict_list[0]["seed"]), "seed = " + str(dict_list[1]["seed"]),
                 "seed = " + str(dict_list[2]["seed"])])
     plt.savefig(fname=results_dir + "/ts_max", bbox_inches='tight')
@@ -290,8 +276,6 @@ def redirect_jobs(prev_nodes):
     if prev_nodes == nodes:
         return
     if prev_nodes < nodes:  # 2-->3
-        '''print(node_list[0].number, node_list[1].number, node_list[2].number, node_list[3].number,
-              node_list[4].number, ", pre->")'''
 
         iteration = nodes - prev_nodes
         for i in range(2, prev_nodes + 1):
@@ -300,7 +284,6 @@ def redirect_jobs(prev_nodes):
                 for jobs in range(0, int(n_jobs) - 1):
                     pos = select_node(True)
                     # aggiorno le stats della nuova coda
-                    # print(pos, nodes, prev_nodes)
                     node_list[pos].number += 1
                     if node_list[pos].number == 1:
                         node_list[pos].completion = time.current + get_service(node_list[pos].id)
@@ -522,7 +505,6 @@ if __name__ == '__main__':
                 # Aggiornamento delle aree basate sul giro prima
                 for i in range(0, len(node_list)):
                     if node_list[i].number > 0:
-                        # if i == 0 or i == node_to_process.id:
                         node_list[i].stat.node += (time.next - time.current) * node_list[i].number
                         node_list[i].stat.queue += (time.next - time.current) * (node_list[i].number - 1)
                         node_list[i].stat.service += (time.next - time.current)

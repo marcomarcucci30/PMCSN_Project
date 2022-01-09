@@ -163,7 +163,6 @@ def select_node(from_tkt_queue):
     if r <= p_ticket_queue:
         global arr_est
         arr_est += 1
-        # print(arr_est)
         return TICKET_QUEUE
     else:
         r = random()
@@ -230,18 +229,14 @@ def get_service(id_node):
         if r <= p_size:  # green pass
             selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(2, 1.5, 1, 3)  # green pass
-            # print("Green pass: ", service)
             return service
         else:
             selectStream(id_node + select_node_ticket)
             service = TruncatedNormal(10, 1.5, 8, 12)  # covid test
-            # print("covid test: ", service)
             return service
     else:
         selectStream(id_node + select_node_arcades)
         service = TruncatedNormal(15, 3, 10, 20)  # arcade game time
-        # service = BoundedPareto()
-        # print("arcade game time: ", service)
         return service
 
 
@@ -328,7 +323,6 @@ def plot_stats():
     y = (batch_means_info["avg_delay_arcades"][:])  # in 0 global stats
     print(x)
     print(y)
-    # plt.plot(x, y)
 
     plt.errorbar(x, y, yerr=batch_means_info["w_arcades"][:], fmt='.', color='black',
                  ecolor='red', elinewidth=3, capsize=0)

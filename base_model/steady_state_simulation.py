@@ -67,8 +67,6 @@ def plot_stats_global():
     y = [dict_list[i]["final_wait_system"] for i in range(0, len(dict_list))]
     plt.xticks(rotation=45)
     axs[0].set_ylabel(ylabel="Avg wait system (minutes)", fontsize=15)
-    #axs[0].set(ylabel="Income (€)")
-    #axs[0].ylabel("Income (€)")
     axs[0].tick_params(labelsize=10)
 
     axs[0].errorbar(x, y, yerr=[dict_list[i]["final_w_system"] for i in range(0, len(dict_list))], fmt='.',
@@ -100,7 +98,6 @@ def plot_stats_global():
 
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    # plt.savefig(fname=results_dir + "/avg_ws_steady_state_mor", bbox_inches='tight')
 
     plt.show()
 
@@ -110,10 +107,7 @@ def plot_stats_global_ticket():
     x = [str(dict_list[i]["seed"]) for i in range(0, len(dict_list))]
     y = [dict_list[i]["final_delay_ticket"] for i in range(0, len(dict_list))]
     plt.xticks(rotation=45)
-    # fig1 = plt.figure(figsize=(16, 9), dpi=400)
     axs[0].set_ylabel(ylabel="Avg delay Covid-19 Green-pass (minutes)", fontsize=15)
-    #axs[0].set(ylabel="Income (€)")
-    #axs[0].ylabel("Income (€)")
     axs[0].tick_params(labelsize=10)
 
     axs[0].errorbar(x, y, yerr=[dict_list[i]["final_w_ticket"] for i in range(0, len(dict_list))], fmt='.',
@@ -155,15 +149,11 @@ def plot_income():
     x = [str(income_list[i][1]) for i in range(0, len(income_list))]
     y1 = [income_list[i][0] for i in range(0, len(income_list))]
     axs[0].set_ylabel(ylabel="Income", fontsize=15)
-    #axs[0].set(ylabel="Income (€)")
-    #axs[0].ylabel("Income (€)")
     axs[0].tick_params(labelsize=10)
     axs[1].tick_params(labelsize=10)
     axs[0].plot(x, y1, 'o', mfc='none', color='black')
     script_dir = os.path.dirname(__file__)
     results_dir = os.path.join(script_dir, '../report/images')
-    # plt.savefig(fname=results_dir+"/income_mor", bbox_inches='tight')
-    #plt.show()
     axs[1].set_ylabel(ylabel="Average wait system (minutes)", fontsize=15)
     axs[1].set_xlabel(xlabel="Number of Arcades", fontsize=15)
     y2 = [income_list[i][2] for i in range(0, len(income_list))]

@@ -79,7 +79,6 @@ def select_node(from_tkt_queue):
     if r <= p_ticket_queue:
         global arr_est
         arr_est += 1
-        # print(arr_est)
         return TICKET_QUEUE
     else:
         r = random()

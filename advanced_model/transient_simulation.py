@@ -12,7 +12,7 @@ from base_model.skeleton import select_node_arrival, select_node_random, select_
     select_node_arcades, select_node_stream
 from advanced_model.skeleton import select_queue_premium
 stationary = True
-nodes = 3 # n nodi
+nodes = 3  # n nodi
 arrival_time = 35.0
 arrival_time_morning = 14.0  # nodes = 3 min
 arrival_time_afternoon = 5.0  # nodes = 4 min

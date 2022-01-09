@@ -288,7 +288,6 @@ def select_node(from_tkt_queue):
     if r <= p_ticket_queue:
         global arr_est
         arr_est += 1
-        # print(arr_est)
         return TICKET_QUEUE
     else:
         r = random()
@@ -783,6 +782,10 @@ if __name__ == '__main__':
 
         plot_stats_global()
         plot_stats_global_ticket()
+
+        # plot_stats_global()
+        plot_stats_global_ticket()
+        # plot_correlation()
         avg_seed_income = 0.0
         avg_wait_system = 0.0
         for i in range(0, len(dict_list)):
@@ -791,3 +794,4 @@ if __name__ == '__main__':
         avg_seed_income = avg_seed_income / len(dict_list)
         avg_wait_system = avg_wait_system / len(dict_list)
         income_list.append((avg_seed_income, nodes - 1, avg_wait_system))
+    # plot_income()
