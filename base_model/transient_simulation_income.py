@@ -59,7 +59,7 @@ else:
     n4 = 20
 
 energy_cost = 0.4
-ec_mor = (n1-1) * energy_cost  # TODO: farlo giornaliero invece che mensile
+ec_mor = (n1-1) * energy_cost
 ec_aft = (n2-1) * energy_cost
 ec_night = (n4-1) * energy_cost
 class Track:
@@ -384,7 +384,7 @@ if __name__ == '__main__':
         batch_means_info["n_nodes"] = nodes - 1
         batch_means_info["lambda"] = 1.0 / arrival_time
         # (batch_means_info)
-        node_list = [StatusNode(i) for i in range(max(n1, n2, n3, n4) + 1)]  # in 0 global stats TODO: +1?
+        node_list = [StatusNode(i) for i in range(max(n1, n2, n3, n4) + 1)]
 
         plantSeeds(seed)
 
