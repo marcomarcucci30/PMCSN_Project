@@ -19,17 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Report Updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/advanced_model/skeleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/advanced_model/skeleton.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base_model/skeleton.py" beforeDir="false" afterPath="$PROJECT_DIR$/base_model/skeleton.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report/Report_PMCSN_Marcucci_Lasco_Falaschi.tex" afterDir="false" />
-    </list>
+    <list default="true" id="af45d23e-2e3e-40fa-a5db-052473c19f75" name="Changes" comment="- Report Updated" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -228,7 +218,7 @@
       <workItem from="1641420982697" duration="1071000" />
       <workItem from="1641589301745" duration="1292000" />
       <workItem from="1641757752447" duration="967000" />
-      <workItem from="1641766043963" duration="3180000" />
+      <workItem from="1641766043963" duration="3714000" />
     </task>
     <task id="LOCAL-00001" summary="- Adavanced model transient simulation added">
       <created>1640348342576</created>
@@ -300,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641593384624</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- Update report">
+      <created>1641849240312</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1641849240312</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,9 +353,14 @@
     <MESSAGE value="- Income Steady state simulation fixed (same energy cost now)" />
     <MESSAGE value="- Steady state simulation Advanced fixed" />
     <MESSAGE value="- Report Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Report Updated" />
+    <MESSAGE value="- Update report" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Update report" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="361" y="128" key="Vcs.Push.Dialog.v2" timestamp="1641849243010">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="361" y="128" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1641849243010" />
     <state x="458" y="197" key="git4idea.merge.GitPullDialog" timestamp="1641766052029">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
