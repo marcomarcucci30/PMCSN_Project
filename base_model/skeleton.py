@@ -197,24 +197,24 @@ if __name__ == '__main__':
 
         current_for_update = time.current
         time.current = time.next  # advance the clock
+        # Set arrival time
+        day = (time.current / 1440.0) // 1
+        current_lambda = time.current - day * 1440.0
 
+        if 480.0 <= current_lambda < 720.0:  # 8-12
+            set_arrival_time(arrival_time_morning)
+            times[0] += 1
+        elif 720.0 <= current_lambda < 1020.0:  # 12-17
+            set_arrival_time(arrival_time_afternoon)
+            times[1] += 1
+        elif 1020.0 <= current_lambda < 1320.0:  # 17-22
+            set_arrival_time(arrival_time_evening)
+            times[2] += 1
+        else:  # 22-8
+            set_arrival_time(arrival_time_night)
+            times[3] += 1
         if time.current == node_to_process.arrival:
-            # Set arrival time
-            day = (time.current / 1440.0) // 1
-            current_lambda = time.current - day * 1440.0
 
-            if 480.0 <= current_lambda < 720.0:  # 8-12
-                set_arrival_time(arrival_time_morning)
-                times[0] += 1
-            elif 720.0 <= current_lambda < 1020.0:  # 12-17
-                set_arrival_time(arrival_time_afternoon)
-                times[1] += 1
-            elif 1020.0 <= current_lambda < 1320.0:  # 17-22
-                set_arrival_time(arrival_time_evening)
-                times[2] += 1
-            else:  # 22-8
-                set_arrival_time(arrival_time_night)
-                times[3] += 1
             node_to_process.number += 1
             node_list[0].number += 1  # update system stat
             arrival += get_arrival(arrival_time)

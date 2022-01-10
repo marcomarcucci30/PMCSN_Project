@@ -29,7 +29,7 @@
 
 \title{PMCSN Report} % Title of the assignment
 
-\author{Marco Marcucci\\ \texttt{marco.marcucci96@gmail.com}\\ \texttt{0286352} \and Giuseppe Lasco\\ \texttt{giuseppe.lasco17@gmail.com}\\ \texttt{0286045} \and Valentina Valentina Francesca falaschi\\ \texttt{valentinayffalas@gmail.com}\\ \texttt{0295947}} % Author name and email address
+\author{Marco Marcucci\\ \texttt{marco.marcucci96@gmail.com}\\ \texttt{0286352} \and Giuseppe Lasco\\ \texttt{giuseppe.lasco17@gmail.com}\\ \texttt{0286045} \and Valentina Falaschi\\ \texttt{valentinayffalas@gmail.com}\\ \texttt{0295947}} % Author name and email address
 
 \date{University of Roma Tor Vergata --- \today} % University, school and/or department name(s) and a date
 
@@ -192,10 +192,10 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 
   \EndFor
   \State $\textit{Avanzamento del clock}$
+  \If{\textit{Evento} $= \textit{Cambio fascia oraria}$}
+  \State $\textit{Selezione tasso arrivi corretto}$
+  \EndIf
   \If{\textit{Evento} $= Arrivo$} \Comment{Arrivo}
-    \If{\textit{Evento} $= \textit{Cambio fascia oraria}$}
-      \State $\textit{Selezione tasso arrivi corretto}$
-    \EndIf
     \State $\textit{Aggiornamento stato nodo}$
     \State $\textit{Aggiornamento stato sistema}$
     \State $\textit{Schedulazione prossimo arrivo}$
@@ -534,13 +534,14 @@ L’approccio di simulazione utilizzato è stato quello Next-Event Simulation. I
 Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{algo2}. Quest'ultimo si avvale di ulteriori strutture dati e funzioni necessarie al corretto funzionamento.
 
 \begin{algorithm}[H]
-\caption{Multiqueue Priority - Rete Aperta - Scheduling FIFO}\label{algo2}
+\caption{Multiqueue Priority - Rete Aperta}\label{algo2}
 \begin{algorithmic}[1]
 \Procedure{Modello Avanzato}{}
 \State $\textit{Inizializzazione clock}$
 \State $\textit{Inizializzazione lista dei nodi}$
 \State $\textit{Inizializzazione struttura Integrali}$
 \State $\textit{Selezione nodo su cui generare il primo arrivo}$
+\State $\textit{Selezione coda su cui generare il primo arrivo}$
 \State $\textit{Generazione primo arrivo}$
 \While{\textit{ultimo arrivo $<$ STOP} \textbf{or} \textit{ci sono job nel sistema}}
   \State $\textit{Scelta del prossimo evento}$
@@ -551,15 +552,16 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 
   \EndFor
   \State $\textit{Avanzamento del clock}$
+  \If{\textit{Evento} $= \textit{Cambio fascia oraria}$}
+  \State $\textit{Selezione tasso arrivi corretto}$
+  \EndIf
   \If{\textit{Evento} $= Arrivo$} \Comment{Arrivo}
-    \If{\textit{Evento} $= \textit{Cambio fascia oraria}$}
-      \State $\textit{Selezione tasso arrivi corretto}$
-    \EndIf
     \State $\textit{Aggiornamento stato nodo e code di priorità}$ \Comment{Aggiornamento code di priorità}
     \State $\textit{Aggiornamento stato sistema}$
-    \State $\textit{Schedulazione prossimo arrivo}$
+    \State $\textit{Selezione nodo prossimo arrivo}$
+    \State $\textit{Selezione coda prossimo arrivo}$
     \If{\textit{Jobs nel centro} $= 1$}
-      \State $\textit{Schedulazione prossimo servizio}$
+    \State $\textit{Schedulazione prossimo servizio}$
     \EndIf
   \Else  \Comment{Completamento}
     \State $\textit{Aggiornamento stato nodo e code di priorità}$ \Comment{Aggiornamento code di priorità}
@@ -567,7 +569,8 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
       \State $\textit{Aggiornamento stato sistema}$
     \EndIf
     \If{\textit{Jobs nel centro} $> 0$}
-      \State $\textit{Schedulazione prossimo servizio}$
+      \State $\textit{Selezione nodo prossimo serivizo}$
+      \State $\textit{Selezione coda prossimo servizio}$
     \EndIf
     \If{\textit{Nodo Covid-Check}}
       \If{\textit{Covid test negativo }\text{\textbf{and}} \textit{Green-pass valido}}
@@ -647,7 +650,7 @@ Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (0
 \end{figure}
 
 
-Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:adv_avg_ws_aft_ns}.
+Per quanto riguarda la seconda fascia oraria (12:00-17:00), è possibile osservare i risultati dell'analisi in figura \ref{figura:adv_avg_ws_aft_s}.
 
 
 
