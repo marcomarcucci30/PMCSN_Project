@@ -70,13 +70,13 @@ L'uscita dalla struttura può avvenire in tre modi:
 \item In seguito al completamento della partita.
 \end{itemize}
 Nei primi due casi, il giocatore esce dal sistema senza pagare il biglietto.
-Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia diritto ad un rimborso del biglietto proporzionale al tempo di attesa che ha sperimentato.
+Inoltre, la politica aziendale della sala giochi prevede che il giocatore abbia diritto ad un rimborso del biglietto proporzionale al tempo di attesa che ha sperimentato nei nodi Arcade.
 \par In figura \ref{figura:base_model_high_level} è possibile osservare lo schema ad alto livello del modello base.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.75]{images/base_model_high_level.jpg}
-	\caption{Advanced Model, High-level view}\label{figura:base_model_high_level}
+	\caption{Base Model, High-level view}\label{figura:base_model_high_level}
 \end{figure}
 
 
@@ -175,7 +175,7 @@ L’approccio di simulazione utilizzato è stato quello Next-Event Simulation. I
 Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{algo1}. Quest'ultimo si avvale di ulteriori strutture dati e funzioni necessarie al corretto funzionamento.
 
 \begin{algorithm}[H]
-\caption{M/G/1 - Rete Aperta - Scheduling FIFO}\label{algo1}
+\caption{Rete Aperta - Scheduling FIFO}\label{algo1}
 \begin{algorithmic}[1]
 \Procedure{Modello Base}{}
 \State $\textit{Inizializzazione clock}$
@@ -222,8 +222,6 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 \end{algorithm}
 
 
-\todo[inline, color=red]{Cambiare o no lo pseudocodice?}
-
 \subsection{Verifica}
 Le strutture e le funzioni precedentemente accennate sono state sottoposte ad una fase di testing in modo da garantire il loro corretto funzionamento. Durante l'implementazione del progetto, l'applicazione iterativa di tale fase ha permesso di individuare e correggere diversi difetti, emersi a seguito del manifestarsi di malfunzionamenti del sistema.
 
@@ -264,7 +262,7 @@ Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo d
 \end{table}
 
 
-Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di Little, applicabile in quanto il modello soddisfa le condizioni sufficienti, sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
+Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di Little, applicabile in quanto il modello soddisfa le condizioni sufficienti, sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
 \\ \\
 Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel sistema i tempi di attesa e il numero di jobs nei rispettivi centri diminuisce coerentemente a ciò che ci si aspetta.
 
@@ -276,8 +274,8 @@ Il raggiungimento della stazionarietà o meno viene studiato attraverso l'impieg
 \subsubsection{Analisi del comportamento transiente}
 %----Minimo n per stazionarietà
 Attraverso l'analisi del comportamento transiente viene studiato il tempo medio di risposta del sistema, per ogni fascia oraria, utilizzando il metodo delle repliche.
-In particolare, vengono effettuate run di simulazione
-consecutive, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
+In particolare, vengono effettuati run di simulazione
+consecutivi, utilizzando ogni volta come punto di partenza lo stato del sistema raggiunto dalla replica precedente. Il seed, infatti, viene settato una volta, all'inizio della prima replica.
 La tecnica delle repliche permette di calcolare stime puntuali e intervallari ad ogni acquisizione, ognuna di queste corrispondente ad un certo numero di richieste processate.
 
 Una prima analisi ha portato ad osservare che il sistema non può raggiungere la stazionarietà per via dei limiti introdotti dalla coda del controllo Covid-19, essendo unica per modellazione. Infatti, per un $\lambda_{arrival} \gtrsim \frac{1}{4.1}$, l'utilizzazione di tale centro è approssimativamente pari ad 1, mentre quella dei centri Arcade risulta essere inferiore. Questo studio permette di concludere che il collo di bottiglia è rappresentato dalla coda del controllo Covid-19, per questo motivo, segue solamente lo studio dei nodi Arcade, considerando un $\lambda_{arrival} < \frac{1}{4.1}$.
@@ -335,7 +333,7 @@ In questo caso, il tempo di risposta medio del sistema si stabilizza anche con l
 Considerati i risultati dell'analisi transiente, è possibile procedere allo studio del comportamento stazionario.
 Attraverso l'analisi del comportamento stazionario si vuole trovare la configurazione ottima di nodi arcade, per ogni fascia oraria, che permetta di raggiungere gli obiettivi prefissati in \ref{Goal}, partendo dai risultati ottenuti dallo studio precedente.
 In questa fase sono state effettuate simulazioni con tempi
-d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida. 
+d’osservazione molto lunghi, utilizzando la tecnica batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra i batch sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256. Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida. 
 \par In seguito per ogni fascia oraria viene riportato il grafico relativo alla funzione guadagno e del tempo medio di risposta del sistema al variare del numero di nodi Arcade, mediata sui seed. L'asse y "income" riportato nelle figure non rappresenta l'effettivo guadagno della sala giochi in una specifica fascia oraria, che verrà analizzato in uno studio successivo, ma esprime l'effettivo andamento del guadagno, utile ad individuare la miglior configurazione da utilizzare.
 \\ \\
 Per quanto riguarda la prima fascia e la terza fascia oraria, rispettivamente (08:00-12:00) e (17:00-22:00), è possibile osservare i risultati dell'analisi in figura  figura \ref{figura:avg_wait_sys_mor}. Tali fasce, infatti, hanno lo stesso $\lambda_{arrival}$ da modellazione.
@@ -424,7 +422,7 @@ Attraverso questa analisi viene effettuata una simulazione concreta di una tipic
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_optimal.png}
-	\caption{Average Wait System \& Income Daily, Base Model, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal}
+	\caption{Average Wait System \& Income Daily, Base Model, best configuration, sampling frequency=10 min}\label{figura:ts_optimal}
 \end{figure}
 \begin{figure}[H]
 	\centering
@@ -436,8 +434,8 @@ Come si evince da tali risultati, oltre a rispettare i QoS imposti, la configura
 
 \section{Modello Avanzato} % Numbered section
 
-Si procede alla realizzazione di un modello avanzato che sia in grado di adattarsi ai nuovi obiettivi, descritti in seguito, a costo zero. Per tale scopo, è stata introdotta nella sala giochi, la possibilità, da parte di un utente, di acquistare un biglietto \textit{premium} che gli permette di passare avanti agli utenti che sono in possesso di un biglietto standard.
-\par In figura \ref{figura:adv_model_high_level} è possibile osservare lo schema ad alto livello del modello base.
+Si procede alla realizzazione di un modello avanzato che sia in grado di adattarsi ai nuovi obiettivi, descritti in seguito, a costo zero. Per tale scopo, è stata introdotta nella sala giochi, la possibilità, da parte di un utente, di acquistare un biglietto \textit{premium} che gli permette di avere la precedenza rispetto agli utenti che sono in possesso di un biglietto standard.
+\par In figura \ref{figura:adv_model_high_level} è possibile osservare lo schema ad alto livello del modello avanzato.
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
@@ -464,7 +462,7 @@ Il costo del biglietto standard è di 10 \euro, mentre il costo del biglietto pr
 \subsection{Modello Concettuale}
 Nel modello avanzato la sala giochi è modellata attraverso una rete aperta composta da N nodi rappresentanti i videogiochi (Arcade) e da un nodo rappresentante il controllo Covid-19. Ogni nodo Arcade si compone di un servente e di due code infinite con priorità astratta senza prelazione. L'accesso alla coda con priorità più alta è riservato agli utenti che acquistano il biglietto premium.
 Il nodo Covid-19 si compone di un servente e di due code infinite con priorità size-based senza prelazione. L'accesso alla prima coda è riservato agli utenti che possiedono il green-pass, dato che questi ultimi hanno un tempo di servizio inferiore rispetto a chi esegue il test antigenico rapido.
-\par Non sono state scelte code di priorità con prelazione poiché, nonostante esse avrebbero avuto prestazioni migliori per gli obiettivi prefissati, non rispecchiano uno scenario reale.
+\par Non sono state scelte code di priorità con prelazione, che avrebbero avuto prestazioni migliori per gli obiettivi prefissati, poiché non rispecchiano uno scenario reale.
 \\
 La struttura è aperta H24 e la giornata è suddivisa in 4 fasce orarie caratterizzate da tassi di arrivo differenti:
 \begin{itemize}
@@ -491,14 +489,13 @@ Gli eventi considerati sono:
 \item Completamento di un servizio;
 \item Cambio di fascia oraria.
 \end{itemize}
-Tali eventi possono causare cambiamenti dello stato. L’arrivo di un cliente causa
-l’aumento della popolazione in un dato nodo e l’aumento del numero della popolazione del sistema. Il completamento di un servizio causa il passaggio di un cliente da un
+Tali eventi possono causare cambiamenti dello stato. L’arrivo di un cliente causa l’aumento della popolazione in un dato nodo e nel sistema. Il completamento di un servizio causa il passaggio di un cliente da un
 nodo ad un altro o la sua uscita dal sistema. Il cambio di fascia oraria può causare
 l’accensione o lo spegnimento degli Arcade. Se un nodo arcade viene spento quando ha ancora un cliente in servizio, questo continuerà a processarlo, pur non ricevendo altri
 arrivi, mentre i clienti in coda vengono distribuiti uniformemente tra i nodi Arcade rimasti operativi. Il tempo in cui un nodo Arcade è idle, ma acceso, viene considerato nel calcolo dei
 costi.
 
-\par In figura \ref{figura:adv_model_low_level} è possibile osservare lo schema a basso livello del modello base. 
+\par In figura \ref{figura:adv_model_low_level} è possibile osservare lo schema a basso livello del modello avanzato. 
 
 \begin{figure}[H]
 	\centering
@@ -587,7 +584,7 @@ Il codice di base per la simulazione segue quanto descritto nell'algoritmo \ref{
 Le strutture e le funzioni precedentemente accennate sono state sottoposte ad una fase di testing in modo da garantire il loro corretto funzionamento. Durante l'implementazione del progetto, l'applicazione iterativa di tale fase ha permesso di individuare e correggere diversi difetti, emersi a seguito del manifestarsi di malfunzionamenti del sistema.
 
 \subsection{Validazione}
-Al fine di validare il modello implementato, sono stati eseguiti diversi run variando determinati parametri. I risultati possono essere osservati in tabella \ref{tab3} e \ref{tab4}.
+Al fine di validare il modello implementato, sono stati eseguiti diversi run variando determinati parametri. I risultati possono essere osservati in tabella \ref{tab4} e \ref{tab5}.
 
 \begin{table}[htbp]
 \caption{System statistics}
@@ -600,11 +597,11 @@ Al fine di validare il modello implementato, sono stati eseguiti diversi run var
 \textbf{9} & 14.037119 &  20.727016 & 1.476581 \\ \hline
 \multicolumn{4}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} \frac{job}{min}, \# jobs=517028, $}
 \end{tabular}
-\label{tab3}
+\label{tab4}
 \end{center}
 \end{table}
 
-Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo di interarrivo medio del sistema converga al parametro impostato $\lambda_{system}^{-1}$.
+Per quanto riguarda la tabella \ref{tab4}, è possibile evincere come il tempo di interarrivo medio del sistema converga al parametro impostato $\lambda_{system}^{-1}$.
 
 \begin{table}[H]
 \caption{Arcades statistics}
@@ -618,12 +615,12 @@ Per quanto riguarda la tabella \ref{tab1}, è possibile evincere come il tempo d
 9 & 370.111505 & 203.980331 & 15.425839 & 15.681829 & 0.041678 & 0.076871 & 0.001129 & 0.003296\\ \hline
 \multicolumn{9}{l}{$^{\mathrm{*}}$ $seed=1234567891, \lambda_{system} =\frac{1}{14} \frac{job}{min}, \# jobs=517028 $.}
 \end{tabular}
-\label{tab4}
+\label{tab5}
 \end{center}
 \end{table}
 
 
-Per quanto riguarda la tabella \ref{tab2}, si può notare come la relazione di Little, applicabile in quanto il modello soddisfa le condizioni sufficienti, sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
+Per quanto riguarda la tabella \ref{tab5}, si può notare come la relazione di Little, applicabile in quanto il modello soddisfa le condizioni sufficienti, sia soddisfatta e come l'utilizzazione e il tempo di interarrivo medio, rispettivamente, decresca ed aumenti al crescere del numero degli arcade. Tale comportamento è giustificato dal fatto che i jobs vengono distribuiti in modo equiprobabile tra i diversi nodi arcade.
 \\ \\
 Come è possibile osservare dalle tabelle, inoltre, all'aumentare dei nodi nel sistema i tempi di attesa e il numero di jobs nei rispettivi centri diminuisce coerentemente a ciò che ci si aspetta.
 \\ \\
@@ -681,7 +678,7 @@ Considerati i risultati dell'analisi transiente, è possibile procedere allo stu
 Attraverso l'analisi del comportamento stazionario si vuole confrontare, con la configurazione ottima di nodi arcade, per ogni fascia oraria, i tempi di attesa nella coda Covid-19 sperimentati dagli utenti con green-pass, per quanto riguarda il modello base e quello avanzato, verificando che l'obiettivo 2 in \ref{Advanced_Goal} venga raggiunto.
 
 In questa fase sono state effettuate simulazioni con tempi
-d’osservazione molto lunghi, utilizzando la tecnica delle batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256.
+d’osservazione molto lunghi, utilizzando la tecnica batch-means per ottenere delle stime degli indici di prestazione in regime stazionario, evitando la problematica del bias dovuto alle condizioni iniziali del sistema. Cruciale in questa fase la scelta di due parametri: \textit{b} e \textit{k}, rispettivamente la grandezza del batch e il numero di batch in cui si divide la simulazione. Per la scelta di \textit{b} è stata utilizzata la linea guida di Banks, Carson, Nelson, e Nicol (2001), la quale afferma che il batch size venga aumentato fintantoché l'autocorrelazione a lag 1 tra batch means sia minore di 0.2. Nel caso in esame è stato constatato che tale direttiva viene rispettata con un \textit{b} pari a 256.
 Per la scelta del parametro \textit{k} è stato usato il valore pari a 64 come consigliato dalle linee guida.
 \\ \\
 In seguito per ogni fascia oraria viene riportato il grafico relativo al tempo medio di attesa nella coda Covid-19 per i clienti dotati di green-pass, per ogni seed, per il modello base e il modello avanzato,con un intervallo di confidenza pari al $95\%$.
@@ -728,7 +725,7 @@ In seguito per ogni fascia oraria viene riportato il grafico relativo al tempo m
 	\caption{Advanced Model, Average delay Covid-19 Green-Pass, 22:00-08:00, $\lambda_{arrival}=\frac{1}{35} \frac{job}{min}$, b=256, k=64}\label{figura:adv_avg_d_covid_steady_state_night}
 \end{figure}
 
-Come si può osservare dai grafici e dalle tabelle riportate, il tempo di attesa medio nella coda Covid-19, per i clienti che possiedono un Green-Pass valido, diminuisce sensibilmente utilizzando il modello avanzato, a parità di configurazione e fascia oraria. Tale risultato permette di raggiungere il secondo obiettivo prefissato relativo al modello avanzato.
+Come si può osservare dai grafici e dalle tabelle riportate, il tempo di attesa medio nella coda Covid-19, per i clienti che possiedono il Green-Pass, diminuisce sensibilmente utilizzando il modello avanzato, a parità di configurazione e fascia oraria. Tale risultato permette di raggiungere il secondo obiettivo prefissato relativo al modello avanzato.
 
 
 \subsubsection{Analisi guadagno giornaliero}
@@ -738,20 +735,20 @@ Attraverso questa analisi viene effettuata una simulazione concreta di una tipic
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/ts_optimal_confronto.png}
-	\caption{Average Wait System \& Income Daily, Base Model, optimal configuration, sampling frequency=10 min}\label{figura:ts_optimal_1}
+	\caption{Average Wait System \& Income Daily, Base Model, best configuration, sampling frequency=10 min}\label{figura:ts_optimal_1}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\captionsetup{justification=centering,margin=2cm}
 	\includegraphics[scale=0.48]{images/adv_ts_optimal.png}
-	\caption{Average Wait System \& Income Daily, Advanced Model, optimal configuration, sampling frequency=10 min}\label{figura:adv_ts_optimal}
+	\caption{Average Wait System \& Income Daily, Advanced Model, best configuration, sampling frequency=10 min}\label{figura:adv_ts_optimal}
 \end{figure}
 
 Nelle figure \ref{figura:ts_optimal_1} e \ref{figura:adv_ts_optimal} si può notare il confronto tra il modello base e quello avanzato in corrispondenza della configurazione ottimale. In particolare si osserva un aumento del guadagno, nel caso avanzato, semplicemente introducendo code di priorità, senza incrementare il numero di nodi o i tempi di servizio. Inoltre, si ottiene, mediamente, un tempo di risposta medio del sistema pari o minore a quello del modello base, per via dell'introduzione della priorità basata sulla size per quanto riguarda il nodo Covid-19, nonostante quest'ultima impatti poco sul sistema stesso. Questa analisi conduce al raggiungimento del primo obiettivo.
 
 \section{Conclusioni}
 
-L'obiettivo cardine dello studio è quello di massimizzare i profitti di una sala giochi, lavorando sulla struttura della rete, in modo da evitare ulteriori spese dovute all'introduzione di centri aggiuntivi. Inoltre, è stata adottata una politica più fair nei confronti dei clienti provvisti di green-pass, infatti questi sperimentano un tempo di attesa in coda proporzionale al tempo di servizio, corrispondente al raggiungimento del secondo obiettivo del caso avanzato. 
+L'intento principale dell'analisi è quello di massimizzare i profitti di una sala giochi, individuando la configurazione ottimale del sistema con lo studio del modello base. Successivamente, attraverso lo studio del modello avanzato, si è agito sulla struttura della rete, in modo da evitare ulteriori spese dovute all'introduzione di centri aggiuntivi. Inoltre, viene adottata una politica più fair nei confronti dei clienti provvisti di green-pass; infatti, questi sperimentano un tempo di attesa in coda proporzionale al tempo di servizio. 
 
 \begin{thebibliography}{00}
 \bibitem{b1} Lawrence M. Leemis, Sthephen K. Park, Discrete-Event Simulation - A first course, Pearson Education Prentice Hall,
